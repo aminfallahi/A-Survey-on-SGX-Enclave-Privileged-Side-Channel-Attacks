@@ -1,0 +1,185 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{11}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Corporation}{Corporation}{[n. d.]a}]%
+        {haswell}
+\bibfield{author}{\bibinfo{person}{Intel® Corporation}.} \bibinfo{year}{[n.
+  d.]}\natexlab{a}.
+\newblock \bibinfo{title}{4th Generation Intel® Core™ Processor}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://software.intel.com/en-us/node/524022}
+\showURL{%
+Retrieved April 12, 2018 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Corporation}{Corporation}{[n. d.]b}]%
+        {ecallocall}
+\bibfield{author}{\bibinfo{person}{Intel® Corporation}.} \bibinfo{year}{[n.
+  d.]}\natexlab{b}.
+\newblock \bibinfo{title}{ECALL/OCALL Functions}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://software.intel.com/en-us/node/709001}
+\showURL{%
+Retrieved April 12, 2018 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Corporation}{Corporation}{[n. d.]c}]%
+        {sgx}
+\bibfield{author}{\bibinfo{person}{Intel® Corporation}.} \bibinfo{year}{[n.
+  d.]}\natexlab{c}.
+\newblock \bibinfo{title}{Intel® Software Guard Extensions (Intel® SGX)}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://software.intel.com/en-us/sgx}
+\showURL{%
+Retrieved April 12, 2018 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Corporation}{Corporation}{[n. d.]d}]%
+        {sgxapi}
+\bibfield{author}{\bibinfo{person}{Intel® Corporation}.} \bibinfo{year}{[n.
+  d.]}\natexlab{d}.
+\newblock \bibinfo{title}{Intel® Software Guard Extensions (Intel® SGX) SDK}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://software.intel.com/en-us/sgx- sdk}
+\showURL{%
+Retrieved April 12, 2018 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Corporation}{Corporation}{[n. d.]e}]%
+        {rtm}
+\bibfield{author}{\bibinfo{person}{Intel® Corporation}.} \bibinfo{year}{[n.
+  d.]}\natexlab{e}.
+\newblock \bibinfo{title}{Restricted Transactional Memory Overview}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://software.intel.com/en-us/node/524022}
+\showURL{%
+Retrieved April 12, 2018 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Corporation}{Corporation}{2017a}]%
+        {skylake}
+\bibfield{author}{\bibinfo{person}{Intel® Corporation}.}
+  \bibinfo{year}{2017}\natexlab{a}.
+\newblock \bibinfo{title}{6th Generation Intel® Processor Family}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.intel.com/content/www/us/en/processors/core/desktop-6th-gen-core-family-spec-update.html}
+\showURL{%
+Retrieved April 12, 2018 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Corporation}{Corporation}{2017b}]%
+        {tsx}
+\bibfield{author}{\bibinfo{person}{Intel® Corporation}.}
+  \bibinfo{year}{2017}\natexlab{b}.
+\newblock \bibinfo{title}{Intel® Transactional Synchronization Extensions
+  (Intel® TSX) Overview}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://software.intel.com/en-us/node/524022}
+\showURL{%
+Retrieved April 12, 2018 from \tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Gruss, Lettner, Schuster, Ohrimenko, Haller,
+  and Costa}{Gruss et~al\mbox{.}}{2017}]%
+        {cloak}
+\bibfield{author}{\bibinfo{person}{Daniel Gruss}, \bibinfo{person}{Julian
+  Lettner}, \bibinfo{person}{Felix Schuster}, \bibinfo{person}{Olya Ohrimenko},
+  \bibinfo{person}{Istvan Haller}, {and} \bibinfo{person}{Manuel Costa}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Strong and efficient cache side-channel protection
+  using hardware transactional memory}. In \bibinfo{booktitle}{\emph{USENIX
+  Security Symposium}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Shih, Lee, Kim, and Peinado}{Shih
+  et~al\mbox{.}}{2017}]%
+        {tsgx}
+\bibfield{author}{\bibinfo{person}{Ming-Wei Shih}, \bibinfo{person}{Sangho
+  Lee}, \bibinfo{person}{Taesoo Kim}, {and} \bibinfo{person}{Marcus Peinado}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{T-SGX: Eradicating controlled-channel attacks
+  against enclave programs}. In \bibinfo{booktitle}{\emph{Proceedings of the
+  2017 Annual Network and Distributed System Security Symposium (NDSS), San
+  Diego, CA}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Van~Bulck, Weichbrodt, Kapitza, Piessens, and
+  Strackx}{Van~Bulck et~al\mbox{.}}{2017}]%
+        {telling}
+\bibfield{author}{\bibinfo{person}{Jo Van~Bulck}, \bibinfo{person}{Nico
+  Weichbrodt}, \bibinfo{person}{R{\"u}diger Kapitza}, \bibinfo{person}{Frank
+  Piessens}, {and} \bibinfo{person}{Raoul Strackx}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Telling your secrets without page faults: Stealthy
+  page table-based attacks on enclaved execution}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 26th USENIX Security
+  Symposium}}. USENIX Association.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Wang, Chen, Pan, Zhang, Wang, Bindschaedler,
+  Tang, and A.~Gunter}{Wang et~al\mbox{.}}{2017}]%
+        {leakycauldron}
+\bibfield{author}{\bibinfo{person}{Wenhao Wang}, \bibinfo{person}{Guoxing
+  Chen}, \bibinfo{person}{Xiaorui Pan}, \bibinfo{person}{Yinqian Zhang},
+  \bibinfo{person}{Xiaofeng Wang}, \bibinfo{person}{Vincent Bindschaedler},
+  \bibinfo{person}{Haixu Tang}, {and} \bibinfo{person}{Carl A.~Gunter}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Leaky Cauldron on the Dark Land: Understanding
+  Memory Side-Channel Hazards in SGX}. \bibinfo{pages}{2421--2434}.
+\newblock
+
+
+\end{thebibliography}
