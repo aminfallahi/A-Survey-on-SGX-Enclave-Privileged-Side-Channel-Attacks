@@ -38,7 +38,7 @@ Multiple effective attacks and defenses on the enclave have been proposed by pas
 
 One of the major points of attacks is targeting exceptions caused by the program. Since the exceptions are first acknowledged by the kernel before the program, a malicious OS can use them to infer activities and the behavior of the program according to the inputs which leads to recovering the actual data and code of the program.
 
-Another kind of attack that can be triggered by a malicious OS is an interrupt-based attack. The kernel can trigger interrupts to control the execution of the program.
+Another kind of attack that can be triggered by a malicious OS is an interrupt-based attack. The kernel can trigger interrupts to control the execution of program.
 
 Other attacks such as Stealthy Page Monitoring (SPM) attacks \cite{telling,leakycauldron} can also be effective. For a typical page-fault attack, the attacker can make all the page table entries invalid and restrict enclave program’s access to all the pages and by causing page-faults, view the pattern of memory reads and writes by the program. This action will cause a lot of page-faults which lead to a high overhead which leads to attack detection by the victim, so the attacker is interested to retrieve this information and view the pattern without causing unwanted page-faults by the victim. In page monitoring attacks, the attacker monitors the bits representing the validity and whether a page is accessed or modified. The attacker is also able to clear these bits and view them again frequently. So, the pattern of accesses can be visible to the attacker without causing page-faults \cite{telling,leakycauldron}.
 
@@ -49,7 +49,28 @@ RTM has been used by previous researches like T-SGX \cite{tsgx} to isolate instr
 
 %We use RTM transactions to detect attacks against the executing program inside enclave. By using RTM, we detect page-faults, interrupts and other unusual behavior performed by the attacker and we can terminate if we guess we are being attacked.
 
+
+
+
 \section{Attacks}
+Several side-channel attacks on the enclave have been proposed by the past research. Focusing on the thorough work done by Wang et al. \cite{leakycauldron} we focus on summarizing the attacks and the points of attacks in this section.
+
+\subsection{Attack Model}
+In our attack scenario, the enclave is protected by Intel SGX, so no one except the main program running inside enclave has the key to access the enclave. The operating system kernel which runs on top of a hypervisor can view and manage tasks queue, exceptions and interrupts. The hypervisor kernel is also capable of viewing data transfer between memories and caches while Intel SGX prevents it from accessing the enclave data. It is considered that other tenants executing on the same hypervisor are not able to control the resources assigned to the main machine by the hypervisor.
+
+\subsection{Points of Attack}
+Several weaknesses in SGX architecture have been proposed to be points for launching attacks against the enclave.
+
+TLB, as an address translation cache, can be one point of attack. While TLB is shared between enclave and non-enclave programs when hyper-threading is enabled, it can create side-channels which can be used for retrieving useful information \cite{leakycauldron}.
+
+Also, during AEX (Asynchronous EXit), TLB and paging-structure caches will be flushed and let the adversary know the flushed entries at context switch \cite{leakycauldron}.
+
+Another point of attack is the use of page table entry flags. The accessed and dirty bits which are set and unset for page table entries upon accesses and modifications, are used for launching attacks. So, the code in non-enclave mode can observe page-table updates and the memory write pattern to recover useful data \cite{leakycauldron}.
+
+Other than TLBs, CPU caches are shared between the enclave and non-enclave code resulting in the possiblity of cache side-channel attacks \cite{leakycauldron}.
+
+\subsection{Flush+Reload}
+By making use of page sharing between enclave and non-enclave code, the attacker can find out if a certain page is removed from the cache. More precisely, the attacker flushes the target memory line from the cache and waits for the victim to access it. The wait time can be fixed to either a random value or a value that is experimented to be good for the attack success. Then, the attacker will request to access the page, and measures the time it takes for the page to be fetched. Judging based on the time, the attacker can say if the page is already cached or fetched from the memory. In the case that it takes longer than a certain amount of time for the page to be retrieved, the attacker can conclude that it has not been fetched or touched by the victim \cite{flushreload}.
 
 \section{Defenses}
 % Head 1
@@ -392,4 +413,4 @@ and~\grantnum[http://www.nnsf.cn/youngscientists]{GS501100001809}{Young
 
 % Bibliography
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{sample-bibliography}
+\bibliography{bibliography}

@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{11}
+\begin{thebibliography}{12}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -179,6 +179,16 @@ Retrieved April 12, 2018 from \tempurl}
   \bibinfo{year}{2017}\natexlab{}.
 \newblock \showarticletitle{Leaky Cauldron on the Dark Land: Understanding
   Memory Side-Channel Hazards in SGX}. \bibinfo{pages}{2421--2434}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Yarom and Falkner}{Yarom and Falkner}{2014}]%
+        {flushreload}
+\bibfield{author}{\bibinfo{person}{Yuval Yarom} {and} \bibinfo{person}{Katrina
+  Falkner}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{FLUSH+ RELOAD: A High Resolution, Low Noise, L3
+  Cache Side-Channel Attack.}. In \bibinfo{booktitle}{\emph{USENIX Security
+  Symposium}}. \bibinfo{pages}{719--732}.
 \newblock
 
 

@@ -1,0 +1,112 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: main.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: bibliography.bib
+Warning--I didn't find a database entry for "Bahl-02"
+Warning--I didn't find a database entry for "Culler-01"
+Warning--I didn't find a database entry for "Zhou-06"
+Warning--I didn't find a database entry for "Adya-01"
+Warning--I didn't find a database entry for "Tzamaloukas-01"
+Warning--I didn't find a database entry for "Akyildiz-01"
+Warning--I didn't find a database entry for "Abril07"
+Warning--I didn't find a database entry for "Cohen07"
+Warning--I didn't find a database entry for "JCohen96"
+Warning--I didn't find a database entry for "Kosiur01"
+Warning--I didn't find a database entry for "Harel79"
+Warning--I didn't find a database entry for "Editor00"
+Warning--I didn't find a database entry for "Editor00a"
+Warning--I didn't find a database entry for "Spector90"
+Warning--I didn't find a database entry for "Douglass98"
+Warning--I didn't find a database entry for "Knuth97"
+Warning--I didn't find a database entry for "Andler79"
+Warning--I didn't find a database entry for "Smith10"
+Warning--I didn't find a database entry for "VanGundy07"
+Warning--I didn't find a database entry for "Harel78"
+Warning--I didn't find a database entry for "Clarkson85"
+Warning--I didn't find a database entry for "anisi03"
+Warning--I didn't find a database entry for "Thornburg01"
+Warning--I didn't find a database entry for "Ablamowicz07"
+Warning--I didn't find a database entry for "Poker06"
+Warning--I didn't find a database entry for "Obama08"
+Warning--I didn't find a database entry for "Novak03"
+Warning--I didn't find a database entry for "Lee05"
+Warning--I didn't find a database entry for "JoeScientist001"
+Warning--I didn't find a database entry for "rous08"
+Warning--I didn't find a database entry for "SaeediMEJ10"
+Warning--I didn't find a database entry for "SaeediJETC10"
+Warning--I didn't find a database entry for "Kirschmer:2010:AEI:1958016.1958018"
+Warning--I didn't find a database entry for "MR781536"
+Warning--I didn't find a database entry for "MR781537"
+Warning--I didn't find a database entry for "2004:ITE:1009386.1010128"
+Warning--I didn't find a database entry for "TUGInstmem"
+Warning--I didn't find a database entry for "CTANacmart"
+Warning--I didn't find a database entry for "CROSSBOW"
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty year in haswell
+Warning--empty year in ecallocall
+Warning--empty year in sgx
+Warning--empty year in sgxapi
+Warning--empty year in rtm
+Warning--empty publisher in cloak
+Warning--empty address in cloak
+Warning--page numbers missing in both pages and numpages fields in cloak
+Warning--empty publisher in tsgx
+Warning--empty address in tsgx
+Warning--page numbers missing in both pages and numpages fields in tsgx
+Warning--empty publisher in telling
+Warning--empty address in telling
+Warning--page numbers missing in both pages and numpages fields in telling
+Warning--empty booktitle in leakycauldron
+Warning--empty publisher in leakycauldron
+Warning--empty address in leakycauldron
+Warning--empty publisher in flushreload
+Warning--empty address in flushreload
+You've used 12 entries,
+            5732 wiz_defined-function locations,
+            1569 strings with 19019 characters,
+and the built_in function-call counts, 11059 in all, are:
+= -- 1057
+> -- 453
+< -- 0
++ -- 149
+- -- 159
+* -- 786
+:= -- 1281
+add.period$ -- 58
+call.type$ -- 12
+change.case$ -- 80
+chr.to.int$ -- 7
+cite$ -- 31
+duplicate$ -- 985
+empty$ -- 709
+format.name$ -- 179
+if$ -- 2443
+int.to.chr$ -- 7
+int.to.str$ -- 1
+missing$ -- 25
+newline$ -- 159
+num.names$ -- 91
+pop$ -- 490
+preamble$ -- 1
+purify$ -- 152
+quote$ -- 0
+skip$ -- 339
+stack$ -- 0
+substring$ -- 639
+swap$ -- 81
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 330
+warning$ -- 19
+while$ -- 80
+width$ -- 0
+write$ -- 256
+(There were 58 warnings)
