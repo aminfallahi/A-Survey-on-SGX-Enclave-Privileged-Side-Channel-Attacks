@@ -5,6 +5,7 @@ The style file: ACM-Reference-Format.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: bibliography.bib
+Warning--I didn't find a database entry for "telling"
 Warning--I didn't find a database entry for "Bahl-02"
 Warning--I didn't find a database entry for "Culler-01"
 Warning--I didn't find a database entry for "Zhou-06"
@@ -60,9 +61,9 @@ Warning--page numbers missing in both pages and numpages fields in cloak
 Warning--empty publisher in tsgx
 Warning--empty address in tsgx
 Warning--page numbers missing in both pages and numpages fields in tsgx
-Warning--empty publisher in telling
-Warning--empty address in telling
-Warning--page numbers missing in both pages and numpages fields in telling
+Warning--empty publisher in stealthy
+Warning--empty address in stealthy
+Warning--page numbers missing in both pages and numpages fields in stealthy
 Warning--empty booktitle in leakycauldron
 Warning--empty publisher in leakycauldron
 Warning--empty address in leakycauldron
@@ -70,7 +71,7 @@ Warning--empty publisher in flushreload
 Warning--empty address in flushreload
 You've used 12 entries,
             5732 wiz_defined-function locations,
-            1569 strings with 19019 characters,
+            1570 strings with 19027 characters,
 and the built_in function-call counts, 11059 in all, are:
 = -- 1057
 > -- 453
@@ -109,4 +110,4 @@ warning$ -- 19
 while$ -- 80
 width$ -- 0
 write$ -- 256
-(There were 58 warnings)
+(There were 59 warnings)
