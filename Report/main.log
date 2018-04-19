@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.10)  18 APR 2018 17:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.10)  19 APR 2018 14:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -820,6 +820,9 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
 
 
 [5.5]
+Missing character: There is no Ù in font cmr10!
+Missing character: There is no Ž in font cmr10!
+
 
 Package natbib Warning: Citation `Bahl-02' on page 6 undefined on input line 14
 8.
@@ -863,7 +866,7 @@ Package epstopdf Info: Source file: <mouse.eps>
  mouse.eps>
 (epstopdf)             \includegraphics on input line 261.
 Package epstopdf Info: Output file is already uptodate.
-<mouse-eps-converted-to.pdf, id=270, 151.56625pt x 134.5025pt>
+<mouse-eps-converted-to.pdf, id=267, 151.56625pt x 134.5025pt>
 File: mouse-eps-converted-to.pdf Graphic file (type pdf)
 <use mouse-eps-converted-to.pdf>
 Package pdftex.def Info: mouse-eps-converted-to.pdf  used on input line 261.
@@ -998,26 +1001,23 @@ Package natbib Warning: Citation `2004:ITE:1009386.1010128' on page 9 undefined
 Package natbib Warning: Citation `Kirschmer:2010:AEI:1958016.1958018' on page 9
  undefined on input line 382.
 
+[9.9]
 
-Package natbib Warning: Citation `TUGInstmem' on page 9 undefined on input line
- 384.
-
-
-Package natbib Warning: Citation `Thornburg01' on page 9 undefined on input lin
+Package natbib Warning: Citation `TUGInstmem' on page 10 undefined on input lin
 e 384.
 
 
-Package natbib Warning: Citation `CTANacmart' on page 9 undefined on input line
- 384.
+Package natbib Warning: Citation `Thornburg01' on page 10 undefined on input li
+ne 384.
 
 
-Package natbib Warning: Citation `CROSSBOW' on page 9 undefined on input line 3
-91.
+Package natbib Warning: Citation `CTANacmart' on page 10 undefined on input lin
+e 384.
 
 
-Underfull \vbox (badness 1509) has occurred while \output is active []
+Package natbib Warning: Citation `CROSSBOW' on page 10 undefined on input line 
+391.
 
- [9.9]
 Excluding 'printonly' comment. Including 'screenonly' comment.
 \openout4 = `comment.cut'.
 
@@ -1052,6 +1052,7 @@ Missing character: There is no ® in font cmr8!
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 LaTeX Info: Redefining \tempurl on input line 87.
+ [10.10]
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 LaTeX Info: Redefining \tempurl on input line 100.
@@ -1060,7 +1061,6 @@ Missing character: There is no ® in font cmr8!
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 LaTeX Info: Redefining \tempurl on input line 113.
- [10.10]
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 Missing character: There is no Â in font cmr8!
@@ -1091,7 +1091,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  16822 strings out of 494847
  244775 string characters out of 6179080
- 390755 words of memory out of 5000000
+ 388755 words of memory out of 5000000
  19445 multiletter control sequences out of 15000+600000
  21515 words of font info for 139 fonts, out of 8000000 for 9000
  220 hyphenation exceptions out of 8191
@@ -1124,7 +1124,7 @@ cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (11 pages, 378062 bytes).
+Output written on main.pdf (11 pages, 378880 bytes).
 PDF statistics:
  450 PDF objects out of 1000 (max. 8388607)
  374 compressed objects within 4 object streams

@@ -111,7 +111,7 @@ With caching disabled to prevent cache-based side-channel attacks, the attacker 
 Using two threads for launching the Prime+Probe attack \cite{primeprobe1, primeprobe2} and DRAMA attacks \cite{drama} together, Prime+Probe can cause conflicts in the cache which leads to fetching the data from DRAM, making DRAMA attack possible in the case caching is disabled \cite{leakycauldron}. Therefore, launching this attack, the slowdown caused by disabling cache in DRAMA attacks is avoided. 
 
 \subsection{Flush+Flush}
-\cite{flushflush}
+َUsing the \emph{clflush} instruction, it is possible to flush a cache line and if the cache line is already empty, the instruction will abort. Considering that the abort takes less time than the flush, it is possible to use this delay to recover information about the content of the cache. By observing the existence of data inside the cache line, it is possibe to find out which memory address have been accessed by the victim. Running the \emph{clflush} instruction repetitively and measuring its execution time, the attacker retrieves this information \cite{flushflush}.
 \section{Defenses}
 % Head 1
 \section{MMSN Protocol}
