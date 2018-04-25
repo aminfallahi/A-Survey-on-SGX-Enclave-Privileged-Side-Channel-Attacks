@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{21}
+\begin{thebibliography}{27}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -37,13 +37,28 @@
 \providecommand\natexlab[1]{#1}
 \providecommand\showeprint[2][]{arXiv:#2}
 
+\bibitem[\protect\citeauthoryear{Brasser, Capkun, Dmitrienko, Frassetto,
+  Kostiainen, M{\"u}ller, and Sadeghi}{Brasser et~al\mbox{.}}{2017a}]%
+        {drsgx}
+\bibfield{author}{\bibinfo{person}{Ferdinand Brasser}, \bibinfo{person}{Srdjan
+  Capkun}, \bibinfo{person}{Alexandra Dmitrienko}, \bibinfo{person}{Tommaso
+  Frassetto}, \bibinfo{person}{Kari Kostiainen}, \bibinfo{person}{Urs
+  M{\"u}ller}, {and} \bibinfo{person}{Ahmad-Reza Sadeghi}.}
+  \bibinfo{year}{2017}\natexlab{a}.
+\newblock \showarticletitle{DR. SGX: Hardening SGX Enclaves against Cache
+  Attacks with Data Location Randomization}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1709.09917}}
+  (\bibinfo{year}{2017}).
+\newblock
+
+
 \bibitem[\protect\citeauthoryear{Brasser, M{\"u}ller, Dmitrienko, Kostiainen,
-  Capkun, and Sadeghi}{Brasser et~al\mbox{.}}{2017}]%
+  Capkun, and Sadeghi}{Brasser et~al\mbox{.}}{2017b}]%
         {brasser2017software}
 \bibfield{author}{\bibinfo{person}{Ferdinand Brasser}, \bibinfo{person}{Urs
   M{\"u}ller}, \bibinfo{person}{Alexandra Dmitrienko}, \bibinfo{person}{Kari
   Kostiainen}, \bibinfo{person}{Srdjan Capkun}, {and}
-  \bibinfo{person}{Ahmad-Reza Sadeghi}.} \bibinfo{year}{2017}\natexlab{}.
+  \bibinfo{person}{Ahmad-Reza Sadeghi}.} \bibinfo{year}{2017}\natexlab{b}.
 \newblock \showarticletitle{Software grand exposure: SGX cache attacks are
   practical}.
 \newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1702.07521}}
@@ -156,6 +171,30 @@ Retrieved April 12, 2018 from \tempurl}
 Retrieved April 12, 2018 from \tempurl}
 
 
+\bibitem[\protect\citeauthoryear{Goldreich}{Goldreich}{1987}]%
+        {oram1}
+\bibfield{author}{\bibinfo{person}{Oded Goldreich}.}
+  \bibinfo{year}{1987}\natexlab{}.
+\newblock \showarticletitle{Towards a theory of software protection and
+  simulation by oblivious RAMs}. In \bibinfo{booktitle}{\emph{Proceedings of
+  the nineteenth annual ACM symposium on Theory of computing}}. ACM,
+  \bibinfo{pages}{182--194}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Goldreich and Ostrovsky}{Goldreich and
+  Ostrovsky}{1996}]%
+        {oram3}
+\bibfield{author}{\bibinfo{person}{Oded Goldreich} {and}
+  \bibinfo{person}{Rafail Ostrovsky}.} \bibinfo{year}{1996}\natexlab{}.
+\newblock \showarticletitle{Software protection and simulation on oblivious
+  RAMs}.
+\newblock \bibinfo{journal}{\emph{Journal of the ACM (JACM)}}
+  \bibinfo{volume}{43}, \bibinfo{number}{3} (\bibinfo{year}{1996}),
+  \bibinfo{pages}{431--473}.
+\newblock
+
+
 \bibitem[\protect\citeauthoryear{Gruss, Lettner, Schuster, Ohrimenko, Haller,
   and Costa}{Gruss et~al\mbox{.}}{2017}]%
         {cloak}
@@ -194,6 +233,16 @@ Retrieved April 12, 2018 from \tempurl}
 \newblock
 
 
+\bibitem[\protect\citeauthoryear{Ostrovsky}{Ostrovsky}{1990}]%
+        {oram2}
+\bibfield{author}{\bibinfo{person}{Rafail Ostrovsky}.}
+  \bibinfo{year}{1990}\natexlab{}.
+\newblock \showarticletitle{Efficient computation on oblivious RAMs}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the twenty-second annual ACM
+  symposium on Theory of computing}}. ACM, \bibinfo{pages}{514--523}.
+\newblock
+
+
 \bibitem[\protect\citeauthoryear{Osvik, Shamir, and Tromer}{Osvik
   et~al\mbox{.}}{2006}]%
         {primeprobe1}
@@ -216,6 +265,32 @@ Retrieved April 12, 2018 from \tempurl}
 \newblock \showarticletitle{DRAMA: Exploiting DRAM Addressing for Cross-CPU
   Attacks.}. In \bibinfo{booktitle}{\emph{USENIX Security Symposium}}.
   \bibinfo{pages}{565--581}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Sasy, Gorbunov, and Fletcher}{Sasy
+  et~al\mbox{.}}{2017}]%
+        {zerotrace}
+\bibfield{author}{\bibinfo{person}{Sajin Sasy}, \bibinfo{person}{Sergey
+  Gorbunov}, {and} \bibinfo{person}{Christopher Fletcher}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{ZeroTrace: Oblivious memory primitives from Intel
+  SGX}. In \bibinfo{booktitle}{\emph{Symposium on Network and Distributed
+  System Security (NDSS)}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Seo, Lee, Kim, Shih, Shin, Han, and Kim}{Seo
+  et~al\mbox{.}}{2017}]%
+        {sgxshield}
+\bibfield{author}{\bibinfo{person}{Jaebaek Seo}, \bibinfo{person}{Byounyoung
+  Lee}, \bibinfo{person}{Seongmin Kim}, \bibinfo{person}{Ming-Wei Shih},
+  \bibinfo{person}{Insik Shin}, \bibinfo{person}{Dongsu Han}, {and}
+  \bibinfo{person}{Taesoo Kim}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{SGX-Shield: Enabling address space layout
+  randomization for SGX programs}. In \bibinfo{booktitle}{\emph{Proceedings of
+  the 2017 Annual Network and Distributed System Security Symposium (NDSS), San
+  Diego, CA}}.
 \newblock
 
 
