@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.10)  19 APR 2018 14:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.10)  24 APR 2018 16:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -637,7 +637,7 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 50.
 Include comment 'screenonly' Excluding comment 'printonly'
 Include comment 'anonsuppress' (./main.aux
 
-LaTeX Warning: Label `alg:one' multiply defined.
+LaTeX Warning: Label `fig:uos' multiply defined.
 
 )
 \openout1 = `main.aux'.
@@ -786,11 +786,11 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 
 Package hyperref Warning: Option `pdflang' has already been used,
-(hyperref)                setting the option has no effect on input line 128.
+(hyperref)                setting the option has no effect on input line 126.
 
 
 Package hyperref Warning: Option `pdfdisplaydoctitle' has already been used,
-(hyperref)                setting the option has no effect on input line 128.
+(hyperref)                setting the option has no effect on input line 126.
 
 (./body.tex [1.1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
@@ -802,223 +802,231 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
-
-Underfull \vbox (badness 4024) has occurred while \output is active []
-
- [3.3]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 78.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 78.
- [4.4]
+<images/uos.png, id=167, 626.34pt x 375.4025pt>
+File: images/uos.png Graphic file (type png)
+<use images/uos.png>
+Package pdftex.def Info: images/uos.png  used on input line 46.
+(pdftex.def)             Requested size: 187.90344pt x 112.62161pt.
+<images/uos1.png, id=170, 1182.4175pt x 698.61pt>
+File: images/uos1.png Graphic file (type png)
+<use images/uos1.png>
+Package pdftex.def Info: images/uos1.png  used on input line 52.
+(pdftex.def)             Requested size: 354.72798pt x 209.58461pt.
+ [3.3 <./images/uos.png>]
+<images/rtm.png, id=190, 963.6pt x 597.23125pt>
+File: images/rtm.png Graphic file (type png)
+<use images/rtm.png>
+Package pdftex.def Info: images/rtm.png  used on input line 65.
+(pdftex.def)             Requested size: 192.71658pt x 119.44412pt.
+ [4.4 <./images/uos1.png> <./images/rtm.png>]
+<images/alg.png, id=215, 318.18875pt x 365.365pt>
+File: images/alg.png Graphic file (type png)
+<use images/alg.png>
+Package pdftex.def Info: images/alg.png  used on input line 92.
+(pdftex.def)             Requested size: 79.54698pt x 91.34102pt.
+<images/pp1.png, id=218, 1154.3125pt x 645.41125pt>
+File: images/pp1.png Graphic file (type png)
+<use images/pp1.png>
+Package pdftex.def Info: images/pp1.png  used on input line 107.
+(pdftex.def)             Requested size: 230.85841pt x 129.07996pt.
+Missing character: There is no â in font cmss9!
+Missing character: There is no € in font cmss9!
+Missing character: There is no ™ in font cmss9!
+Missing character: There is no â in font cmss9!
+Missing character: There is no € in font cmss9!
+Missing character: There is no ™ in font cmss9!
+<images/pp2.png, id=221, 1427.3325pt x 474.77374pt>
+File: images/pp2.png Graphic file (type png)
+<use images/pp2.png>
+Package pdftex.def Info: images/pp2.png  used on input line 112.
+(pdftex.def)             Requested size: 285.46144pt x 94.95306pt.
+<images/ppfr.png, id=224, 1303.87125pt x 735.74875pt>
+File: images/ppfr.png Graphic file (type png)
+<use images/ppfr.png>
+Package pdftex.def Info: images/ppfr.png  used on input line 117.
+(pdftex.def)             Requested size: 260.76962pt x 147.14714pt.
+ [5.5 <./images/alg.png>] [6.6 <./images/pp1.png> <./images/pp2.png> <./images/
+ppfr.png>]
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 101.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 133.
 
 
-[5.5]
+[7.7]
 Missing character: There is no Ù in font cmr10!
 Missing character: There is no Ž in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+<images/cloakcode.png, id=278, 716.6775pt x 181.67876pt>
+File: images/cloakcode.png Graphic file (type png)
+<use images/cloakcode.png>
+Package pdftex.def Info: images/cloakcode.png  used on input line 159.
+(pdftex.def)             Requested size: 179.16893pt x 45.41957pt.
+ [8.8]
+Missing character: There is no Ã in font cmssbx10!
+Missing character: There is no © in font cmssbx10!
+Missing character: There is no Ã in font cmssbx10!
+Missing character: There is no   in font cmssbx10!
+<images/dejavu.png, id=290, 1104.125pt x 569.12625pt>
+File: images/dejavu.png Graphic file (type png)
+<use images/dejavu.png>
+Package pdftex.def Info: images/dejavu.png  used on input line 185.
+(pdftex.def)             Requested size: 220.82109pt x 113.82323pt.
+Missing character: There is no Ã in font cmss9!
+Missing character: There is no © in font cmss9!
+Missing character: There is no Ã in font cmss9!
+Missing character: There is no   in font cmss9!
+Missing character: There is no Ã in font cmss9!
+Missing character: There is no © in font cmss9!
+Missing character: There is no Ã in font cmss9!
+Missing character: There is no   in font cmss9!
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no © in font cmr10!
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no   in font cmr10!
+ [9.9 <./images/cloakcode.png>] [10.10 <./images/dejavu.png>]
 
+Package natbib Warning: Citation `Abril07' on page 11 undefined on input line 2
+38.
 
-Package natbib Warning: Citation `Bahl-02' on page 6 undefined on input line 14
-8.
 
+Package natbib Warning: Citation `Cohen07' on page 11 undefined on input line 2
+39.
 
-Package natbib Warning: Citation `Culler-01' on page 6 undefined on input line 
-148.
 
+Package natbib Warning: Citation `JCohen96' on page 11 undefined on input line 
+239.
 
-Package natbib Warning: Citation `Zhou-06' on page 6 undefined on input line 14
-8.
 
+Package natbib Warning: Citation `Kosiur01' on page 11 undefined on input line 
+240.
 
-Package natbib Warning: Citation `Adya-01' on page 6 undefined on input line 14
-8.
 
+Package natbib Warning: Citation `Harel79' on page 11 undefined on input line 2
+41.
 
-Package natbib Warning: Citation `Tzamaloukas-01' on page 6 undefined on input 
-line 148.
 
+Package natbib Warning: Citation `Editor00' on page 11 undefined on input line 
+241.
 
-Package natbib Warning: Citation `Akyildiz-01' on page 6 undefined on input lin
-e 148.
 
+Package natbib Warning: Citation `Editor00a' on page 11 undefined on input line
+ 243.
 
-Package natbib Warning: Citation `Akyildiz-01' on page 6 undefined on input lin
-e 153.
 
+Package natbib Warning: Citation `Spector90' on page 11 undefined on input line
+ 244.
 
-Package natbib Warning: Citation `Adya-01' on page 6 undefined on input line 15
-3.
 
-[6.6] [7.7]
-Package epstopdf Info: Source file: <mouse.eps>
-(epstopdf)                    date: 2018-04-09 12:11:17
-(epstopdf)                    size: 5189 bytes
-(epstopdf)             Output file: <mouse-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-04-09 12:11:17
-(epstopdf)                    size: 3107 bytes
-(epstopdf)             Command: <repstopdf --outfile=mouse-eps-converted-to.pdf
- mouse.eps>
-(epstopdf)             \includegraphics on input line 261.
-Package epstopdf Info: Output file is already uptodate.
-<mouse-eps-converted-to.pdf, id=267, 151.56625pt x 134.5025pt>
-File: mouse-eps-converted-to.pdf Graphic file (type pdf)
-<use mouse-eps-converted-to.pdf>
-Package pdftex.def Info: mouse-eps-converted-to.pdf  used on input line 261.
-(pdftex.def)             Requested size: 151.56587pt x 134.50215pt.
+Package natbib Warning: Citation `Douglass98' on page 11 undefined on input lin
+e 245.
 
 
-Package natbib Warning: Citation `Akyildiz-01' on page 8 undefined on input lin
-e 306.
+Package natbib Warning: Citation `Knuth97' on page 11 undefined on input line 2
+45.
 
-[8.8 <./mouse-eps-converted-to.pdf>]
 
-Package natbib Warning: Citation `Abril07' on page 9 undefined on input line 35
-9.
+Package natbib Warning: Citation `Andler79' on page 11 undefined on input line 
+247.
 
 
-Package natbib Warning: Citation `Cohen07' on page 9 undefined on input line 36
-0.
+Package natbib Warning: Citation `Smith10' on page 11 undefined on input line 2
+48.
 
 
-Package natbib Warning: Citation `JCohen96' on page 9 undefined on input line 3
-60.
+Package natbib Warning: Citation `VanGundy07' on page 11 undefined on input lin
+e 249.
 
 
-Package natbib Warning: Citation `Kosiur01' on page 9 undefined on input line 3
-61.
+Package natbib Warning: Citation `Harel78' on page 11 undefined on input line 2
+50.
 
 
-Package natbib Warning: Citation `Harel79' on page 9 undefined on input line 36
-2.
+Package natbib Warning: Citation `Clarkson85' on page 11 undefined on input lin
+e 250.
 
 
-Package natbib Warning: Citation `Editor00' on page 9 undefined on input line 3
-62.
+Package natbib Warning: Citation `anisi03' on page 11 undefined on input line 2
+51.
 
 
-Package natbib Warning: Citation `Editor00a' on page 9 undefined on input line 
-364.
+Package natbib Warning: Citation `Thornburg01' on page 11 undefined on input li
+ne 252.
 
 
-Package natbib Warning: Citation `Spector90' on page 9 undefined on input line 
-365.
+Package natbib Warning: Citation `Ablamowicz07' on page 11 undefined on input l
+ine 252.
 
 
-Package natbib Warning: Citation `Douglass98' on page 9 undefined on input line
- 366.
+Package natbib Warning: Citation `Poker06' on page 11 undefined on input line 2
+52.
 
 
-Package natbib Warning: Citation `Knuth97' on page 9 undefined on input line 36
-6.
+Package natbib Warning: Citation `Obama08' on page 11 undefined on input line 2
+52.
 
 
-Package natbib Warning: Citation `Andler79' on page 9 undefined on input line 3
-68.
+Package natbib Warning: Citation `Novak03' on page 11 undefined on input line 2
+52.
 
 
-Package natbib Warning: Citation `Smith10' on page 9 undefined on input line 36
-9.
-
-
-Package natbib Warning: Citation `VanGundy07' on page 9 undefined on input line
- 370.
-
-
-Package natbib Warning: Citation `Harel78' on page 9 undefined on input line 37
-1.
-
-
-Package natbib Warning: Citation `Clarkson85' on page 9 undefined on input line
- 371.
-
-
-Package natbib Warning: Citation `anisi03' on page 9 undefined on input line 37
-2.
-
-
-Package natbib Warning: Citation `Thornburg01' on page 9 undefined on input lin
-e 373.
-
-
-Package natbib Warning: Citation `Ablamowicz07' on page 9 undefined on input li
-ne 373.
-
-
-Package natbib Warning: Citation `Poker06' on page 9 undefined on input line 37
-3.
-
-
-Package natbib Warning: Citation `Obama08' on page 9 undefined on input line 37
-3.
-
-
-Package natbib Warning: Citation `Novak03' on page 9 undefined on input line 37
-3.
-
-
-Package natbib Warning: Citation `Lee05' on page 9 undefined on input line 374.
-
-
-
-Package natbib Warning: Citation `JoeScientist001' on page 9 undefined on input
- line 374.
-
-
-Package natbib Warning: Citation `rous08' on page 9 undefined on input line 375
+Package natbib Warning: Citation `Lee05' on page 11 undefined on input line 253
 .
 
 
-Package natbib Warning: Citation `SaeediMEJ10' on page 9 undefined on input lin
-e 376.
+Package natbib Warning: Citation `JoeScientist001' on page 11 undefined on inpu
+t line 253.
 
 
-Package natbib Warning: Citation `SaeediJETC10' on page 9 undefined on input li
-ne 376.
+Package natbib Warning: Citation `rous08' on page 11 undefined on input line 25
+4.
 
 
-Package natbib Warning: Citation `Kirschmer:2010:AEI:1958016.1958018' on page 9
- undefined on input line 377.
+Package natbib Warning: Citation `SaeediMEJ10' on page 11 undefined on input li
+ne 255.
 
 
-Package natbib Warning: Citation `MR781536' on page 9 undefined on input line 3
-79.
+Package natbib Warning: Citation `SaeediJETC10' on page 11 undefined on input l
+ine 255.
 
 
-Package natbib Warning: Citation `MR781537' on page 9 undefined on input line 3
-79.
+Package natbib Warning: Citation `Kirschmer:2010:AEI:1958016.1958018' on page 1
+1 undefined on input line 256.
 
 
-Package natbib Warning: Citation `2004:ITE:1009386.1010128' on page 9 undefined
- on input line 382.
+Package natbib Warning: Citation `MR781536' on page 11 undefined on input line 
+258.
 
 
-Package natbib Warning: Citation `Kirschmer:2010:AEI:1958016.1958018' on page 9
- undefined on input line 382.
-
-[9.9]
-
-Package natbib Warning: Citation `TUGInstmem' on page 10 undefined on input lin
-e 384.
+Package natbib Warning: Citation `MR781537' on page 11 undefined on input line 
+258.
 
 
-Package natbib Warning: Citation `Thornburg01' on page 10 undefined on input li
-ne 384.
+Package natbib Warning: Citation `2004:ITE:1009386.1010128' on page 11 undefine
+d on input line 261.
 
 
-Package natbib Warning: Citation `CTANacmart' on page 10 undefined on input lin
-e 384.
+Package natbib Warning: Citation `Kirschmer:2010:AEI:1958016.1958018' on page 1
+1 undefined on input line 261.
 
 
-Package natbib Warning: Citation `CROSSBOW' on page 10 undefined on input line 
-391.
+Package natbib Warning: Citation `TUGInstmem' on page 11 undefined on input lin
+e 263.
 
-Excluding 'printonly' comment. Including 'screenonly' comment.
+
+Package natbib Warning: Citation `Thornburg01' on page 11 undefined on input li
+ne 263.
+
+
+Package natbib Warning: Citation `CTANacmart' on page 11 undefined on input lin
+e 263.
+
+
+Package natbib Warning: Citation `CROSSBOW' on page 11 undefined on input line 
+270.
+
+[11.11] Excluding 'printonly' comment. Including 'screenonly' comment.
 \openout4 = `comment.cut'.
 
 
@@ -1037,97 +1045,97 @@ Missing character: There is no „ in font cmr8!
 Missing character: There is no ¢ in font cmr8!
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
-LaTeX Info: Redefining \tempurl on input line 61.
+LaTeX Info: Redefining \tempurl on input line 88.
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
-LaTeX Info: Redefining \tempurl on input line 74.
+LaTeX Info: Redefining \tempurl on input line 101.
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
-LaTeX Info: Redefining \tempurl on input line 87.
- [10.10]
-Missing character: There is no Â in font cmr8!
-Missing character: There is no ® in font cmr8!
-LaTeX Info: Redefining \tempurl on input line 100.
-Missing character: There is no Â in font cmr8!
-Missing character: There is no ® in font cmr8!
-Missing character: There is no Â in font cmr8!
-Missing character: There is no ® in font cmr8!
-LaTeX Info: Redefining \tempurl on input line 113.
-Missing character: There is no Â in font cmr8!
-Missing character: There is no ® in font cmr8!
-Missing character: There is no Â in font cmr8!
-Missing character: There is no ® in font cmr8!
+LaTeX Info: Redefining \tempurl on input line 114.
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 LaTeX Info: Redefining \tempurl on input line 127.
+ [12.12]
+Missing character: There is no Â in font cmr8!
+Missing character: There is no ® in font cmr8!
+Missing character: There is no Â in font cmr8!
+Missing character: There is no ® in font cmr8!
+LaTeX Info: Redefining \tempurl on input line 140.
+Missing character: There is no Â in font cmr8!
+Missing character: There is no ® in font cmr8!
+Missing character: There is no Â in font cmr8!
+Missing character: There is no ® in font cmr8!
+Missing character: There is no Â in font cmr8!
+Missing character: There is no ® in font cmr8!
+LaTeX Info: Redefining \tempurl on input line 154.
 Missing character: There is no â in font cmti8!
 Missing character: There is no € in font cmti8!
 Missing character: There is no ™ in font cmti8!
+LaTeX Info: Redefining \tempurl on input line 283.
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--286
+[]\OT1/cmr/m/n/8 (+20) Frank Wang. 2017.  Opaque: An Obliv-i-ous and En-crypted
+ Dis-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--286
+\OT1/cmr/m/n/8 (+20) tributed An-a-lyt-ics Plat-form.    [][]$https : / / mediu
+m . com / mit-[]security-[]seminar /
+ []
+
 ))
 
 Package natbib Warning: There were undefined citations.
 
-[11.11]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 136.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 136.
+[13.13]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 134.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 134.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 136.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 136.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 134.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 134.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: A801A9A4085C8FDE3A6B6001F84F1570;5128.
+(rerunfilecheck)             Checksum: B225FE3AEB8898260ABB5215AED3BC0D;4920.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16822 strings out of 494847
- 244775 string characters out of 6179080
- 388755 words of memory out of 5000000
- 19445 multiletter control sequences out of 15000+600000
- 21515 words of font info for 139 fonts, out of 8000000 for 9000
+ 16826 strings out of 494847
+ 244961 string characters out of 6179080
+ 391171 words of memory out of 5000000
+ 19451 multiletter control sequences out of 15000+600000
+ 19232 words of font info for 139 fonts, out of 8000000 for 9000
  220 hyphenation exceptions out of 8191
- 60i,17n,94p,1720b,600s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exi
-st, replaced by a fixed one
-
- </home/amin/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600pk>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on main.pdf (11 pages, 378880 bytes).
+ 60i,12n,94p,1720b,578s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/amin/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600p
+k></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+si10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on main.pdf (13 pages, 844784 bytes).
 PDF statistics:
- 450 PDF objects out of 1000 (max. 8388607)
- 374 compressed objects within 4 object streams
- 86 named destinations out of 1000 (max. 500000)
- 32022 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 431 PDF objects out of 1000 (max. 8388607)
+ 352 compressed objects within 4 object streams
+ 85 named destinations out of 1000 (max. 500000)
+ 27958 words of extra memory for PDF output out of 29859 (max. 10000000)
 

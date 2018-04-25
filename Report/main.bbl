@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{16}
+\begin{thebibliography}{21}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -36,6 +36,33 @@
 \providecommand\bibinfo[2]{#2}
 \providecommand\natexlab[1]{#1}
 \providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Brasser, M{\"u}ller, Dmitrienko, Kostiainen,
+  Capkun, and Sadeghi}{Brasser et~al\mbox{.}}{2017}]%
+        {brasser2017software}
+\bibfield{author}{\bibinfo{person}{Ferdinand Brasser}, \bibinfo{person}{Urs
+  M{\"u}ller}, \bibinfo{person}{Alexandra Dmitrienko}, \bibinfo{person}{Kari
+  Kostiainen}, \bibinfo{person}{Srdjan Capkun}, {and}
+  \bibinfo{person}{Ahmad-Reza Sadeghi}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Software grand exposure: SGX cache attacks are
+  practical}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1702.07521}}
+  (\bibinfo{year}{2017}), \bibinfo{pages}{33}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Chen, Zhang, Reiter, and Zhang}{Chen
+  et~al\mbox{.}}{2017}]%
+        {dejavu}
+\bibfield{author}{\bibinfo{person}{Sanchuan Chen}, \bibinfo{person}{Xiaokuan
+  Zhang}, \bibinfo{person}{Michael~K Reiter}, {and} \bibinfo{person}{Yinqian
+  Zhang}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Detecting privileged side-channel attacks in
+  shielded execution with D{\'e}j{\'a} Vu}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 2017 ACM on Asia Conference on
+  Computer and Communications Security}}. ACM, \bibinfo{pages}{7--18}.
+\newblock
+
 
 \bibitem[\protect\citeauthoryear{Corporation}{Corporation}{[n. d.]a}]%
         {haswell}
@@ -155,6 +182,18 @@ Retrieved April 12, 2018 from \tempurl}
 \newblock
 
 
+\bibitem[\protect\citeauthoryear{Kayaalp, Abu-Ghazaleh, Ponomarev, and
+  Jaleel}{Kayaalp et~al\mbox{.}}{2016}]%
+        {kayaalp2016high}
+\bibfield{author}{\bibinfo{person}{Mehmet Kayaalp}, \bibinfo{person}{Nael
+  Abu-Ghazaleh}, \bibinfo{person}{Dmitry Ponomarev}, {and}
+  \bibinfo{person}{Aamer Jaleel}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{A high-resolution side-channel attack on last-level
+  cache}. In \bibinfo{booktitle}{\emph{Proceedings of the 53rd Annual Design
+  Automation Conference}}. ACM, \bibinfo{pages}{72}.
+\newblock
+
+
 \bibitem[\protect\citeauthoryear{Osvik, Shamir, and Tromer}{Osvik
   et~al\mbox{.}}{2006}]%
         {primeprobe1}
@@ -193,6 +232,19 @@ Retrieved April 12, 2018 from \tempurl}
 \newblock
 
 
+\bibitem[\protect\citeauthoryear{Shinde, Chua, Narayanan, and Saxena}{Shinde
+  et~al\mbox{.}}{2015}]%
+        {pigeonhole}
+\bibfield{author}{\bibinfo{person}{Shweta Shinde}, \bibinfo{person}{Zheng~Leong
+  Chua}, \bibinfo{person}{Viswesh Narayanan}, {and} \bibinfo{person}{Prateek
+  Saxena}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Preventing your faults from telling your secrets:
+  Defenses against pigeonhole attacks}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1506.04832}}
+  (\bibinfo{year}{2015}).
+\newblock
+
+
 \bibitem[\protect\citeauthoryear{Tromer, Osvik, and Shamir}{Tromer
   et~al\mbox{.}}{2010}]%
         {primeprobe2}
@@ -217,6 +269,20 @@ Retrieved April 12, 2018 from \tempurl}
   \bibinfo{booktitle}{\emph{Proceedings of the 26th USENIX Security
   Symposium}}. USENIX Association.
 \newblock
+
+
+\bibitem[\protect\citeauthoryear{Wang}{Wang}{2017}]%
+        {wang2017}
+\bibfield{author}{\bibinfo{person}{Frank Wang}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{Opaque: An Oblivious and Encrypted Distributed
+  Analytics Platform}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://medium.com/mit-security-seminar/opaque-an-oblivious-and-encrypted-distributed-analytics-platform-4109a0e70bcf}
+\showURL{%
+\tempurl}
 
 
 \bibitem[\protect\citeauthoryear{Wang, Chen, Pan, Zhang, Wang, Bindschaedler,

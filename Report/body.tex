@@ -42,6 +42,18 @@ Another kind of attack that can be triggered by a malicious OS is an interrupt-b
 
 Other attacks such as Stealthy Page Monitoring (SPM) attacks \cite{stealthy,leakycauldron} can also be effective. For a typical page-fault attack, the attacker can make all the page table entries invalid and restrict enclave program’s access to all the pages and by causing page-faults, view the pattern of memory reads and writes by the program. This action will cause a lot of page-faults which lead to a high overhead which leads to attack detection by the victim, so the attacker is interested to retrieve this information and view the pattern without causing unwanted page-faults by the victim. In page monitoring attacks, the attacker monitors the bits representing the validity and whether a page is accessed or modified. The attacker is also able to clear these bits and view them again frequently. So, the pattern of accesses can be visible to the attacker without causing page-faults \cite{stealthy,leakycauldron}.
 
+\begin{figure}
+	\includegraphics[scale=0.3]{images/uos}
+	\caption{Overview of remote attestation available in Intel SGX \cite{wang2017}.}
+	\label{fig:uos}
+\end{figure}
+
+\begin{figure}
+	\includegraphics[scale=0.3]{images/uos1}
+	\caption{Problem Setting. Process executing in an enclave on untrusted OS \cite{pigeonhole}.}
+	\label{fig:uos}
+\end{figure}
+
 \subsection{Intel TSX}
 One of the technologies which have been came into notice for making benefit in defense against side-channel attacks is Intel TSX \cite{tsx}. This technology has been introduced by Intel since Haswell mirco-architecture \cite{haswell} for critical sections management and monitoring serialization. Intel TSX provides two frameworks to add transaction support to the processor. Both frameworks intoduce new instructions for region specification, backward compatiblity, and flexiblity \cite{tsx}. We use RTM (Restricted Transactional Memory) \cite{rtm} for implementing our defenses in this work.
 
@@ -49,7 +61,11 @@ RTM has been used by previous researches like T-SGX \cite{tsgx} to isolate instr
 
 %We use RTM transactions to detect attacks against the executing program inside enclave. By using RTM, we detect page-faults, interrupts and other unusual behavior performed by the attacker and we can terminate if we guess we are being attacked.
 
-
+\begin{figure}
+	\includegraphics[scale=0.2]{images/rtm}
+	\caption{HTM ensures that no concurrent modifications influence the transaction, either by preserving the old value or by aborting and reverting the transaction. \cite{cloak}.}
+	\label{fig:rtm}
+\end{figure}
 
 
 \section{Attacks}
@@ -73,19 +89,35 @@ Other than TLBs, CPU caches are shared between the enclave and non-enclave code 
 Prime+Probe is composed of two stages. Considering an L1 cache of 64 sets, each containing 8 cache lines which are each 64 bytes, in the prime stage, the attacker executes conflicting cache lines to make page fault possible for the victim who branches on a secret. In the probe step, the attacker executes all the cache lines and measures the execution time of each, and if a cache line execution takes longer, it can be revealed that the secret has been zero \cite{primeprobe1,primeprobe2,cloak}.
 
 \begin{algorithm}[t]
-	\SetAlgoNoLine
-	if ($secret$)
-	\\\{\\
-	\tab ;\\
-	\}\\
-	else\\
-	\{\\
-	\tab;\\
-	\}
+	\includegraphics[scale=0.25]{images/alg}
+%	\SetAlgoNoLine
+%	if ($secret$)
+%	\\\{\\
+%	\tab ;\\
+%	\}\\
+%	else\\
+%	\{\\
+%	\tab;\\
+%	\}
 	\caption{Prime+Probe branching side-channel sample code \cite{stealthy,cloak}}
 	\label{alg:one}
 \end{algorithm}
 
+\begin{figure}
+	\includegraphics[scale=0.2]{images/pp1}
+	\caption{High-level view of our attack; victim and attacker’s Prime+Probe code run in parallel on a dedicated core. The malicious OS  ensures  that  no  other  code shares that core minimizing noise in L1/L2 cache \cite{brasser2017software}.}
+	\label{fig:ppone}
+\end{figure}
+\begin{figure}
+	\includegraphics[scale=0.2]{images/pp2}
+	\caption{Prime+Probe side-channel attack technique; first the attacker primes the cache, next the victim executes and occupies some of the cache, afterwards the attacker probes to identify which cache lines have been used by the victim. This information allows the attacker to draw conclusion on secret data processed by the victim process \cite{brasser2017software}.}
+	\label{fig:pptwo}
+\end{figure}
+\begin{figure}
+	\includegraphics[scale=0.2]{images/ppfr}
+	\caption{Prime+Probe vs Flush+Reload Attacks \cite{kayaalp2016high}.}
+	\label{fig:ppfr}
+\end{figure}
 
 \subsection{Flush+Reload}
 By making use of page sharing between enclave and non-enclave code, the attacker can find out if a certain page is removed from the cache. More precisely, the attacker flushes the target memory line from the cache and waits for the victim to access it. The wait time can be fixed to either a random value or a value that is experimented to be good for the attack success. Then, the attacker will request to access the page, and measures the time it takes for the page to be fetched. Judging based on the time, the attacker can say if the page is already cached or fetched from the memory. In the case that it takes longer than a certain amount of time for the page to be retrieved, the attacker can conclude that it has not been fetched or touched by the victim \cite{flushreload}.
@@ -113,233 +145,80 @@ Using two threads for launching the Prime+Probe attack \cite{primeprobe1, primep
 \subsection{Flush+Flush}
 َUsing the \emph{clflush} instruction, it is possible to flush a cache line and if the cache line is already empty, the instruction will abort. Considering that the abort takes less time than the flush, it is possible to use this delay to recover information about the content of the cache. By observing the existence of data inside the cache line, it is possibe to find out which memory address have been accessed by the victim. Running the \emph{clflush} instruction repetitively and measuring its execution time, the attacker retrieves this information \cite{flushflush}.
 \section{Defenses}
-% Head 1
-\section{MMSN Protocol}
 
-% Head 2
-\subsection{Frequency Assignment}
+\subsection{Cache-based attacks}%cloak
+It is known that in a multicore system, there are three levels of cache: L3 is shared between all physical cores, L2 is shared between each core’s threads and L1 shares data and code separately between the hyperthreads. In a typical environment, it is not visible to the enclave program running in one thread, what is being run in the other thread on the same core. So, if the other hyperthread is trusted (assuming there are two hyperthreads running in each core) it is only needed to care about the L3 cache. In the SGX environment, the hyperthreads cannot trust each other, thus, L2 and L1 caches are also of importance when it comes to the case of cache side-channel attacks, because attacks like Prime+Probe will be possible in this case \cite{cloak}.
 
-We propose a suboptimal distribution to be used by each node, which is
-easy to compute and does not depend on the number of competing
-nodes. A natural candidate is an increasing geometric sequence, in
-which
-% Numbered Equation
-\begin{equation}
-\label{eqn:01}
-P(t)=\frac{b^{\frac{t+1}{T+1}}-b^{\frac{t}{T+1}}}{b-1},
-\end{equation}
-where $t=0,{\ldots}\,,T$, and $b$ is a number greater than $1$.
+The obvious approach to confront cache-based side-channel attacks including Prime+Probe \cite{primeprobe1,primeprobe2} and eliminate the leakage is to pin sensitive code and data into caches so no conflict and cache-miss be possible to happen, but it is not possible to pin data into caches in the current hardware/software environment. So, there is a need to introduce a hack for indirectly doing this that has been implemented using Intel TSX by Gruss et al. \cite{cloak}. TSX works like making use of semaphores to prevent interrupts but performs faster.
 
-In our algorithm, we use the suboptimal approach for simplicity and
-generality. We need to make the distribution of the selected back-off
-time slice at each node conform to what is shown in
-Equation~\eqref{eqn:01}. It is implemented as follows: First, a random
-variable $\alpha$ with a uniform distribution within the interval $(0,
-1)$ is generated on each node, then time slice $i$ is selected
-according to the following equation:
-% Unnumbered Equation
-\[
-i=\lfloor(T+1)\log_b[\alpha(b-1)+1]\rfloor.
-\]
-It can be easily proven that the distribution of $i$ conforms to Equation
-(\ref{eqn:01}).
+By studying the in-depth architecture of TSX instructions, it is found out that TSX uses a write set and a read set and interrupts to these sets cause the transaction to abort. The write set is always the 32kb L1 and the read set is the 8mb sized L3. So, if a cache line in L1 is modified and made dirty, the transaction aborts. The same happens when some cache line in L3 is removed due to a conflict. Also, it is observed that code, which is read-only, can only be a part of the read set L1. This has the benefit of detecting external code evictions by other cores which share the same L3 cache \cite{cloak}.
 
-So protocols \cite{Bahl-02, Culler-01,Zhou-06,Adya-01,
-Tzamaloukas-01, Akyildiz-01} that use RTS/CTS
-controls\footnote{RTS/CTS controls are required to be implemented by
-802.11-compliant devices. They can be used as an optional mechanism
-to avoid Hidden Terminal Problems in the 802.11 standard and
-protocols based on those similar to \cite{Akyildiz-01} and
-\cite{Adya-01}.} for frequency negotiation and reservation are not
-suitable for WSN applications, even though they exhibit good
-performance in general wireless ad-hoc
-networks.
+After explaining the indirect effect of using TSX for pinning data to cache it is needed to load the data and code into the cache inside a TSX transaction. After that, each cache conflict which leads to making cache access pattern to be visible will cause the transaction to abort. So, the sensitive code and data will be preloaded and the program will start to run inside the transaction. Then, the victim does not experience cache misses and there is nothing for the attacker to measure, so the enclave is protected against malicious OS \cite{cloak}.
 
-% Head 3
-\subsubsection{Exclusive Frequency Assignment}
-
-
-In exclusive frequency assignment, nodes first exchange their IDs
-among two communication hops so that each node knows its two-hop
-neighbors' IDs. In the second broadcast, each node beacons all
-neighbors' IDs it has collected during the first broadcast period.
-
-% Head 4
-\paragraph{Eavesdropping}
-
-Even though the even selection scheme leads to even sharing of
-available frequencies among any two-hop neighborhood, it involves a
-number of two-hop broadcasts. To reduce the communication cost, we
-propose a lightweight eavesdropping scheme.
-
-\subsection{Basic Notations}
-
-As Algorithm~\ref{alg:one} states, for each frequency
-number, each node calculates a random number (${\textit{Rnd}}_{\alpha}$) for
-itself and a random number (${\textit{Rnd}}_{\beta}$) for each of its two-hop
-neighbors with the same pseudorandom number generator.
-
-% Algorithm
 \begin{algorithm}[t]
-\SetAlgoNoLine
-\KwIn{Node $\alpha$'s ID ($ID_{\alpha}$), and node $\alpha$'s
-neighbors' IDs within two communication hops.}
-\KwOut{The frequency number ($FreNum_{\alpha}$) node $\alpha$ gets assigned.}
-$index$ = 0; $FreNum_{\alpha}$ = -1\;
-\Repeat{$FreNum_{\alpha} > -1$}{
-        $Rnd_{\alpha}$ = Random($ID_{\alpha}$, $index$)\;
-        $Found$ = $TRUE$\;
-        \For{each node $\beta$ in $\alpha$'s two communication hops
-    }{
-      $Rnd_{\beta}$ = Random($ID_{\beta}$, $index$)\;
-      \If{($Rnd_{\alpha} < Rnd_{\beta}$) \text{or} ($Rnd_{\alpha}$ ==
-          $Rnd_{\beta}$ \text{and} $ID_{\alpha} < ID_{\beta}$)\;
-      }{
-        $Found$ = $FALSE$; break\;
-      }
-        }
-     \eIf{$Found$}{
-           $FreNum_{\alpha}$ = $index$\;
-         }{
-           $index$ ++\;
-     }
-      }
-\caption{Frequency Number Computation}
-\label{alg:one}
+	\includegraphics[scale=0.25]{images/cloakcode}
+	\caption{Cloak sample code \cite{cloak}}
+	\label{alg:cloak}
 \end{algorithm}
 
+For preloading, if the attacker targets L1, the code should be preloaded into L1-I by execution. Also, all the data should be loaded into the write set. For the attackers targeting L3, code and read-only data should be loaded into read set, while the data which will possibly be touched again should be loaded into the write set \cite{cloak}.
 
-Bus masters are divided into two disjoint sets, $\mathcal{M}_{RT}$
-and $\mathcal{M}_{NRT}$.
-% description
-\begin{description}
-\item[RT Masters]
-$\mathcal{M}_{RT}=\{ \vec{m}_{1},\dots,\vec{m}_{n}\}$ denotes the
-$n$ RT masters issuing real-time constrained requests. To model the
-current request issued by an $\vec{m}_{i}$ in $\mathcal{M}_{RT}$,
-three parameters---the recurrence time $(r_i)$, the service cycle
-$(c_i)$, and the relative deadline $(d_i)$---are used, with their
-relationships.
-\item[NRT Masters]
-$\mathcal{M}_{NRT}=\{ \vec{m}_{n+1},\dots,\vec{m}_{n+m}\}$ is a set
-of $m$ masters issuing nonreal-time constrained requests. In our
-model, each $\vec{m}_{j}$ in $\mathcal{M}_{NRT}$ needs only one
-parameter, the service cycle, to model the current request it
-issues.
-\end{description}
+%The evaluation of this work has been done by running weak implementations of existing algorithms in enclave secured by the implementation of this research, named Cloak. The AES T-table implementation of OpenSSL which is known to be vulnerable to cache attacks, recovering cryptographic keys and randomly generated numbers by execution path monitoring, RSA square and multiply example and GTK keystroke example which are discussed in the paper are among the attacks used for evaluating the defense method proposed in the paper.
 
-Here, a question may arise, since each node has a global ID. Why
-don't we just map nodes' IDs within two hops into a group of
-frequency numbers and assign those numbers to all nodes within two
-hops?
+\subsubsection{Analysis}
+There will still be some leakage remaining which this research does not handle. Overall execution time can leak information. Also, aborts do not cause the concurrent memory accesses to be canceled. Branch predictor is influenced due to the cache pinning and other micro-architecture effects can be possible due to the modifications to the execution behavior.
 
-\section{Simulator}
-\label{sec:sim}
+The strength of the research is to introduce a new software-based way for pinning data into cache lines which has not been done before. Making use of Intel TSX instructions for this purpose is a novel idea that can be used in various areas other than enclave side channel attack protection. There is also an opportunity for later research on optimization and performance improvement and architectural study for reducing faults.
 
-If the model checker requests successors of a state which are not
-created yet, the state space uses the simulator to create the
-successors on-the-fly. To create successor states the simulator
-conducts the following steps.
-% enumerate
-\begin{enumerate}
-\item Load state into microcontroller model.
-\item Determine assignments needed for resolving nondeterminism.
-\item For each assignment.
-      \begin{enumerate}
-      \item either call interrupt handler or simulate effect of next instruction, or
-      \item evaluate truth values of atomic propositions.
-      \end{enumerate}
-\item Return resulting states.
-\end{enumerate}
-Figure~\ref{fig:one} shows a typical microcontroller C program that
-controls an automotive power window lift. The program is one of the
-programs used in the case study described in Section~\ref{sec:sim}.
-At first sight, the programs looks like an ANSI~C program. It
-contains function calls, assignments, if clauses, and while loops.
-% Figure
+\subsection{Déjà Vu}
+Chen et al. \cite{dejavu} focus on detecting SGX side-channel attacks performed by privileged attackers (OS, etc.). They make use of Intel TSX to embed a clock inside the enclave. The use of TSX is for detecting any interrupts to the clock itself if occurred. When the execution time of the program inside the enclave exceeds a fixed amount of time as the threshold, it is considered that the code has been interrupted by some external factor and an AEX (asynchronous enclave exit) will be detected. Thus, the research claims to detect attacks to a good degree and the evaluation results show little performance overhead and good precision in detecting the attacks.
+
+The implemented clock should be hidden from the OS in terms of reading and modification and it should not be decreased under any condition. These can be assured by implementation inside SGX enclave. Also, the clock should not be stopped or interrupted by the OS. This feature is addressed by using Intel transactional memory. For protecting the clock to be read by the OS, a random value will be generated in a transaction and will be added to the global timer variable. This will run in a thread parallel to the main program which is targeted to be executed inside the enclave.
+
+For measuring the threshold for program interruption detection by the attacker, the system needs to be trained with execution to learn the execution time without AEXs and the minimum time of an AEX execution.
+
+The security evaluation has been done by running attacks on the clock for stopping it, triggering page-faults for tracing the execution, and slowing the clock by modifying CPU cores' working frequency.
+
+%Performance evaluation of this work is done by running nbench benchmark algorithms and measuring the normalized execution time of them.
+
 \begin{figure}
-  \includegraphics{mouse}
-  \caption{Code before preprocessing.}
-  \label{fig:one}
+	\includegraphics[scale=0.2]{images/dejavu}
+	\caption{System architecture of Déjà Vu. Blocks in gray are untrusted, which include the untrusted components of the processes and the entire OS kernel \cite{dejavu}.}
+	\label{fig:dejavu}
 \end{figure}
 
-\subsection{Problem Formulation}
+\subsubsection{Strengths and Weaknesses}
+The problem with this method is that it only considers enclave exits as points of attacks and possible attacks that may have been occurred during the execution which do not cause AEX have been excluded. So, attacks like B-SPM and HT-SPM (sneaky page monitoring attacks in general) which do not rely on AEX can still be effective in the presence of Déjà Vu.
 
-The objective of variable coalescence-based offset assignment is to find
-both the coalescence scheme and the MWPC on the coalesced graph. We start
-with a few definitions and lemmas for variable coalescence.
+\subsection{Pigeonhole attacks}
+Shinde et al. \cite{pigeonhole} study the possible side-channel attacks which make use of page-faults. Firstly, they do a statistical study on the percent of leakage, vulnerability, and the possibility and effectiveness of page-fault based attacks which they call pigeonhole attacks. Then, they study the possible ways of eliminating page-fault side-channels. The paper claims that for lowering the overheads, there is a need for hardware changes. It defines pigeonhole attack as an attack that is performed when a page table walk is done. Moving data between physical memory and virtual memory from different pages sequentially causes page-faults on every single page when the virtual memory is already full, holding all the other pages. When the first page is fetched, the next page will be removed from the page table and when the next page is to be fetched, a page fault will occur.
 
-% Enunciations
-\begin{definition}[Coalesced Node (C-Node)]A C-node is a set of
-live ranges (webs) in the AG or IG that are coalesced. Nodes within the same
-C-node cannot interfere with each other on the IG. Before any coalescing is
-done, each live range is a C-node by itself.
-\end{definition}
+The solution of the paper is based on the fact that the malicious OS cannot differentiate accesses which are occurred in a single page. Thus, by mapping all the input dependent data into a single page, the program will access the same pattern of the pages independent of the input and makes it page fault oblivious. The page containing the input dependent data is called data staging page and the page containing the code is called code staging page. By creating a decision tree of the program instructions, it is understood that in each stage of the program which is being executed, there is a page-fault sequence dependent on the data, which can be mapped to a staging page. So for each stage, we consider a staging page.
 
-\begin{definition}[C-AG (Coalesced Access Graph)]The C-AG is the access
-graph after node coalescence, which is composed of all C-nodes and C-edges.
-\end{definition}
+This technique will create a big overhead, thus the paper also works on optimizing the method they have implemented. The optimizations are:
+\begin{itemize}
+	\item Eliminating copy operations by skipping saving the read-only data
+	\item Merge small data blocks into single pages to reduce the number of fetches
+	\item Merge levels of execution and reduce the number of stages
+	\item Removing the mux based on the input to reduce the possibility of branch conditions
+	\item Remove the dependence of code on the data, Ex. CAS obliviousness
+\end{itemize}
 
-\begin{lemma}
-The C-MWPC problem is NP-complete.
-\end{lemma}
-\begin{proof} C-MWPC can be easily reduced to the MWPC problem assuming a
-coalescence graph without any edge or a fully connected interference graph.
-Therefore, each C-node is an uncoalesced live range after value separation
-and C-PC is equivalent to PC. A fully connected interference graph is made
-possible when all live ranges interfere with each other. Thus, the C-MWPC
-problem is NP-complete.
-\end{proof}
+The idea of the paper has been implemented as an LLVM compiler pass.
 
-\begin{lemma}[Lemma Subhead]The solution to the C-MWPC problem is no
-worse than the solution to the MWPC.
-\end{lemma}
-\begin{proof}
-Simply, any solution to the MWPC is also a solution to the
-C-MWPC. But some solutions to C-MWPC may not apply to the MWPC (if any
-coalescing were made).
-\end{proof}
+\subsection{Stealthy}
+This paper introduces a new group of side-channel attacks named stealthy page table-based attacks which are not dependent on page faults and can recover useful information from the data which is being accessed by the program running inside the enclave without page faults being occurred. While current defenses are all based on preventing page faults from happening, there is little effort to prevent attacks which do not depend on page faults.
 
-\section{Performance Evaluation}
+One of the attack vectors discussed by this paper is pages accessed and dirty bits. Suppose a program is being executed in the enclave which branches based on a secret. If the branch occurs one page will be retrieved and thus its accessed flag will be set, otherwise the same happens for another page. By observing the accessed bit for these two page tables, the secret is revealed. Doing this sequentially can reveal all the secrets which lead to EdDSA session key to be revealed gradually.
 
-During all the experiments, the Geographic Forwarding (GF) by Akyildiz
-et al.~\shortcite{Akyildiz-01} routing protocol is used. GF exploits
-geographic information of nodes and conducts local data-forwarding to
-achieve end-to-end routing. Our simulation is configured according to
-the settings in Table~\ref{tab:one}. Each run lasts for 2 minutes and
-repeated 100 times. For each data value we present in the results, we
-also give its 90\% confidence interval.
+The evaluation of this research is done by writing a microbenchmark for measuring interrupts frequency and latency and launching attacks against Libgcrypt EdDSA for extracting private session keys. The results show that it is possible to recover the same session keys which are possible by attacking using page faults without incurring page faults.
 
-% Table
-\begin{table}%
-\caption{Simulation Configuration}
-\label{tab:one}
-\begin{minipage}{\columnwidth}
-\begin{center}
-\begin{tabular}{ll}
-  \toprule
-  TERRAIN\footnote{This is a table footnote. This is a
-    table footnote. This is a table footnote.}   & (200m$\times$200m) Square\\
-  Node Number     & 289\\
-  Node Placement  & Uniform\\
-  Application     & Many-to-Many/Gossip CBR Streams\\
-  Payload Size    & 32 bytes\\
-  Routing Layer   & GF\\
-  MAC Layer       & CSMA/MMSN\\
-  Radio Layer     & RADIO-ACCNOISE\\
-  Radio Bandwidth & 250Kbps\\
-  Radio Range     & 20m--45m\\
-  \bottomrule
-\end{tabular}
-\end{center}
-\bigskip\centering
-\footnotesize\emph{Source:} This is a table
- sourcenote. This is a table sourcenote. This is a table
- sourcenote.
+\subsubsection{Strengths and Weaknesses}
 
- \emph{Note:} This is a table footnote.
-\end{minipage}
-\end{table}%
+Does not work on performance optimization but only to attack and recover information without the use of page faults.
+
+\section{SGX-Shield}
+
 
 
 \section{Conclusions}

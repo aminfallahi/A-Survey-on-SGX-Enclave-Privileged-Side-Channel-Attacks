@@ -31,65 +31,93 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Storage Structure}{2}{subsection.2.2}}
 \citation{stealthy,leakycauldron}
 \citation{stealthy,leakycauldron}
+\citation{wang2017}
+\citation{wang2017}
+\citation{pigeonhole}
+\citation{pigeonhole}
 \citation{tsx}
 \citation{haswell}
 \citation{tsx}
 \citation{rtm}
-\citation{tsgx}
-\citation{cloak}
-\citation{leakycauldron}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Overview of remote attestation available in Intel SGX \citep  {wang2017}.\relax }}{3}{figure.caption.2}}
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:uos}{{1}{3}{Overview of remote attestation available in Intel SGX \cite {wang2017}.\relax }{figure.caption.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Side-Channel Attacks on the Enclave}{3}{subsection.2.3}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Intel TSX}{3}{subsection.2.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Attacks}{3}{section.3}}
+\citation{tsgx}
+\citation{cloak}
+\citation{cloak}
+\citation{cloak}
+\citation{leakycauldron}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Problem Setting. Process executing in an enclave on untrusted OS \citep  {pigeonhole}.\relax }}{4}{figure.caption.3}}
+\newlabel{fig:uos}{{2}{4}{Problem Setting. Process executing in an enclave on untrusted OS \cite {pigeonhole}.\relax }{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces HTM ensures that no concurrent modifications influence the transaction, either by preserving the old value or by aborting and reverting the transaction. \citep  {cloak}.\relax }}{4}{figure.caption.4}}
+\newlabel{fig:rtm}{{3}{4}{HTM ensures that no concurrent modifications influence the transaction, either by preserving the old value or by aborting and reverting the transaction. \cite {cloak}.\relax }{figure.caption.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Attacks}{4}{section.3}}
 \citation{leakycauldron}
 \citation{leakycauldron}
 \citation{leakycauldron,stealthy}
 \citation{leakycauldron}
 \citation{primeprobe1,primeprobe2,cloak}
 \citation{stealthy,cloak}
+\citation{brasser2017software}
+\citation{brasser2017software}
+\citation{brasser2017software}
+\citation{brasser2017software}
+\citation{kayaalp2016high}
+\citation{kayaalp2016high}
 \citation{flushreload}
-\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Prime+Probe branching side-channel sample code \citep  {stealthy,cloak}\relax }}{4}{algocf.1}}
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{alg:one}{{1}{4}{Prime+Probe}{algocf.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Attack Model}{4}{subsection.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Points of Attack}{4}{subsection.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Prime+Probe}{4}{subsection.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Flush+Reload}{4}{subsection.3.4}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Prime+Probe branching side-channel sample code \citep  {stealthy,cloak}\relax }}{5}{algocf.1}}
+\newlabel{alg:one}{{1}{5}{Prime+Probe}{algocf.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Attack Model}{5}{subsection.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Points of Attack}{5}{subsection.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Prime+Probe}{5}{subsection.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Flush+Reload}{5}{subsection.3.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces High-level view of our attack; victim and attacker’s Prime+Probe code run in parallel on a dedicated core. The malicious OS ensures that no other code shares that core minimizing noise in L1/L2 cache \citep  {brasser2017software}.\relax }}{6}{figure.caption.6}}
+\newlabel{fig:ppone}{{4}{6}{High-level view of our attack; victim and attacker’s Prime+Probe code run in parallel on a dedicated core. The malicious OS ensures that no other code shares that core minimizing noise in L1/L2 cache \cite {brasser2017software}.\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Prime+Probe side-channel attack technique; first the attacker primes the cache, next the victim executes and occupies some of the cache, afterwards the attacker probes to identify which cache lines have been used by the victim. This information allows the attacker to draw conclusion on secret data processed by the victim process \citep  {brasser2017software}.\relax }}{6}{figure.caption.7}}
+\newlabel{fig:pptwo}{{5}{6}{Prime+Probe side-channel attack technique; first the attacker primes the cache, next the victim executes and occupies some of the cache, afterwards the attacker probes to identify which cache lines have been used by the victim. This information allows the attacker to draw conclusion on secret data processed by the victim process \cite {brasser2017software}.\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Prime+Probe vs Flush+Reload Attacks \citep  {kayaalp2016high}.\relax }}{6}{figure.caption.8}}
+\newlabel{fig:ppfr}{{6}{6}{Prime+Probe vs Flush+Reload Attacks \cite {kayaalp2016high}.\relax }{figure.caption.8}{}}
 \citation{stealthy}
 \citation{stealthy}
 \citation{leakycauldron}
 \citation{leakycauldron,stealthy}
 \citation{leakycauldron,drama}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Stealthy Page Table-Based Attacks}{5}{subsection.3.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Sneaky Page-Monitoring Attacks}{5}{subsection.3.6}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.1}Accessed flags monitoring}{5}{subsubsection.3.6.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.2}Timing enhancement}{5}{subsubsection.3.6.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.3}TLB flushing through Hyper-Threading}{5}{subsubsection.3.6.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}DRAMA Attacks}{5}{subsection.3.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Stealthy Page Table-Based Attacks}{7}{subsection.3.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Sneaky Page-Monitoring Attacks}{7}{subsection.3.6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.1}Accessed flags monitoring}{7}{subsubsection.3.6.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.2}Timing enhancement}{7}{subsubsection.3.6.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.3}TLB flushing through Hyper-Threading}{7}{subsubsection.3.6.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}DRAMA Attacks}{7}{subsection.3.7}}
 \citation{primeprobe1,primeprobe2}
 \citation{drama}
 \citation{leakycauldron}
 \citation{flushflush}
-\citation{Bahl-02,Culler-01,Zhou-06,Adya-01,Tzamaloukas-01,Akyildiz-01}
-\citation{Akyildiz-01}
-\citation{Adya-01}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Cache-DRAM Attacks}{6}{subsection.3.8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.9}Flush+Flush}{6}{subsection.3.9}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Defenses}{6}{section.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}MMSN Protocol}{6}{section.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Frequency Assignment}{6}{subsection.5.1}}
-\newlabel{eqn:01}{{1}{6}{Frequency Assignment}{equation.5.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}Exclusive Frequency Assignment}{6}{subsubsection.5.1.1}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Frequency Number Computation\relax }}{7}{algocf.2}}
-\newlabel{alg:one}{{2}{7}{Basic Notations}{algocf.2}{}}
-\@writefile{toc}{\contentsline {paragraph}{Eavesdropping}{7}{section*.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Basic Notations}{7}{subsection.5.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Simulator}{7}{section.6}}
-\newlabel{sec:sim}{{6}{7}{Simulator}{section.6}{}}
-\citation{Akyildiz-01}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Code before preprocessing.\relax }}{8}{figure.caption.5}}
-\newlabel{fig:one}{{1}{8}{Code before preprocessing.\relax }{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Problem Formulation}{8}{subsection.6.1}}
+\citation{cloak}
+\citation{primeprobe1,primeprobe2}
+\citation{cloak}
+\citation{cloak}
+\citation{cloak}
+\citation{cloak}
+\citation{cloak}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.8}Cache-DRAM Attacks}{8}{subsection.3.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.9}Flush+Flush}{8}{subsection.3.9}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Defenses}{8}{section.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Cache-based attacks}{8}{subsection.4.1}}
+\citation{dejavu}
+\citation{dejavu}
+\citation{dejavu}
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Cloak sample code \citep  {cloak}\relax }}{9}{algocf.2}}
+\newlabel{alg:cloak}{{2}{9}{Cache-based attacks}{algocf.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Analysis}{9}{subsubsection.4.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Déjà Vu}{9}{subsection.4.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Strengths and Weaknesses}{9}{subsubsection.4.2.1}}
+\citation{pigeonhole}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces System architecture of Déjà Vu. Blocks in gray are untrusted, which include the untrusted components of the processes and the entire OS kernel \citep  {dejavu}.\relax }}{10}{figure.caption.10}}
+\newlabel{fig:dejavu}{{7}{10}{System architecture of Déjà Vu. Blocks in gray are untrusted, which include the untrusted components of the processes and the entire OS kernel \cite {dejavu}.\relax }{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Pigeonhole attacks}{10}{subsection.4.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Stealthy}{10}{subsection.4.4}}
 \citation{Abril07}
 \citation{Cohen07}
 \citation{JCohen96}
@@ -118,40 +146,44 @@
 \citation{MR781536}
 \citation{MR781537}
 \citation{2004:ITE:1009386.1010128,Kirschmer:2010:AEI:1958016.1958018}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Simulation Configuration\relax }}{9}{table.caption.6}}
-\newlabel{tab:one}{{1}{9}{Simulation Configuration\relax }{table.caption.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Performance Evaluation}{9}{section.7}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusions}{9}{section.8}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Typical References in New ACM Reference Format}{9}{section.9}}
 \citation{TUGInstmem,Thornburg01,CTANacmart}
 \citation{CROSSBOW}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}Strengths and Weaknesses}{11}{subsubsection.4.4.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}SGX-Shield}{11}{section.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusions}{11}{section.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Typical References in New ACM Reference Format}{11}{section.7}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Switching Times}{11}{appendix.A}}
 \bibstyle{ACM-Reference-Format}
 \bibdata{bibliography}
-\bibcite{haswell}{{1}{[n. d.]a}{{Corporation}}{{Corporation}}}
-\bibcite{ecallocall}{{2}{[n. d.]b}{{Corporation}}{{Corporation}}}
-\bibcite{sgx}{{3}{[n. d.]c}{{Corporation}}{{Corporation}}}
-\bibcite{sgxapi}{{4}{[n. d.]d}{{Corporation}}{{Corporation}}}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Switching Times}{10}{appendix.A}}
-\@writefile{toc}{\contentsline {section}{\numberline {B}Supplementary Materials}{10}{appendix.B}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}This is an Example of Appendix Subsection Head}{10}{subsection.B.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Appendix Subsection Head}{10}{subsection.B.2}}
-\@writefile{toc}{\contentsline {section}{Acknowledgments}{10}{section*.8}}
-\@writefile{toc}{\contentsline {section}{References}{10}{section*.10}}
-\bibcite{rtm}{{5}{[n. d.]e}{{Corporation}}{{Corporation}}}
-\bibcite{skylake}{{6}{2017a}{{Corporation}}{{Corporation}}}
-\bibcite{tsx}{{7}{2017b}{{Corporation}}{{Corporation}}}
-\bibcite{cloak}{{8}{2017}{{Gruss et~al\unhbox \voidb@x \hbox {.}}}{{Gruss, Lettner, Schuster, Ohrimenko, Haller, and Costa}}}
-\bibcite{flushflush}{{9}{2016}{{Gruss et~al\unhbox \voidb@x \hbox {.}}}{{Gruss, Maurice, Wagner, and Mangard}}}
-\bibcite{primeprobe1}{{10}{2006}{{Osvik et~al\unhbox \voidb@x \hbox {.}}}{{Osvik, Shamir, and Tromer}}}
-\bibcite{drama}{{11}{2016}{{Pessl et~al\unhbox \voidb@x \hbox {.}}}{{Pessl, Gruss, Maurice, Schwarz, and Mangard}}}
-\bibcite{tsgx}{{12}{2017}{{Shih et~al\unhbox \voidb@x \hbox {.}}}{{Shih, Lee, Kim, and Peinado}}}
-\bibcite{primeprobe2}{{13}{2010}{{Tromer et~al\unhbox \voidb@x \hbox {.}}}{{Tromer, Osvik, and Shamir}}}
-\bibcite{stealthy}{{14}{2017}{{Van~Bulck et~al\unhbox \voidb@x \hbox {.}}}{{Van~Bulck, Weichbrodt, Kapitza, Piessens, and Strackx}}}
-\bibcite{leakycauldron}{{15}{2017}{{Wang et~al\unhbox \voidb@x \hbox {.}}}{{Wang, Chen, Pan, Zhang, Wang, Bindschaedler, Tang, and A.~Gunter}}}
-\bibcite{flushreload}{{16}{2014}{{Yarom and Falkner}}{{Yarom and Falkner}}}
+\bibcite{brasser2017software}{{1}{2017}{{Brasser et~al\unhbox \voidb@x \hbox {.}}}{{Brasser, M{\"u}ller, Dmitrienko, Kostiainen, Capkun, and Sadeghi}}}
+\bibcite{dejavu}{{2}{2017}{{Chen et~al\unhbox \voidb@x \hbox {.}}}{{Chen, Zhang, Reiter, and Zhang}}}
+\bibcite{haswell}{{3}{[n. d.]a}{{Corporation}}{{Corporation}}}
+\bibcite{ecallocall}{{4}{[n. d.]b}{{Corporation}}{{Corporation}}}
+\bibcite{sgx}{{5}{[n. d.]c}{{Corporation}}{{Corporation}}}
+\bibcite{sgxapi}{{6}{[n. d.]d}{{Corporation}}{{Corporation}}}
+\bibcite{rtm}{{7}{[n. d.]e}{{Corporation}}{{Corporation}}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Supplementary Materials}{12}{appendix.B}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}This is an Example of Appendix Subsection Head}{12}{subsection.B.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Appendix Subsection Head}{12}{subsection.B.2}}
+\@writefile{toc}{\contentsline {section}{Acknowledgments}{12}{section*.12}}
+\@writefile{toc}{\contentsline {section}{References}{12}{section*.14}}
+\bibcite{skylake}{{8}{2017a}{{Corporation}}{{Corporation}}}
+\bibcite{tsx}{{9}{2017b}{{Corporation}}{{Corporation}}}
+\bibcite{cloak}{{10}{2017}{{Gruss et~al\unhbox \voidb@x \hbox {.}}}{{Gruss, Lettner, Schuster, Ohrimenko, Haller, and Costa}}}
+\bibcite{flushflush}{{11}{2016}{{Gruss et~al\unhbox \voidb@x \hbox {.}}}{{Gruss, Maurice, Wagner, and Mangard}}}
+\bibcite{kayaalp2016high}{{12}{2016}{{Kayaalp et~al\unhbox \voidb@x \hbox {.}}}{{Kayaalp, Abu-Ghazaleh, Ponomarev, and Jaleel}}}
+\bibcite{primeprobe1}{{13}{2006}{{Osvik et~al\unhbox \voidb@x \hbox {.}}}{{Osvik, Shamir, and Tromer}}}
+\bibcite{drama}{{14}{2016}{{Pessl et~al\unhbox \voidb@x \hbox {.}}}{{Pessl, Gruss, Maurice, Schwarz, and Mangard}}}
+\bibcite{tsgx}{{15}{2017}{{Shih et~al\unhbox \voidb@x \hbox {.}}}{{Shih, Lee, Kim, and Peinado}}}
+\bibcite{pigeonhole}{{16}{2015}{{Shinde et~al\unhbox \voidb@x \hbox {.}}}{{Shinde, Chua, Narayanan, and Saxena}}}
+\bibcite{primeprobe2}{{17}{2010}{{Tromer et~al\unhbox \voidb@x \hbox {.}}}{{Tromer, Osvik, and Shamir}}}
+\bibcite{stealthy}{{18}{2017}{{Van~Bulck et~al\unhbox \voidb@x \hbox {.}}}{{Van~Bulck, Weichbrodt, Kapitza, Piessens, and Strackx}}}
+\bibcite{wang2017}{{19}{2017}{{Wang}}{{Wang}}}
+\bibcite{leakycauldron}{{20}{2017}{{Wang et~al\unhbox \voidb@x \hbox {.}}}{{Wang, Chen, Pan, Zhang, Wang, Bindschaedler, Tang, and A.~Gunter}}}
+\bibcite{flushreload}{{21}{2014}{{Yarom and Falkner}}{{Yarom and Falkner}}}
 \newlabel{tocindent-1}{0pt}
 \newlabel{tocindent0}{0pt}
-\newlabel{tocindent1}{7.50002pt}
+\newlabel{tocindent1}{10.00003pt}
 \newlabel{tocindent2}{14.86116pt}
 \newlabel{tocindent3}{23.88895pt}
-\newlabel{TotPages}{{11}{11}{}{page.11}{}}
+\newlabel{TotPages}{{13}{13}{}{page.13}{}}
