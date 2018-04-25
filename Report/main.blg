@@ -5,39 +5,6 @@ The style file: ACM-Reference-Format.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: bibliography.bib
-Warning--I didn't find a database entry for "Abril07"
-Warning--I didn't find a database entry for "Cohen07"
-Warning--I didn't find a database entry for "JCohen96"
-Warning--I didn't find a database entry for "Kosiur01"
-Warning--I didn't find a database entry for "Harel79"
-Warning--I didn't find a database entry for "Editor00"
-Warning--I didn't find a database entry for "Editor00a"
-Warning--I didn't find a database entry for "Spector90"
-Warning--I didn't find a database entry for "Douglass98"
-Warning--I didn't find a database entry for "Knuth97"
-Warning--I didn't find a database entry for "Andler79"
-Warning--I didn't find a database entry for "Smith10"
-Warning--I didn't find a database entry for "VanGundy07"
-Warning--I didn't find a database entry for "Harel78"
-Warning--I didn't find a database entry for "Clarkson85"
-Warning--I didn't find a database entry for "anisi03"
-Warning--I didn't find a database entry for "Thornburg01"
-Warning--I didn't find a database entry for "Ablamowicz07"
-Warning--I didn't find a database entry for "Poker06"
-Warning--I didn't find a database entry for "Obama08"
-Warning--I didn't find a database entry for "Novak03"
-Warning--I didn't find a database entry for "Lee05"
-Warning--I didn't find a database entry for "JoeScientist001"
-Warning--I didn't find a database entry for "rous08"
-Warning--I didn't find a database entry for "SaeediMEJ10"
-Warning--I didn't find a database entry for "SaeediJETC10"
-Warning--I didn't find a database entry for "Kirschmer:2010:AEI:1958016.1958018"
-Warning--I didn't find a database entry for "MR781536"
-Warning--I didn't find a database entry for "MR781537"
-Warning--I didn't find a database entry for "2004:ITE:1009386.1010128"
-Warning--I didn't find a database entry for "TUGInstmem"
-Warning--I didn't find a database entry for "CTANacmart"
-Warning--I didn't find a database entry for "CROSSBOW"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
@@ -79,6 +46,9 @@ Warning--empty address in tsgx
 Warning--page numbers missing in both pages and numpages fields in tsgx
 Warning--no number and no volume in pigeonhole
 Warning--page numbers missing in both pages and numpages fields in pigeonhole
+Warning--no journal in sgxstep
+Warning--no number and no volume in sgxstep
+Warning--page numbers missing in both pages and numpages fields in sgxstep
 Warning--empty publisher in stealthy
 Warning--empty address in stealthy
 Warning--page numbers missing in both pages and numpages fields in stealthy
@@ -87,45 +57,45 @@ Warning--empty publisher in leakycauldron
 Warning--empty address in leakycauldron
 Warning--empty publisher in flushreload
 Warning--empty address in flushreload
-You've used 27 entries,
+You've used 28 entries,
             5732 wiz_defined-function locations,
-            1639 strings with 21899 characters,
-and the built_in function-call counts, 29061 in all, are:
-= -- 3167
-> -- 1188
+            1579 strings with 21434 characters,
+and the built_in function-call counts, 29890 in all, are:
+= -- 3236
+> -- 1228
 < -- 0
-+ -- 391
-- -- 399
-* -- 2101
-:= -- 3129
-add.period$ -- 131
-call.type$ -- 27
-change.case$ -- 195
++ -- 405
+- -- 411
+* -- 2173
+:= -- 3229
+add.period$ -- 136
+call.type$ -- 28
+change.case$ -- 202
 chr.to.int$ -- 21
-cite$ -- 71
-duplicate$ -- 2597
-empty$ -- 1839
-format.name$ -- 466
-if$ -- 6781
-int.to.chr$ -- 8
+cite$ -- 75
+duplicate$ -- 2673
+empty$ -- 1896
+format.name$ -- 481
+if$ -- 6963
+int.to.chr$ -- 9
 int.to.str$ -- 1
-missing$ -- 90
-newline$ -- 274
-num.names$ -- 210
-pop$ -- 1180
+missing$ -- 94
+newline$ -- 282
+num.names$ -- 217
+pop$ -- 1218
 preamble$ -- 1
-purify$ -- 400
+purify$ -- 414
 quote$ -- 0
-skip$ -- 888
+skip$ -- 905
 stack$ -- 0
-substring$ -- 1839
-swap$ -- 227
+substring$ -- 1888
+swap$ -- 231
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 707
-warning$ -- 44
-while$ -- 182
+type$ -- 717
+warning$ -- 47
+while$ -- 186
 width$ -- 0
-write$ -- 507
-(There were 77 warnings)
+write$ -- 523
+(There were 47 warnings)

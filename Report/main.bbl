@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{27}
+\begin{thebibliography}{28}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -332,13 +332,25 @@ Retrieved April 12, 2018 from \tempurl}
 \newblock
 
 
+\bibitem[\protect\citeauthoryear{Van~Bulck, Piessens, and Strackx}{Van~Bulck
+  et~al\mbox{.}}{2017a}]%
+        {sgxstep}
+\bibfield{author}{\bibinfo{person}{Jo Van~Bulck}, \bibinfo{person}{Frank
+  Piessens}, {and} \bibinfo{person}{Raoul Strackx}.}
+  \bibinfo{year}{2017}\natexlab{a}.
+\newblock \showarticletitle{SGX-Step: A practical attack framework for precise
+  enclave execution control}.
+\newblock  (\bibinfo{year}{2017}).
+\newblock
+
+
 \bibitem[\protect\citeauthoryear{Van~Bulck, Weichbrodt, Kapitza, Piessens, and
-  Strackx}{Van~Bulck et~al\mbox{.}}{2017}]%
+  Strackx}{Van~Bulck et~al\mbox{.}}{2017b}]%
         {stealthy}
 \bibfield{author}{\bibinfo{person}{Jo Van~Bulck}, \bibinfo{person}{Nico
   Weichbrodt}, \bibinfo{person}{R{\"u}diger Kapitza}, \bibinfo{person}{Frank
   Piessens}, {and} \bibinfo{person}{Raoul Strackx}.}
-  \bibinfo{year}{2017}\natexlab{}.
+  \bibinfo{year}{2017}\natexlab{b}.
 \newblock \showarticletitle{Telling your secrets without page faults: Stealthy
   page table-based attacks on enclaved execution}. In
   \bibinfo{booktitle}{\emph{Proceedings of the 26th USENIX Security

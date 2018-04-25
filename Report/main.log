@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.10)  25 APR 2018 15:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.4.10)  25 APR 2018 17:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -802,29 +802,29 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
-<images/uos.png, id=151, 626.34pt x 375.4025pt>
+<images/uos.png, id=159, 626.34pt x 375.4025pt>
 File: images/uos.png Graphic file (type png)
 <use images/uos.png>
 Package pdftex.def Info: images/uos.png  used on input line 46.
 (pdftex.def)             Requested size: 187.90344pt x 112.62161pt.
-<images/uos1.png, id=154, 1182.4175pt x 698.61pt>
+<images/uos1.png, id=162, 1182.4175pt x 698.61pt>
 File: images/uos1.png Graphic file (type png)
 <use images/uos1.png>
 Package pdftex.def Info: images/uos1.png  used on input line 52.
 (pdftex.def)             Requested size: 354.72798pt x 209.58461pt.
  [3.3 <./images/uos.png>]
-<images/rtm.png, id=174, 963.6pt x 597.23125pt>
+<images/rtm.png, id=182, 963.6pt x 597.23125pt>
 File: images/rtm.png Graphic file (type png)
 <use images/rtm.png>
 Package pdftex.def Info: images/rtm.png  used on input line 65.
 (pdftex.def)             Requested size: 192.71658pt x 119.44412pt.
  [4.4 <./images/uos1.png> <./images/rtm.png>]
-<images/alg.png, id=199, 318.18875pt x 365.365pt>
+<images/alg.png, id=207, 318.18875pt x 365.365pt>
 File: images/alg.png Graphic file (type png)
 <use images/alg.png>
 Package pdftex.def Info: images/alg.png  used on input line 92.
 (pdftex.def)             Requested size: 79.54698pt x 91.34102pt.
-<images/pp1.png, id=202, 1154.3125pt x 645.41125pt>
+<images/pp1.png, id=210, 1154.3125pt x 645.41125pt>
 File: images/pp1.png Graphic file (type png)
 <use images/pp1.png>
 Package pdftex.def Info: images/pp1.png  used on input line 107.
@@ -835,12 +835,12 @@ Missing character: There is no ™ in font cmss9!
 Missing character: There is no â in font cmss9!
 Missing character: There is no € in font cmss9!
 Missing character: There is no ™ in font cmss9!
-<images/pp2.png, id=205, 1427.3325pt x 474.77374pt>
+<images/pp2.png, id=213, 1427.3325pt x 474.77374pt>
 File: images/pp2.png Graphic file (type png)
 <use images/pp2.png>
 Package pdftex.def Info: images/pp2.png  used on input line 112.
 (pdftex.def)             Requested size: 285.46144pt x 94.95306pt.
-<images/ppfr.png, id=208, 1303.87125pt x 735.74875pt>
+<images/ppfr.png, id=216, 1303.87125pt x 735.74875pt>
 File: images/ppfr.png Graphic file (type png)
 <use images/ppfr.png>
 Package pdftex.def Info: images/ppfr.png  used on input line 117.
@@ -858,7 +858,7 @@ Underfull \vbox (badness 2027) has occurred while \output is active []
  [7.7]
 Missing character: There is no Ù in font cmr10!
 Missing character: There is no Ž in font cmr10!
-<images/dejavu.png, id=258, 1104.125pt x 569.12625pt>
+<images/dejavu.png, id=266, 1104.125pt x 569.12625pt>
 File: images/dejavu.png Graphic file (type png)
 <use images/dejavu.png>
 Package pdftex.def Info: images/dejavu.png  used on input line 158.
@@ -871,20 +871,20 @@ Missing character: There is no Ã in font cmss9!
 Missing character: There is no © in font cmss9!
 Missing character: There is no Ã in font cmss9!
 Missing character: There is no   in font cmss9!
-<images/tsgx.png, id=261, 1347.0325pt x 678.535pt>
+<images/tsgx.png, id=269, 1347.0325pt x 678.535pt>
 File: images/tsgx.png Graphic file (type png)
 <use images/tsgx.png>
 Package pdftex.def Info: images/tsgx.png  used on input line 163.
 (pdftex.def)             Requested size: 269.40173pt x 135.70459pt.
 
 [8.8] [9.9 <./images/dejavu.png> <./images/tsgx.png>]
-<images/cloakcode.png, id=287, 716.6775pt x 181.67876pt>
+<images/cloakcode.png, id=295, 716.6775pt x 181.67876pt>
 File: images/cloakcode.png Graphic file (type png)
 <use images/cloakcode.png>
 Package pdftex.def Info: images/cloakcode.png  used on input line 190.
 (pdftex.def)             Requested size: 179.16893pt x 45.41957pt.
  [10.10 <./images/cloakcode.png>]
-<images/sgxshield.png, id=305, 1682.285pt x 719.68875pt>
+<images/sgxshield.png, id=313, 1682.285pt x 719.68875pt>
 File: images/sgxshield.png Graphic file (type png)
 <use images/sgxshield.png>
 Package pdftex.def Info: images/sgxshield.png  used on input line 200.
@@ -895,15 +895,20 @@ Missing character: There is no ™ in font cmss9!
 Missing character: There is no â in font cmss9!
 Missing character: There is no € in font cmss9!
 Missing character: There is no ™ in font cmss9!
-
-Underfull \vbox (badness 2245) has occurred while \output is active []
-
- [11.11 <./images/sgxshield.png>] Processing 'acks' comment.
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no © in font cmr10!
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no   in font cmr10!
+ [11.11 <./images/sgxshield.png>] [12.12]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ¦ in font cmr10!
+ [13.13]
+Processing 'acks' comment.
 \openout4 = `comment.cut'.
 
-
-Comment 'acks' writing to comment.cut. Straight input of comment.cut.
-(./comment.cut) (./main.bbl
+ Comment 'acks' writing to comment.cut.
+Straight input of comment.cut. (./comment.cut) (./main.bbl
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 Missing character: There is no Â in font cmr8!
@@ -914,6 +919,7 @@ Missing character: There is no ¢ in font cmr8!
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 LaTeX Info: Redefining \tempurl on input line 103.
+ [14.14]
 Missing character: There is no Â in font cmr8!
 Missing character: There is no ® in font cmr8!
 Missing character: There is no Â in font cmr8!
@@ -946,76 +952,60 @@ LaTeX Info: Redefining \tempurl on input line 169.
 Missing character: There is no â in font cmti8!
 Missing character: There is no € in font cmti8!
 Missing character: There is no ™ in font cmti8!
- [12.12]
-LaTeX Info: Redefining \tempurl on input line 358.
+LaTeX Info: Redefining \tempurl on input line 370.
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--361
+Underfull \hbox (badness 10000) in paragraph at lines 363--373
 []\OT1/cmr/m/n/8 (+20) Frank Wang. 2017.  Opaque: An Obliv-i-ous and En-crypted
  Dis-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--361
+Underfull \hbox (badness 10000) in paragraph at lines 363--373
 \OT1/cmr/m/n/8 (+20) tributed An-a-lyt-ics Plat-form.    [][]$https : / / mediu
 m . com / mit-[]security-[]seminar /
  []
 
-)) [13.13]
+)) [15.15]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 134.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 134.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 134.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 134.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 96AF127C7FD1A2BEF077A9A5A234A4BD;4388.
 
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 9D42D7D4696A0BE4BDDAF01EB4394041;4238
-(rerunfilecheck)             After:  960C9B79C77221A54726CBCCFDF57844;3385.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16832 strings out of 494847
- 245052 string characters out of 6179080
- 394017 words of memory out of 5000000
- 19439 multiletter control sequences out of 15000+600000
- 19496 words of font info for 144 fonts, out of 8000000 for 9000
+ 16843 strings out of 494847
+ 245216 string characters out of 6179080
+ 395092 words of memory out of 5000000
+ 19444 multiletter control sequences out of 15000+600000
+ 19380 words of font info for 143 fonts, out of 8000000 for 9000
  220 hyphenation exceptions out of 8191
  60i,12n,94p,1940b,578s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{subsection.B.2} has been referenced but does not 
-exist, replaced by a fixed one
-
-pdfTeX warning (dest): name{subsection.B.1} has been referenced but does not ex
-ist, replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.B} has been referenced but does not exist,
- replaced by a fixed one
-
-pdfTeX warning (dest): name{appendix.A} has been referenced but does not exist,
- replaced by a fixed one
-
- </home/amin/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600pk>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pf
-b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on main.pdf (13 pages, 1160334 bytes).
+ </home/amin/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0900.600p
+k></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on main.pdf (15 pages, 1196190 bytes).
 PDF statistics:
- 431 PDF objects out of 1000 (max. 8388607)
- 350 compressed objects within 4 object streams
- 93 named destinations out of 1000 (max. 500000)
- 27936 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 477 PDF objects out of 1000 (max. 8388607)
+ 388 compressed objects within 4 object streams
+ 101 named destinations out of 1000 (max. 500000)
+ 27952 words of extra memory for PDF output out of 29859 (max. 10000000)
 
