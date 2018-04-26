@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{28}
+\begin{thebibliography}{27}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -233,6 +233,18 @@ Retrieved April 12, 2018 from \tempurl}
 \newblock
 
 
+\bibitem[\protect\citeauthoryear{Ohrimenko, Goodrich, Tamassia, and
+  Upfal}{Ohrimenko et~al\mbox{.}}{2014}]%
+        {melbourne}
+\bibfield{author}{\bibinfo{person}{Olga Ohrimenko}, \bibinfo{person}{Michael~T
+  Goodrich}, \bibinfo{person}{Roberto Tamassia}, {and} \bibinfo{person}{Eli
+  Upfal}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{The Melbourne shuffle: Improving oblivious storage
+  in the cloud}. In \bibinfo{booktitle}{\emph{International Colloquium on
+  Automata, Languages, and Programming}}. Springer, \bibinfo{pages}{556--567}.
+\newblock
+
+
 \bibitem[\protect\citeauthoryear{Ostrovsky}{Ostrovsky}{1990}]%
         {oram2}
 \bibfield{author}{\bibinfo{person}{Rafail Ostrovsky}.}
@@ -332,44 +344,18 @@ Retrieved April 12, 2018 from \tempurl}
 \newblock
 
 
-\bibitem[\protect\citeauthoryear{Van~Bulck, Piessens, and Strackx}{Van~Bulck
-  et~al\mbox{.}}{2017a}]%
-        {sgxstep}
-\bibfield{author}{\bibinfo{person}{Jo Van~Bulck}, \bibinfo{person}{Frank
-  Piessens}, {and} \bibinfo{person}{Raoul Strackx}.}
-  \bibinfo{year}{2017}\natexlab{a}.
-\newblock \showarticletitle{SGX-Step: A practical attack framework for precise
-  enclave execution control}.
-\newblock  (\bibinfo{year}{2017}).
-\newblock
-
-
 \bibitem[\protect\citeauthoryear{Van~Bulck, Weichbrodt, Kapitza, Piessens, and
-  Strackx}{Van~Bulck et~al\mbox{.}}{2017b}]%
+  Strackx}{Van~Bulck et~al\mbox{.}}{2017}]%
         {stealthy}
 \bibfield{author}{\bibinfo{person}{Jo Van~Bulck}, \bibinfo{person}{Nico
   Weichbrodt}, \bibinfo{person}{R{\"u}diger Kapitza}, \bibinfo{person}{Frank
   Piessens}, {and} \bibinfo{person}{Raoul Strackx}.}
-  \bibinfo{year}{2017}\natexlab{b}.
+  \bibinfo{year}{2017}\natexlab{}.
 \newblock \showarticletitle{Telling your secrets without page faults: Stealthy
   page table-based attacks on enclaved execution}. In
   \bibinfo{booktitle}{\emph{Proceedings of the 26th USENIX Security
   Symposium}}. USENIX Association.
 \newblock
-
-
-\bibitem[\protect\citeauthoryear{Wang}{Wang}{2017}]%
-        {wang2017}
-\bibfield{author}{\bibinfo{person}{Frank Wang}.}
-  \bibinfo{year}{2017}\natexlab{}.
-\newblock \bibinfo{title}{Opaque: An Oblivious and Encrypted Distributed
-  Analytics Platform}.
-\newblock
-\newblock
-\urldef\tempurl%
-\url{https://medium.com/mit-security-seminar/opaque-an-oblivious-and-encrypted-distributed-analytics-platform-4109a0e70bcf}
-\showURL{%
-\tempurl}
 
 
 \bibitem[\protect\citeauthoryear{Wang, Chen, Pan, Zhang, Wang, Bindschaedler,
