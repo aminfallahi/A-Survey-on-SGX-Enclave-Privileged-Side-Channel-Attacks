@@ -66,20 +66,19 @@
 \newlabel{alg:one}{{1}{5}{Prime+Probe}{algocf.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A high-level view of the Prime+Probe attack; victim and attacker\IeC {\textquoteright }s Prime+Probe code run in parallel on a dedicated core. The malicious OS ensures that no other code shares that core to minimize noise \citep  {brasser2017software}.\relax }}{5}{figure.caption.5}}
 \newlabel{fig:ppone}{{3}{5}{A high-level view of the Prime+Probe attack; victim and attacker’s Prime+Probe code run in parallel on a dedicated core. The malicious OS ensures that no other code shares that core to minimize noise \cite {brasser2017software}.\relax }{figure.caption.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A detailed view of Prime+Probe side-channel attack; first the attacker primes the cache, next the victim executes and occupies some of the cache, afterwards the attacker probes to identify which cache lines have been used by the victim. This information allows the attacker to draw conclusion on secret data processed by the victim process \citep  {brasser2017software}.\relax }}{5}{figure.caption.6}}
-\newlabel{fig:pptwo}{{4}{5}{A detailed view of Prime+Probe side-channel attack; first the attacker primes the cache, next the victim executes and occupies some of the cache, afterwards the attacker probes to identify which cache lines have been used by the victim. This information allows the attacker to draw conclusion on secret data processed by the victim process \cite {brasser2017software}.\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A detailed view of Prime+Probe side-channel attack; first the attacker primes the cache, next the victim executes and occupies some of the cache, then the attacker identifies which cache lines have been used by the victim. This information allows the attacker to recover secret data in use by the victim process \citep  {brasser2017software}.\relax }}{5}{figure.caption.6}}
+\newlabel{fig:pptwo}{{4}{5}{A detailed view of Prime+Probe side-channel attack; first the attacker primes the cache, next the victim executes and occupies some of the cache, then the attacker identifies which cache lines have been used by the victim. This information allows the attacker to recover secret data in use by the victim process \cite {brasser2017software}.\relax }{figure.caption.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Prime+Probe}{5}{subsection.3.3}}
 \citation{kayaalp2016high}
 \citation{kayaalp2016high}
 \citation{stealthy}
 \citation{stealthy}
 \citation{leakycauldron}
-\citation{leakycauldron,stealthy}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Prime+Probe vs Flush+Reload Attacks \citep  {kayaalp2016high}.\relax }}{6}{figure.caption.7}}
 \newlabel{fig:ppfr}{{5}{6}{Prime+Probe vs Flush+Reload Attacks \cite {kayaalp2016high}.\relax }{figure.caption.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Flush+Reload}{6}{subsection.3.4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Stealthy Page Table-Based Attacks}{6}{subsection.3.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Sneaky Page-Monitoring Attacks}{6}{subsection.3.6}}
+\citation{leakycauldron,stealthy}
 \citation{leakycauldron,stealthy}
 \citation{leakycauldron,stealthy}
 \citation{leakycauldron,drama}
@@ -89,6 +88,7 @@
 \citation{kayaalp2016high}
 \citation{kayaalp2016high}
 \citation{flushflush}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Sneaky Page-Monitoring Attacks}{7}{subsection.3.6}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.1}Accessed flags monitoring}{7}{subsubsection.3.6.1}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.2}Timing enhancement}{7}{subsubsection.3.6.2}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.6.3}TLB flushing through Hyperthreading}{7}{subsubsection.3.6.3}}
@@ -117,8 +117,6 @@
 \citation{cloak}
 \citation{cloak}
 \citation{sgxshield}
-\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Cloak sample code \citep  {cloak}\relax }}{10}{algocf.2}}
-\newlabel{alg:cloak}{{2}{10}{Attack Prevention}{algocf.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Attack Prevention}{10}{subsection.4.2}}
 \citation{sgxshield}
 \citation{sgxshield}
@@ -126,12 +124,14 @@
 \citation{oram1,oram2,oram3}
 \citation{drsgx}
 \citation{cloak}
-\citation{tsgx}
-\citation{dejavu}
-\citation{leakycauldron}
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Cloak sample code \citep  {cloak}\relax }}{11}{algocf.2}}
+\newlabel{alg:cloak}{{2}{11}{Attack Prevention}{algocf.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Overall workflow of SGX-Shield: 1) the preparation phase builds a SGX binary from the target program\IeC {\textquoteright }s source code; 2) the bootstrapping phase loads the secure in-enclave loader into code pages and the target SGX program into data pages; and 3) the secure in-enclave loading phase finally loads the target SGX program \citep  {sgxshield}.\relax }}{11}{figure.caption.12}}
 \newlabel{fig:sgxshield}{{9}{11}{Overall workflow of SGX-Shield: 1) the preparation phase builds a SGX binary from the target program’s source code; 2) the bootstrapping phase loads the secure in-enclave loader into code pages and the target SGX program into data pages; and 3) the secure in-enclave loading phase finally loads the target SGX program \cite {sgxshield}.\relax }{figure.caption.12}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Analysis}{11}{section.5}}
+\citation{tsgx}
+\citation{dejavu}
+\citation{leakycauldron}
 \citation{sgxshield}
 \citation{leakycauldron}
 \citation{pigeonhole}
@@ -141,11 +141,11 @@
 \bibcite{drsgx}{{1}{2017a}{{Brasser et~al\unhbox \voidb@x \hbox {.}}}{{Brasser, Capkun, Dmitrienko, Frassetto, Kostiainen, M{\"u}ller, and Sadeghi}}}
 \bibcite{brasser2017software}{{2}{2017b}{{Brasser et~al\unhbox \voidb@x \hbox {.}}}{{Brasser, M{\"u}ller, Dmitrienko, Kostiainen, Capkun, and Sadeghi}}}
 \bibcite{dejavu}{{3}{2017}{{Chen et~al\unhbox \voidb@x \hbox {.}}}{{Chen, Zhang, Reiter, and Zhang}}}
-\bibcite{haswell}{{4}{[n. d.]a}{{Corporation}}{{Corporation}}}
-\bibcite{ecallocall}{{5}{[n. d.]b}{{Corporation}}{{Corporation}}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Conclusions}{12}{section.6}}
 \@writefile{toc}{\contentsline {section}{Acknowledgments}{12}{section*.14}}
 \@writefile{toc}{\contentsline {section}{References}{12}{section*.16}}
+\bibcite{haswell}{{4}{[n. d.]a}{{Corporation}}{{Corporation}}}
+\bibcite{ecallocall}{{5}{[n. d.]b}{{Corporation}}{{Corporation}}}
 \bibcite{sgx}{{6}{[n. d.]c}{{Corporation}}{{Corporation}}}
 \bibcite{sgxapi}{{7}{[n. d.]d}{{Corporation}}{{Corporation}}}
 \bibcite{rtm}{{8}{[n. d.]e}{{Corporation}}{{Corporation}}}
@@ -173,4 +173,4 @@
 \newlabel{tocindent1}{10.00003pt}
 \newlabel{tocindent2}{14.86116pt}
 \newlabel{tocindent3}{23.88895pt}
-\newlabel{TotPages}{{13}{13}{}{page.13}{}}
+\newlabel{TotPages}{{14}{14}{}{page.14}{}}
