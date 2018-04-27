@@ -1,12 +1,12 @@
 \section{Introduction}
 
-One of the present challenges in cybersecurity systems is to outsource programs to be executed in the cloud and at the same time maintaining the privacy of the owner and the security of data. The program code has to be protected alongside the data which is being used by it. Even in a securely encrypted code, the low-level instructions are visible when they are being executed by the CPU and a malicious operating system kernel can tamper with them. Several attacks are possible by reverse engineering the instructions, including code reuse, data injection, copyright violation, and recovery of classified data. Intel SGX (Software Guard eXtensions) \cite{sgx} is a novel architecture introduced with Intel Skylake micro-architecture \cite{skylake} that protects the code and the data inside an encrypted enclave that is a portion of memory which is protected by the support of hardware. The enclave is secure against direct eavesdropping by the adversary, but there are several successful attacking methods using side-channel information which are visible to the adversary \cite{leakycauldron}. The problem with this hardware extension is that the memory layout is still visible to the operating system kernel and a malicious OS in the cloud can recover useful information by observing the occurrences of page faults. As a result, this side-channel attack can be successful on recovering the data by clearing the page table and causing page faults, then observing them for different inputs. In the same scenario, cache-misses are a point for side-channel attacks. The pattern of cache-miss occurrences can be used by a malicious operating system to attack the enclave program.
+One of the most recent challenges in cybersecurity systems is to outsource programs to be executed in the cloud maintaining the privacy of the owner and the security of data at the same time. The program code has to be protected alongside the data which is being used by it. Even in a securely encrypted code, the low-level instructions are visible when they are being executed by the CPU and a malicious operating system kernel can tamper with them. Several attacks are possible by reverse engineering the instructions, including code reuse, data injection, copyright violation, and recovery of classified data. Intel SGX (Software Guard eXtensions) \cite{sgx} is a novel architecture introduced with Intel Skylake micro-architecture \cite{skylake} that protects the code and the data inside an encrypted enclave that is a portion of memory protected by the support of hardware. The enclave is secure against direct eavesdropping by the adversary, but several successful attacking methods using side-channel information exist becuase  this information are visible to the adversary \cite{leakycauldron}. The main drawback of this hardware extension is that the memory layout is still visible to the operating system kernel. Therefore, a malicious OS in the cloud can recover useful information by observing the occurrences of page faults. As a result, this side-channel attack can be successful on recovering the data by clearing the page table and causing page faults, then observing them for different inputs. In the same scenario, cache-misses are a point for side-channel attacks. The pattern of cache-miss occurrences can be used by a malicious operating system to attack the enclave program.
 
-Several theoretical and practical attacks based on SGX side channels discussed and experimented to be practical and effective. The points of interest during the execution of a program inside enclave for the adversary are cache and whatever is missed and retrieved from the memory, page-faults, and page-table.
+Several theoretical and practical attacks based on SGX side channels are discussed and experimented to be practical and effective. The points of interest during the execution of a program inside enclave for the adversary are cache and whatever is missed and retrieved from the memory, page-faults, and page-table.
 
 In response to the development of attacks, several defense mechanisms are designed which have been effective in some cases and conditions. These defense methods usually sacrifice performance or accuracy while improving the security against side-channel attacks. 
 
-In this report, we study the possible attacks which are possible using SGX side-channel information and their points of success. Then, we discuss possible defenses which have been proposed by the researchers, study their methods and compare the defenses and their effectiveness under different conditions and scenarios.
+In this report, we study the possible attacks which are possible using SGX side-channel information and their points of success. Then, we discuss possible defense mechanisms which have been proposed by the researchers, study their methods and compare the defenses and their effectiveness under different conditions and scenarios.
 
 In summary, the main points of study in this work are:
 \begin{itemize}
@@ -14,21 +14,21 @@ In summary, the main points of study in this work are:
 	\item Discussing the past work which have been done on defending the SGX enclave against side-channel attacks.
 	\item Analyzing the defense methods and their effectiveness.
 \end{itemize} 
-\textbf{Outline} In the remainder of this report, we discuss basic background knowledge required for studying this work in section 2. Then, we review and analyze the attacks which are possible to be launched against SGX enclave using side-channel information in section 3. In section 4, we introduce several defenses which have been proposed by past research and in section 5 we analyze and compare the effectiveness of these defense methods in terms of security and performance. At last, we conclude the research in section 6.
+\textbf{Outline} In the remainder of this report, we discuss basic background knowledge required for studying this work in section 2. Then, we review and analyze the attacks which are possible to be launched against SGX enclave using side-channel information in section 3. In section 4, we introduce several defenses proposed by past research works, and in section 5 we analyze and compare the effectiveness of these defense methods in terms of security and performance. At last, we conclude the research in section 6.
 \section{Background}
 In this section, we provide detailed background on side-channel attacks targeting enclaved applications, tools, and terms we use in this report.
 
 \subsection{Intel SGX}
 
-Protecting the data inside a shield has been a major interest for improving security and privacy in distributed systems and several software and hardware based solutions have been proposed for this purpose.
+Protecting the data inside a shield has been a major interest for improving security and privacy in distributed systems. for this purpose, several software and hardware based solutions have been proposed.
 
-Intel introduced a new hardware-based technique in its new Skylake micro-architecture \cite{skylake} line of processors called Software Guard eXtensions (SGX) \cite{sgx}. The main function of it is assigning a portion of main memory to a program and protecting it from being read and written by other processes. The effectiveness of this technique scales up to prevent the operating system kernel itself from accessing the shielded memory which is called enclave. Intel SGX API \cite{sgxapi} uses two main kinds of specialized function calls to work with the enclave. ECALLs are functions which run inside the enclave and can be called from outside and OCALLs are useful for using system functions and other operations which are possible to be done outside enclave \cite{ecallocall}.
+Intel introduced a new hardware-based technique in its new Skylake micro-architecture \cite{skylake} line of processors called Software Guard eXtensions (SGX) \cite{sgx}. The main function of it is assigning a portion of main memory to a program and protecting it from being read and written by other processes. The effectiveness of this technique scales up to prevent the operating system kernel itself from accessing the shielded memory which is called enclave. Intel SGX API \cite{sgxapi} uses two main forms of specialized function calls to work with the enclave. ECALLs are functions which run inside the enclave and can be called from outside and OCALLs are useful for using system functions and other operations which are possible to be done outside enclave \cite{ecallocall}.
 
 One of the major problems with running applications inside the cloud is the leakage of data and code instructions. Even with encryption, the CPU can only execute unencrypted instructions which can be eavesdropped and reverse engineered to useful code. Only with hardware modifications and adding SGX support to the hardware, it is possible to improve security and privacy in this term.
 
 \subsection{Storage Structure}
 
-In the common hardware architectures used in cloud computing environments today, data is transferred through several buses using multiple protocols to be used. The encrypted data is stored on the hard drive and will be transferred into enclaved memory. Then, it will be cached using multiple levels of cache for performance optimization. Also, page mappings between virtual and physical addresses of data are kept in the main memory and a transaction look-aside buffer (TLB) is used to cache the mappings in the page-table for better performance.
+In the common hardware architectures used in cloud computing environments today, data is transferred through several buses using multiple protocols to be used. The encrypted data is stored on the hard drive and will be transferred into enclaved memory. Then, it will be cached using multiple levels of cache for performance optimization. Page mappings between virtual and physical addresses of data are also kept in the main memory and a transaction look-aside buffer (TLB) is used to cache the mappings in the page-table for better performance.
 
 Each data transfer can be a point of side-channel attack. While the data is encrypted, the patterns of reads and writes, cache-misses, page-faults, and other interrupts and exceptions can be used by the adversary for launching attacks and recovering useful information.
 
@@ -55,7 +55,7 @@ Other attacks such as Stealthy Page Monitoring (SPM) attacks \cite{stealthy,leak
 \end{figure}
 
 \subsection{Intel TSX}
-One of the technologies which have came into notice for making benefit in defense against side-channel attacks is Intel TSX \cite{tsx}. This technology has been introduced by Intel since Haswell micro-architecture \cite{haswell} for critical sections management and monitoring serialization. Intel TSX provides two frameworks to add transaction support to the processor. Both frameworks introduce new instructions for region specification, backward compatibility, and flexibility \cite{tsx}. One of them is RTM (Restricted Transactional Memory) \cite{rtm} which has been used by previous research like T-SGX \cite{tsgx} to isolate instructions and Cloak \cite{cloak} to pin sensitive code and data to the caches which is not supported by current hardware instructions.
+One of the technologies that has attracted a great attention for making benefit in defense against side-channel attacks is Intel TSX \cite{tsx}. This technology has been introduced by Intel since Haswell micro-architecture \cite{haswell} for critical sections management and monitoring serialization. Intel TSX provides two frameworks to add transaction support to the processor. Both frameworks introduce new instructions for region specification, backward compatibility, and flexibility \cite{tsx}. One of them is RTM (Restricted Transactional Memory) \cite{rtm} which has been used by previous research like T-SGX \cite{tsgx} to isolate instructions and Cloak \cite{cloak} to pin sensitive code and data to the caches which are not supported by current hardware instructions.
 
 \begin{figure}
 	\includegraphics[scale=0.2]{images/rtm}
@@ -65,13 +65,13 @@ One of the technologies which have came into notice for making benefit in defens
 
 
 \section{Attacks}
-We introduce and discuss the attacks which use side-channel information in this section and focus on summarizing the methods and points of attack.
+In this section, we introduce and discuss the attacks which use side-channel and focus on summarizing the methods and points of attack.
 
 \subsection{Attack Model}
 In our attack scenario, the enclave is protected by Intel SGX, so no one except the main program running inside enclave has the key to access it. The operating system kernel which runs on top of a hypervisor can view and manage tasks queue, exceptions and interrupts. The hypervisor kernel is also capable of viewing data transfer between memories and caches while Intel SGX prevents it from accessing the enclave data. It is considered that other tenants executing on the same hypervisor are not able to control the resources assigned to the main machine by the hypervisor.
 
 \subsection{Points of Attack}
-Several weaknesses in SGX architecture have been studied to be points for launching attacks against the enclave.
+Several caveats with SGX architecture have been studied to be points for launching attacks against the enclave.
 
 TLB, as an address translation cache, can be one point of attack. While TLB is shared between enclave and non-enclave programs when hyperthreading is enabled, it can create side-channels which can be used for retrieving useful information \cite{leakycauldron}.
 
@@ -86,15 +86,15 @@ Prime+Probe is composed of two stages. Considering an L1 cache of 64 sets, each 
 
 \begin{algorithm}[t]
 	\includegraphics[scale=0.25]{images/alg}
-%	\SetAlgoNoLine
-%	if ($secret$)
-%	\\\{\\
-%	\tab ;\\
-%	\}\\
-%	else\\
-%	\{\\
-%	\tab;\\
-%	\}
+	%	\SetAlgoNoLine
+	%	if ($secret$)
+	%	\\\{\\
+	%	\tab ;\\
+	%	\}\\
+	%	else\\
+	%	\{\\
+	%	\tab;\\
+	%	\}
 	\caption{Prime+Probe branching side-channel sample code \cite{stealthy,cloak}}
 	\label{alg:one}
 \end{algorithm}
@@ -120,7 +120,7 @@ By making use of page sharing between enclave and non-enclave code, the attacker
 \end{figure}
 
 \subsection{Stealthy Page Table-Based Attacks}
-Since the emerging of various page-fault based side-channel attacks, it is important to come out with a method for retrieving information without causing page-faults. Intended page-faults are possible to protect, and also cause a lot of overhead which leads to attack detection.
+Regarding the emerging of various page-fault based side-channel attacks, it is important to come out with a method for retrieving information without causing page-faults. Intended page-faults are possible to protect, and also cause a lot of overhead which leads to attack detection.
 
 Van Bulck et al. \cite{stealthy} have confirmed that accessed and dirty flags are set and unset for page table entries in both enclave mode and non-enclave mode. Monitoring these attacks can lead to page-fault detection on protected memory region without the need to produce intended page-faults. Suppose a program is being executed in the enclave which branches based on a secret. If the branch occurs one page will be retrieved and thus its accessed flag will be set, otherwise the same happens for another page. By observing the accessed bit for these two page tables, the secret is revealed. Doing this sequentially can reveal all the secrets which lead to EdDSA session key to be revealed gradually \cite{stealthy}.
 
@@ -167,7 +167,7 @@ Chen et al. \cite{dejavu} embed a clock inside the enclave and use Intel TSX for
 	\caption{Steps of an SGX asynchronous enclave exit (AEX) \cite{tsgx}.}
 	\label{fig:tsgx}
 \end{figure}
-Shinde et al. \cite{pigeonhole} do a statistical study on the percent of leakage, vulnerability, possibility and effectiveness of page-fault based attacks which they call pigeonhole attacks. Then, they study the possible ways of eliminating page-fault side-channels. More precisely, they define pigeonhole attack as an attack that is performed when a page table walk is done. Moving data between the physical and virtual memory from different pages sequentially causes page-faults on every single page when the virtual memory is already full, holding all the other pages. When the first page is fetched, the next page will be removed from the page table and when the next page is to be fetched, a page-fault will occur. Based on the fact that the malicious OS cannot differentiate accesses which are occurred in a single page, they claim that by mapping all the input dependent data into a single page, the program will access the same pattern of the pages independent of the input and makes it page-fault oblivious. The page containing the input dependent data is called data staging page and the one containing the code is called code staging page. By creating a decision tree of the program instructions, it is understood that in each stage of the program which is being executed, there is a page-fault sequence dependent on the data, which can be mapped to a staging page. So, for each stage, one staging page is considered. This technique will create a high overhead, thus, the research extends to optimizing the implemented method by eliminating copy operations which is done by skipping read-only data save, merging small data blocks into single pages to reduce the number of fetches, merging levels of execution and reducing the number of stages, removing the mux based on the input to reduce the possibility of branch conditions, and removing the dependence of code on the data (Ex. CAS obliviousness).
+Shinde et al. \cite{pigeonhole} conduct a statistical study on the percent of leakage, vulnerability, possibility and effectiveness of page-fault based attacks which they call pigeonhole attacks. Then, they consider the possible ways of eliminating page-fault side-channels. More precisely, they define pigeonhole attack as an attack that is performed when a page table walk is done. Moving data between the physical and virtual memory from different pages sequentially causes page-faults on every single page when the virtual memory is already full, holding all the other pages. When the first page is fetched, the next page will be removed from the page table and when the next page is to be fetched, a page-fault will occur. Based on the fact that the malicious OS cannot differentiate accesses which are occurred in a single page, they claim that by mapping all the input dependent data into a single page, the program will access the same pattern of the pages independent of the input and makes it page-fault oblivious. The page containing the input dependent data is called data staging page and the one containing the code is called code staging page. By creating a decision tree of the program instructions, it is understood that in each stage of the program which is being executed, there is a page-fault sequence dependent on the data, which can be mapped to a staging page. So, for each stage, one staging page is considered. This technique will create a high overhead, thus, the research extends to optimizing the implemented method by eliminating copy operations which is done by skipping read-only data save, merging small data blocks into single pages to reduce the number of fetches, merging levels of execution and reducing the number of stages, removing the mux based on the input to reduce the possibility of branch conditions, and removing the dependence of code on the data (Ex. CAS obliviousness).
 
 Shih et al. \cite{tsgx} make use of Intel transactional memory technology to isolate enclave code from interrupts caused by intentional page-fault based side-channel attacks performed by a privileged OS. As described in Fig. \ref{fig:tsgx}, the method includes 6 steps:
 \begin{enumerate}
@@ -210,7 +210,7 @@ Sasy et al. \cite{zerotrace} implement a block level memory controller as a new 
 Brasser et al. \cite{drsgx} propose data location randomization as a new approach for defending enclave side-channel attacks by designing and implementing a compiler based tool to shuffle the in-enclave data locations at the granularity of cache lines.
 
 \section{Analysis}
-Cloak \cite{cloak} achieves noticeable protection against cache-based side-channel attacks. However, there will still be some leakage remaining which this research does not handle. Overall execution time can leak information. Also, aborts do not cause the concurrent memory accesses to be canceled. Branch predictor is influenced due to the cache pinning and other micro-architecture effects can be possible due to the modifications to the execution behavior. On the other hand, the introduction of a new software-based way for pinning data into cache lines and making use of transactions for this purpose is a novel idea that opens new ways for future research in several areas. There is also an opportunity for later research on optimization and performance improvement and architectural study for reducing faults.
+Cloak \cite{cloak} has achieved significant protection against cache-based side-channel attacks. However, there will still be some leakage remaining which this research does not handle. Overall execution time can leak information. Also, aborts do not cause the concurrent memory accesses to be canceled. Branch predictor is influenced due to the cache pinning and other micro-architecture effects can be possible due to the modifications to the execution behavior. On the other hand, the introduction of a new software-based way for pinning data into cache lines and making use of transactions for this purpose is a novel idea that opens new ways for future research in several areas. There is also an opportunity for later research on optimization and performance improvement and architectural study for reducing faults.
 
 T-SGX \cite{tsgx} protects the enclave against page-fault based side-channel attacks, but at the same time, attacks which are based on monitoring accessed and dirty bits of the data are not detected by this method.
 
@@ -264,11 +264,11 @@ We defend this attack by shooting down the TLB after the execution of the sensit
 In this report, we studied various kinds of attacks proposed by the past research and also reviewed the defenses in terms of technique, security, and performance and analyzed their effectiveness. In the end, we proposed new ideas for extensions of present defenses and the improvement of them. Finally, the area is subject to further extensive research according to various unknown attacks which emerge every day.
 
 \begin{acks}
-
-This work has been done for the fulfillment of Ph.D. candidacy as qualification examination 2 (QE-2) at Syracuse university department of engineering and computer science for Computer and Information Science and Technology (CISE) program.
-
-%The research has been advised by Dr. Yuzhe Tang and Dr. Steve Chapin at Syracuse University.
-
+	
+	This work has been done for the fulfillment of Ph.D. candidacy as qualification examination 2 (QE-2) at Syracuse University Department of Engineering and Computer Science for Computer and Information Science and Technology (CISE) program.
+	
+	%The research has been advised by Dr. Yuzhe Tang and Dr. Steve Chapin at Syracuse University.
+	
 \end{acks}
 
 % Bibliography

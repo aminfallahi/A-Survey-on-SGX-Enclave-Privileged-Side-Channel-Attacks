@@ -29,8 +29,6 @@ Warning--empty publisher in flushflush
 Warning--empty address in flushflush
 Warning--empty publisher in kayaalp2016high
 Warning--empty address in kayaalp2016high
-Warning--empty publisher in melbourne
-Warning--empty address in melbourne
 Warning--empty publisher in oram2
 Warning--empty address in oram2
 Warning--empty publisher in primeprobe1
@@ -56,45 +54,45 @@ Warning--empty publisher in leakycauldron
 Warning--empty address in leakycauldron
 Warning--empty publisher in flushreload
 Warning--empty address in flushreload
-You've used 27 entries,
+You've used 26 entries,
             5732 wiz_defined-function locations,
-            1574 strings with 21257 characters,
-and the built_in function-call counts, 29651 in all, are:
-= -- 3223
-> -- 1220
+            1569 strings with 21037 characters,
+and the built_in function-call counts, 28312 in all, are:
+= -- 3084
+> -- 1168
 < -- 0
-+ -- 405
-- -- 407
-* -- 2159
-:= -- 3177
-add.period$ -- 131
-call.type$ -- 27
-change.case$ -- 198
-chr.to.int$ -- 21
-cite$ -- 73
-duplicate$ -- 2654
-empty$ -- 1876
-format.name$ -- 478
-if$ -- 6934
++ -- 386
+- -- 391
+* -- 2061
+:= -- 3043
+add.period$ -- 126
+call.type$ -- 26
+change.case$ -- 190
+chr.to.int$ -- 20
+cite$ -- 70
+duplicate$ -- 2526
+empty$ -- 1788
+format.name$ -- 458
+if$ -- 6620
 int.to.chr$ -- 8
 int.to.str$ -- 1
-missing$ -- 95
-newline$ -- 269
-num.names$ -- 210
-pop$ -- 1211
+missing$ -- 90
+newline$ -- 262
+num.names$ -- 202
+pop$ -- 1158
 preamble$ -- 1
-purify$ -- 403
+purify$ -- 386
 quote$ -- 0
-skip$ -- 906
+skip$ -- 859
 stack$ -- 0
-substring$ -- 1890
-swap$ -- 236
+substring$ -- 1784
+swap$ -- 222
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 707
-warning$ -- 46
-while$ -- 181
+type$ -- 677
+warning$ -- 44
+while$ -- 174
 width$ -- 0
-write$ -- 504
-(There were 46 warnings)
+write$ -- 487
+(There were 44 warnings)
