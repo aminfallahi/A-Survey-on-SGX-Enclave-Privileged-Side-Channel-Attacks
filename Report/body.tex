@@ -20,7 +20,7 @@ In this section, we provide detailed background on side-channel attacks targetin
 
 \subsection{Intel SGX}
 
-Protecting the data inside a shield has been a major interest for improving security and privacy in distributed systems. for this purpose, several software and hardware based solutions have been proposed.
+Protecting the data inside a shield has been a major interest for improving security and privacy in distributed systems. For this purpose, several software and hardware based solutions have been proposed.
 
 Intel introduced a new hardware-based technique in its new Skylake micro-architecture \cite{skylake} line of processors called Software Guard eXtensions (SGX) \cite{sgx}. The main function of it is assigning a portion of main memory to a program and protecting it from being read and written by other processes. The effectiveness of this technique scales up to prevent the operating system kernel itself from accessing the shielded memory which is called enclave. Intel SGX API \cite{sgxapi} uses two main forms of specialized function calls to work with the enclave. ECALLs are functions which run inside the enclave and can be called from outside and OCALLs are useful for using system functions and other operations which are possible to be done outside enclave \cite{ecallocall}.
 
@@ -122,7 +122,7 @@ By making use of page sharing between enclave and non-enclave code, the attacker
 \subsection{Stealthy Page Table-Based Attacks}
 Regarding the emerging of various page-fault based side-channel attacks, it is important to come out with a method for retrieving information without causing page-faults. Intended page-faults are possible to protect, and also cause a lot of overhead which leads to attack detection.
 
-Van Bulck et al. \cite{stealthy} have confirmed that accessed and dirty flags are set and unset for page table entries in both enclave mode and non-enclave mode. Monitoring these attacks can lead to page-fault detection on protected memory region without the need to produce intended page-faults. Suppose a program is being executed in the enclave which branches based on a secret. If the branch occurs one page will be retrieved and thus its accessed flag will be set, otherwise the same happens for another page. By observing the accessed bit for these two page tables, the secret is revealed. Doing this sequentially can reveal all the secrets which lead to EdDSA session key to be revealed gradually \cite{stealthy}.
+Van Bulck et al. \cite{stealthy} have confirmed that accessed and dirty flags are set and unset for page table entries in both enclave mode and non-enclave mode. Monitoring these attacks can lead to page-fault detection on protected memory region without the need to produce intended page-faults. Suppose a program is being executed in the enclave which branches based on a secret. If the branch occurs one page will be retrieved and thus its accessed flag will be set, otherwise the same happens for another page. By observing the accessed bit for these two page tables, the secret is revealed. Doing this sequentially can reveal all the secrets \cite{stealthy}.
 
 
 \subsection{Sneaky Page-Monitoring Attacks}
@@ -162,22 +162,10 @@ Chen et al. \cite{dejavu} embed a clock inside the enclave and use Intel TSX for
 	\caption{System architecture of Déjà Vu. Blocks in gray are untrusted, which include the untrusted components of the processes and the entire OS kernel \cite{dejavu}.}
 	\label{fig:dejavu}
 \end{figure}
-\begin{figure}
-	\includegraphics[scale=0.2]{images/tsgx}
-	\caption{Steps of an SGX asynchronous enclave exit (AEX) \cite{tsgx}.}
-	\label{fig:tsgx}
-\end{figure}
+
 Shinde et al. \cite{pigeonhole} conduct a statistical study on the percent of leakage, vulnerability, possibility and effectiveness of page-fault based attacks which they call pigeonhole attacks. Then, they consider the possible ways of eliminating page-fault side-channels. More precisely, they define pigeonhole attack as an attack that is performed when a page table walk is done. Moving data between the physical and virtual memory from different pages sequentially causes page-faults on every single page when the virtual memory is already full, holding all the other pages. When the first page is fetched, the next page will be removed from the page table and when the next page is to be fetched, a page-fault will occur. Based on the fact that the malicious OS cannot differentiate accesses which are occurred in a single page, they claim that by mapping all the input dependent data into a single page, the program will access the same pattern of the pages independent of the input and makes it page-fault oblivious. The page containing the input dependent data is called data staging page and the one containing the code is called code staging page. By creating a decision tree of the program instructions, it is understood that in each stage of the program which is being executed, there is a page-fault sequence dependent on the data, which can be mapped to a staging page. So, for each stage, one staging page is considered. This technique will create a high overhead, thus, the research extends to optimizing the implemented method by eliminating copy operations which is done by skipping read-only data save, merging small data blocks into single pages to reduce the number of fetches, merging levels of execution and reducing the number of stages, removing the mux based on the input to reduce the possibility of branch conditions, and removing the dependence of code on the data (Ex. CAS obliviousness).
 
-Shih et al. \cite{tsgx} make use of Intel transactional memory technology to isolate enclave code from interrupts caused by intentional page-fault based side-channel attacks performed by a privileged OS. As described in Fig. \ref{fig:tsgx}, the method includes 6 steps:
-\begin{enumerate}
-	\item The processor stores register values and the exit reason into the state save area (SSA) inside the enclave.
-	\item The processor loads synthetic	data into registers.
-	\item The enclave exits directly to the kernel space exception handler.
-	\item The exception handler handles the interrupt and returns to the trampoline.
-	\item The trampoline resumes the enclave.
-	\item The processor restores the stored register values and resumes enclave execution. In addition, the trampoline can call an application exception handler inside the enclave to handle exceptions the OS cannot process.
-\end{enumerate}
+Shih et al. \cite{tsgx} make use of Intel transactional memory technology to isolate enclave code from interrupts caused by intentional page-fault based side-channel attacks performed by a privileged OS. They improve the design by dividing the code into micro blocks to prevent abortions, because transactions are not designed to run long programs.
 
 
 \subsection{Attack Prevention}%{Cache-based attacks}%cloak
@@ -260,8 +248,8 @@ We defend this attack by shooting down the TLB after the execution of the sensit
 \end{comment}
 
 
-\section{Conclusions}
-In this report, we studied various kinds of attacks proposed by the past research and also reviewed the defenses in terms of technique, security, and performance and analyzed their effectiveness. In the end, we proposed new ideas for extensions of present defenses and the improvement of them. Finally, the area is subject to further extensive research according to various unknown attacks which emerge every day.
+\section{Conclusion}
+In this report, we studied various kinds of attacks proposed by the past research and also reviewed the defenses in terms of their technique, security, and performance, also analyzed their effectiveness. While several attacks can be practical to a good extent, there are still points of attacks and there is still space for security and performance improvements. Finally, the area is subject to further extensive research according to various unknown attacks which emerge every day.
 
 \begin{acks}
 	
