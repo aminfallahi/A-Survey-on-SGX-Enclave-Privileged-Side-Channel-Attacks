@@ -38,6 +38,8 @@ Warning--empty address in drama
 Warning--empty publisher in zerotrace
 Warning--empty address in zerotrace
 Warning--page numbers missing in both pages and numpages fields in zerotrace
+Warning--empty publisher in mge
+Warning--empty address in mge
 Warning--empty publisher in sgxshield
 Warning--empty address in sgxshield
 Warning--page numbers missing in both pages and numpages fields in sgxshield
@@ -54,45 +56,45 @@ Warning--empty publisher in leakycauldron
 Warning--empty address in leakycauldron
 Warning--empty publisher in flushreload
 Warning--empty address in flushreload
-You've used 26 entries,
+You've used 27 entries,
             5732 wiz_defined-function locations,
-            1569 strings with 21037 characters,
-and the built_in function-call counts, 28312 in all, are:
-= -- 3084
-> -- 1168
+            1573 strings with 21205 characters,
+and the built_in function-call counts, 29621 in all, are:
+= -- 3212
+> -- 1231
 < -- 0
-+ -- 386
-- -- 391
-* -- 2061
-:= -- 3043
-add.period$ -- 126
-call.type$ -- 26
-change.case$ -- 190
-chr.to.int$ -- 20
-cite$ -- 70
-duplicate$ -- 2526
-empty$ -- 1788
-format.name$ -- 458
-if$ -- 6620
++ -- 407
+- -- 411
+* -- 2166
+:= -- 3184
+add.period$ -- 131
+call.type$ -- 27
+change.case$ -- 199
+chr.to.int$ -- 21
+cite$ -- 73
+duplicate$ -- 2645
+empty$ -- 1871
+format.name$ -- 482
+if$ -- 6921
 int.to.chr$ -- 8
 int.to.str$ -- 1
-missing$ -- 90
-newline$ -- 262
-num.names$ -- 202
-pop$ -- 1158
+missing$ -- 95
+newline$ -- 269
+num.names$ -- 210
+pop$ -- 1212
 preamble$ -- 1
-purify$ -- 386
+purify$ -- 404
 quote$ -- 0
-skip$ -- 859
+skip$ -- 900
 stack$ -- 0
-substring$ -- 1784
-swap$ -- 222
+substring$ -- 1870
+swap$ -- 232
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 677
-warning$ -- 44
-while$ -- 174
+type$ -- 707
+warning$ -- 46
+while$ -- 181
 width$ -- 0
-write$ -- 487
-(There were 44 warnings)
+write$ -- 504
+(There were 46 warnings)

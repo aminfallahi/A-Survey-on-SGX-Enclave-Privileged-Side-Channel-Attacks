@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{26}
+\begin{thebibliography}{27}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -277,6 +277,20 @@ Retrieved April 12, 2018 from \tempurl}
 \newblock \showarticletitle{ZeroTrace: Oblivious memory primitives from Intel
   SGX}. In \bibinfo{booktitle}{\emph{Symposium on Network and Distributed
   System Security (NDSS)}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Schwarz, Weiser, Gruss, Maurice, and
+  Mangard}{Schwarz et~al\mbox{.}}{2017}]%
+        {mge}
+\bibfield{author}{\bibinfo{person}{Michael Schwarz}, \bibinfo{person}{Samuel
+  Weiser}, \bibinfo{person}{Daniel Gruss}, \bibinfo{person}{Cl{\'e}mentine
+  Maurice}, {and} \bibinfo{person}{Stefan Mangard}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Malware guard extension: Using SGX to conceal cache
+  attacks}. In \bibinfo{booktitle}{\emph{International Conference on Detection
+  of Intrusions and Malware, and Vulnerability Assessment}}. Springer,
+  \bibinfo{pages}{3--24}.
 \newblock
 
 

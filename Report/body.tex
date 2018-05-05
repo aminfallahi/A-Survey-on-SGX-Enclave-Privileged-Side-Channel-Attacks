@@ -110,10 +110,21 @@ Other than TLBs, CPU caches are shared between the enclave and non-enclave code 
 \subsection{Cache-Based Attacks}
 Attacks which use cache for eavesdropping, usually work on causing intentional cache-misses. Since the cache is not visible to the OS, the attacker is interested to encourage the program to access the main memory.
 
-Attacker uses parameters like time, trace, and access patterns to infer sensitive data from the cache. When the attacker shares the same direct-mapped cache set with the victim it is possible to launch a Prime+Probe attack against the victim. Considering an L1 cache of 64 sets, each containing 8 cache lines which are each 64 bytes, in the prime stage, the attacker executes conflicting cache lines to make page-fault possible for the victim who branches on a secret (Alg. \ref{alg:one}). By writing into cache lines, the attacker expects the victim to request access to a conflicting cache line and cause a page-fault. In the probe step, the attacker executes all the cache lines and measures the execution time of each, and based on it, the attacker can find out if that cache line has been touched by the user. Because the execution on the particular cache line will take more time due to page-fault. So, if the victim is continouosly branching on a secret, it will be revieled which branch has been taken. Based on different inputs, the attacker can guess the behavior of the program \cite{primeprobe1,primeprobe2,cloak} (Fig. \ref{fig:ppone}, \ref{fig:pptwo}).
+Attacker uses parameters like time, trace, and access patterns to infer sensitive data from the cache. When the attacker shares the same direct-mapped cache set with the victim, it is possible to launch a Prime+Probe attack against the victim. Considering an L1 cache of 64 sets, each containing 8 cache lines which are each 64 bytes, in the prime stage, the attacker executes conflicting cache lines to make page-fault possible for the victim who branches on a secret (Alg. \ref{alg:one}). By writing into cache lines, the attacker expects the victim to request access to a conflicting cache line and cause a page-fault. In the probe step, the attacker executes all the cache lines and measures the execution time of each, and based on it, the attacker can find out if that cache line has been touched by the user. Because the execution on the particular cache line will take more time due to page-fault. So, if the victim is continuously branching on a secret, it will be revealed which branch has been taken. Based on different inputs, the attacker can guess the behavior of the program \cite{primeprobe1,primeprobe2,cloak} (Fig. \ref{fig:ppone}, \ref{fig:pptwo}).
+
+Most of the past researches work on extracting RSA and EdDSA keys as the most used cryptography systems \cite{mge,leakycauldron,brasser2017software, pigeonhole,cloak,stealthy}. However, both follow the same path and basically, RSA is expandable to EdDSA, and both are prune to prime+probe attack. As shown in Algorithm \ref{alg:rsa1}, while RSA is based on calculating an exponentiation modulo some number $n$, Using a square+multiply algorithm it is possible to calculate a result in a branch based algorithm. The calculated result inside the loop is dependent on the bits in $d$ which is a secret than can lead us to recover the private key. In each iteration, if the bit is one, the result will be calculated based on a square and a multiply, otherwise it will be calculated based on a single multiplication. Using this branch, it is possible to find out if the multiply is executed or not and then recover the bitstream of the key. Thus, this secret dependent memory access leads to time difference between the cached data and uncached data which is used by the prime+probe attack \cite{mge,cloak}.
+
+While the private key is kept inside an SGX enclave, it makes sense to also do the attack inside an SGX enclave to leave the minimum possible trace for the detection of the attack by the victim \cite{mge}.
+
+A common problem that comes into view in terms of making the attack more practical, is that Intel has disabled its high precision timer (rdtsc) instruction to be used inside the enclave. So, it is needed to implement a high precision timer inside an enclave which has been done by \cite{mge} as shown in Algorithm \ref{alg:timer}. They start a thread for continously incrementing a global variable and achieve even better performance than Intel's high precision timer. The number of cycles which are executed inside the loop are constant and are a parameter of time, enough for precise specification of a relative time scale \cite{mge}.
+
+A prime+probe attack based on this setting, can result in a pattern observation as shown in Fig. \ref{fig:ppres}. By running a moving average on the result, it is possible to extract the key more easily.
+
+All has been done is experimented to be perfectly hidden, only some system noise can cause unstability which is almost undetectable in comparison to an attack inside the enclave.
+
 
 \begin{algorithm}[t]
-	\includegraphics[scale=0.25]{images/alg}
+	\includegraphics[scale=0.22]{images/alg}
 	%	\SetAlgoNoLine
 	%	if ($secret$)
 	%	\\\{\\
@@ -126,6 +137,37 @@ Attacker uses parameters like time, trace, and access patterns to infer sensitiv
 	\caption{Prime+Probe branching side-channel sample code \cite{stealthy,cloak}}
 	\label{alg:one}
 \end{algorithm}
+
+\begin{algorithm}[t]
+	\textbf{input:} base $b$, exponent $e$, modulus $n$\\
+	\textbf{output:} $b^e mod \; n$\\
+	$X \leftarrow 1;$\\
+	\textbf{for} $i \leftarrow bitlen(e)$ \textbf{downto} $0$ \textbf{do}\\
+	\tab $X \leftarrow multiply(X, X);$\\
+	\tab \textbf{if} $e_i=1$ \textbf{then}
+	\tab \tab $X \leftarrow multiply(X, b);$\\
+	\tab \textbf{end}\\
+	\textbf{end}\\
+	\textbf{return} $X;$
+
+	\caption{Square and multiply exponentiation \cite{mge}}
+	\label{alg:rsa1}
+\end{algorithm}
+
+\begin{algorithm}[t]
+	\textbf{mov} \&counter, \%\textbf{rcx}\\
+	l: \textbf{inc} \%\textbf{rax}\\
+	\textbf{mov} \%\textbf{rax}, (\%\textbf{rcx})\\
+	\textbf{jmp} l
+	\caption{Timestamp counter \cite{mge}}
+	\label{alg:timer}
+\end{algorithm}
+
+\begin{figure}
+	\includegraphics[scale=0.2]{images/ppres}
+	\caption{Measurement's raw trace and over moving average. It is visible that the secret bits can be identified \cite{mge}.}
+	\label{fig:ppres}
+\end{figure}
 
 \begin{figure}
 	\includegraphics[scale=0.2]{images/pp1}
