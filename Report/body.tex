@@ -22,9 +22,32 @@ In this section, we provide detailed background on side-channel attacks targetin
 
 Protecting the data inside a shield has been a major interest for improving security and privacy in distributed systems. For this purpose, several software and hardware based solutions have been proposed.
 
-Intel introduced a new hardware-based technique in its new Skylake micro-architecture \cite{skylake} line of processors called Software Guard eXtensions (SGX) \cite{sgx}. It delivers 17 new instructions that can be used by applications to create enclaves, which are a portion of main memory assigned to a program and protected from being read and written by other processes. The effectiveness of this interface scales up to prevent the operating system kernel itself from accessing the shielded memory. Intel SGX API \cite{sgxapi} uses two main forms of specialized function calls to work with the enclave. ECALLs are functions which run inside the enclave and can be called from outside and OCALLs are useful for using system functions and other operations which are possible to be done outside enclave \cite{ecallocall}.
+Intel introduced a new hardware-based technique in its new Skylake micro-architecture \cite{skylake} line of processors called Software Guard eXtensions (SGX) \cite{sgx}. It delivers 17 new instructions that can be used by applications to create enclaves, which are a portion of main memory assigned to a program and protected from being read and written by other processes. The effectiveness of this interface scales up to prevent the operating system kernel and hypervisor from accessing the shielded memory.
 
-One of the major problems with running applications inside the cloud is the leakage of data and code instructions. Even with encryption, the CPU can only execute unencrypted instructions which can be eavesdropped and reverse engineered to useful code. With hardware modifications and adding SGX support to the hardware, it is possible to improve security and privacy in this term to some extent.
+The enclave will be created by the processor as a contiguous physical memory area and is a part of the virtual address space of an operating system process. The base address will be generated randomly by address space layout randomization (ASLR) system. The security and confidentiality of the enclave is guaranteed by a hardware level memory encryption engine.
+
+One of the major problems with running applications inside the cloud is the leakage of data and code instructions. Even with encryption, the CPU can only execute unencrypted instructions which can be eavesdropped and reverse engineered to useful code. Thus, the only trusted hardware component by SGX is the CPU itself and the plain text data can be stored in the caches and register while they are encrypted inside the main memory \cite{brasser2017software}.
+
+The creation and management of enclaves is done by the operating system which allocates the enclave memory from a dedicated region of physical memory named Enclave Page Cache (EPC). The virtual to physical address translation and transfering the data into enclave is also done by the OS. Meanwhile, SGX logs the behavior of the OS and records it for later observation by an external party for verification. After the creation of the enclave and transfering the code/data into it, the OS will treat it as a normal process. Thus, it can be interrupted, migrated between cores, or halted. In the case of a context switch, SGX is responsible for cleaning the registers and saving the context. This process is called an asynchronous enclave exit (AEX). When the enclave program is to be executed again, the hardware will securely restore the context \cite{brasser2017software}. Detailed steps of an enclave exit can be described as below: \cite{tsgx} (Fig. \ref{fig:aex})
+
+\begin{enumerate}
+	\item The processor stores register values and the exit reason into the state save area (SSA) inside the enclave.
+	\item The processor loads synthetic data into registers.
+	\item The enclave exits directly to the kernel space exception handler.
+	\item The exception handler handles the interrupt and returns to the trampoline.
+	\item The trampoline resumes the enclave.
+	\item The processor restores the stored register values and resumes enclave execution. In addition, the trampoline can call an application exception handler inside the enclave to handle exceptions the OS cannot process.
+\end{enumerate}
+
+\begin{figure}
+	\includegraphics[scale=0.2]{images/tsgx}
+	\caption{Steps of an SGX asynchronous enclave exit \cite{tsgx}.}
+	\label{fig:aex}
+\end{figure}
+
+Intel SGX API \cite{sgxapi} uses two main forms of specialized function calls to work with the enclave. ECALLs are functions which run inside the enclave and can be called from outside and OCALLs are useful for using system functions and other operations which are possible to be done outside enclave \cite{ecallocall}.
+
+
 
 \subsection{Storage Structure}
 
@@ -57,6 +80,9 @@ Other attacks such as Stealthy Page Monitoring (SPM) attacks \cite{stealthy,leak
 \subsection{Intel TSX}
 One of the technologies that has attracted a great attention for making benefit in defense against side-channel attacks is Intel TSX \cite{tsx}. This technology has been introduced by Intel since Haswell micro-architecture \cite{haswell} for critical sections management and monitoring serialization. Intel TSX provides two frameworks to add transaction support to the processor. Both frameworks introduce new instructions for region specification, backward compatibility, and flexibility \cite{tsx}. One of them is RTM (Restricted Transactional Memory) \cite{rtm} which has been used by previous research like T-SGX \cite{tsgx} to isolate instructions and Cloak \cite{cloak} to pin sensitive code and data to the caches which are not supported by current hardware instructions.
 
+TSX introduces three main instructions XBEGIN, XEND, and XABORT. The instruction code will reside between XBEGIN and XEND while XABORT will cause the transaction to abort. Upon abortion, a fallback function will be called to handle reversing the transaction effects.
+
+These transaction can be used to protect and isolate code. While unexpected faults can cause a transaction to exit, the SGX enclave can make benefit of it to protect the code/data against faults.
 \begin{figure}
 	\includegraphics[scale=0.2]{images/rtm}
 	\caption{HTM ensures that no concurrent modifications influence the transaction, either by preserving the old value or by aborting and reverting the transaction. \cite{cloak}.}
@@ -65,7 +91,7 @@ One of the technologies that has attracted a great attention for making benefit 
 
 
 \section{Attacks}
-In this section, we introduce and discuss the attacks which use side-channel and focus on summarizing the methods and points of attack.
+In this section, we introduce and discuss the attacks which use side-channel information in a SGX environment. We will discuss major points of attack that have been worked on by the past research and then describe one attack related to each. At the end we discuss some other attacks in abstract.
 
 \subsection{Attack Model}
 In our attack scenario, the enclave is protected by Intel SGX, so no one except the main program running inside enclave has the key to access it. The operating system kernel which runs on top of a hypervisor can view and manage tasks queue, exceptions and interrupts. The hypervisor kernel is also capable of viewing data transfer between memories and caches while Intel SGX prevents it from accessing the enclave data. It is considered that other tenants executing on the same hypervisor are not able to control the resources assigned to the main machine by the hypervisor.
@@ -81,8 +107,10 @@ Another point of attack is the use of page table entry flags. The accessed and d
 
 Other than TLBs, CPU caches are shared between the enclave and non-enclave code resulting in the possibility of cache side-channel attacks \cite{leakycauldron}.
 
-\subsection{Prime+Probe}
-Prime+Probe is composed of two stages. Considering an L1 cache of 64 sets, each containing 8 cache lines which are each 64 bytes, in the prime stage, the attacker executes conflicting cache lines to make page fault possible for the victim who branches on a secret (Alg. \ref{alg:one}). In the probe step, the attacker executes all the cache lines and measures the execution time of each, and if a cache line execution takes longer, it can be revealed that the secret has been zero \cite{primeprobe1,primeprobe2,cloak} (Fig. \ref{fig:ppone}, \ref{fig:pptwo}).
+\subsection{Cache-Based Attacks}
+Attacks which use cache for eavesdropping, usually work on causing intentional cache-misses. Since the cache is not visible to the OS, the attacker is interested to encourage the program to access the main memory.
+
+Attacker uses parameters like time, trace, and access patterns to infer sensitive data from the cache. When the attacker shares the same direct-mapped cache set with the victim it is possible to launch a Prime+Probe attack against the victim. Considering an L1 cache of 64 sets, each containing 8 cache lines which are each 64 bytes, in the prime stage, the attacker executes conflicting cache lines to make page-fault possible for the victim who branches on a secret (Alg. \ref{alg:one}). By writing into cache lines, the attacker expects the victim to request access to a conflicting cache line and cause a page-fault. In the probe step, the attacker executes all the cache lines and measures the execution time of each, and based on it, the attacker can find out if that cache line has been touched by the user. Because the execution on the particular cache line will take more time due to page-fault. So, if the victim is continouosly branching on a secret, it will be revieled which branch has been taken. Based on different inputs, the attacker can guess the behavior of the program \cite{primeprobe1,primeprobe2,cloak} (Fig. \ref{fig:ppone}, \ref{fig:pptwo}).
 
 \begin{algorithm}[t]
 	\includegraphics[scale=0.25]{images/alg}
@@ -119,10 +147,10 @@ By making use of page sharing between enclave and non-enclave code, the attacker
 	\label{fig:ppfr}
 \end{figure}
 
-\subsection{Stealthy Page Table-Based Attacks}
+\subsection{Page Table-Based Attacks}
 Regarding the emerging of various page-fault based side-channel attacks, it is important to come out with a method for retrieving information without causing page-faults. Intended page-faults are possible to protect, and also cause a lot of overhead which leads to attack detection.
 
-Van Bulck et al. \cite{stealthy} have confirmed that accessed and dirty flags are set and unset for page table entries in both enclave mode and non-enclave mode. Monitoring these attacks can lead to page-fault detection on protected memory region without the need to produce intended page-faults. Suppose a program is being executed in the enclave which branches based on a secret. If the branch occurs one page will be retrieved and thus its accessed flag will be set, otherwise the same happens for another page. By observing the accessed bit for these two page tables, the secret is revealed. Doing this sequentially can reveal all the secrets \cite{stealthy}.
+Van Bulck et al. \cite{stealthy} have confirmed that accessed and dirty flags are set and unset for page table entries in both enclave mode and non-enclave mode. Monitoring these flags can lead to page-fault detection on protected memory region without the need to produce intended page-faults. Suppose a program is being executed in the enclave which branches based on a secret. If the branch occurs one page will be retrieved and thus its accessed flag will be set, otherwise the same happens for another page. By observing the accessed bit for these two page tables, the secret is revealed. Doing this sequentially can reveal all the secrets \cite{stealthy}.
 
 
 \subsection{Sneaky Page-Monitoring Attacks}

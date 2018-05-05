@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Debian) (preloaded format=pdflatex 2018.4.26)  1 MAY 2018 14:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Debian) (preloaded format=pdflatex 2018.4.26)  3 MAY 2018 14:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -886,71 +886,79 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [2.2]
-<images/uos1.png, id=139, 1182.4175pt x 698.61pt>
+<images/tsgx.png, id=136, 1347.0325pt x 678.535pt>
+File: images/tsgx.png Graphic file (type png)
+<use images/tsgx.png>
+Package pdftex.def Info: images/tsgx.png  used on input line 43.
+(pdftex.def)             Requested size: 269.40173pt x 135.70459pt.
+ [3.3 <./images/tsgx.png>]
+<images/uos1.png, id=162, 1182.4175pt x 698.61pt>
 File: images/uos1.png Graphic file (type png)
 <use images/uos1.png>
-Package pdftex.def Info: images/uos1.png  used on input line 52.
+Package pdftex.def Info: images/uos1.png  used on input line 75.
 (pdftex.def)             Requested size: 236.47931pt x 139.71951pt.
- [3.3 <./images/uos1.png>]
-<images/rtm.png, id=160, 963.6pt x 597.23125pt>
+ [4.4 <./images/uos1.png>]
+<images/rtm.png, id=184, 963.6pt x 597.23125pt>
 File: images/rtm.png Graphic file (type png)
 <use images/rtm.png>
-Package pdftex.def Info: images/rtm.png  used on input line 61.
+Package pdftex.def Info: images/rtm.png  used on input line 87.
 (pdftex.def)             Requested size: 192.71658pt x 119.44412pt.
- [4.4 <./images/rtm.png>]
-<images/alg.png, id=183, 318.18875pt x 365.365pt>
+ [5.5 <./images/rtm.png>]
+<images/alg.png, id=204, 318.18875pt x 365.365pt>
 File: images/alg.png Graphic file (type png)
 <use images/alg.png>
-Package pdftex.def Info: images/alg.png  used on input line 88.
+Package pdftex.def Info: images/alg.png  used on input line 116.
 (pdftex.def)             Requested size: 79.54698pt x 91.34102pt.
-<images/pp1.png, id=186, 1154.3125pt x 645.41125pt>
+<images/pp1.png, id=207, 1154.3125pt x 645.41125pt>
 File: images/pp1.png Graphic file (type png)
 <use images/pp1.png>
-Package pdftex.def Info: images/pp1.png  used on input line 103.
+Package pdftex.def Info: images/pp1.png  used on input line 131.
 (pdftex.def)             Requested size: 230.85841pt x 129.07996pt.
-<images/pp2.png, id=189, 1427.3325pt x 474.77374pt>
+<images/pp2.png, id=210, 1427.3325pt x 474.77374pt>
 File: images/pp2.png Graphic file (type png)
 <use images/pp2.png>
-Package pdftex.def Info: images/pp2.png  used on input line 108.
+Package pdftex.def Info: images/pp2.png  used on input line 136.
 (pdftex.def)             Requested size: 285.46144pt x 94.95306pt.
- [5.5 <./images/alg.png> <./images/pp1.png> <./images/pp2.png>]
-<images/ppfr.png, id=209, 1303.87125pt x 735.74875pt>
+ [6.6 <./images/alg.png> <./images/pp1.png>]
+<images/ppfr.png, id=227, 1303.87125pt x 735.74875pt>
 File: images/ppfr.png Graphic file (type png)
 <use images/ppfr.png>
-Package pdftex.def Info: images/ppfr.png  used on input line 117.
+Package pdftex.def Info: images/ppfr.png  used on input line 145.
 (pdftex.def)             Requested size: 365.08147pt x 206.00824pt.
 
-Underfull \vbox (badness 5161) has occurred while \output is active []
+Underfull \vbox (badness 2884) has occurred while \output is active []
 
- [6.6 <./images/ppfr.png>]
+ [7.7 <./images/pp2.png> <./images/ppfr.png>]
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 131.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 159.
 
 
-<images/cachedram.png, id=236, 839.135pt x 682.55pt>
+[8.8]
+<images/cachedram.png, id=264, 839.135pt x 682.55pt>
 File: images/cachedram.png Graphic file (type png)
 <use images/cachedram.png>
-Package pdftex.def Info: images/cachedram.png  used on input line 144.
+Package pdftex.def Info: images/cachedram.png  used on input line 172.
 (pdftex.def)             Requested size: 251.74243pt x 204.76657pt.
-[7.7]
-<images/dejavu.png, id=254, 1104.125pt x 569.12625pt>
+ [9.9 <./images/cachedram.png>]
+<images/dejavu.png, id=279, 1104.125pt x 569.12625pt>
 File: images/dejavu.png Graphic file (type png)
 <use images/dejavu.png>
-Package pdftex.def Info: images/dejavu.png  used on input line 161.
+Package pdftex.def Info: images/dejavu.png  used on input line 189.
 (pdftex.def)             Requested size: 220.82109pt x 113.82323pt.
- [8.8 <./images/cachedram.png>] [9.9 <./images/dejavu.png>]
-<images/cloakcode.png, id=276, 716.6775pt x 181.67876pt>
+ [10.10 <./images/dejavu.png>]
+<images/cloakcode.png, id=295, 716.6775pt x 181.67876pt>
 File: images/cloakcode.png Graphic file (type png)
 <use images/cloakcode.png>
-Package pdftex.def Info: images/cloakcode.png  used on input line 181.
+Package pdftex.def Info: images/cloakcode.png  used on input line 209.
 (pdftex.def)             Requested size: 179.16893pt x 45.41957pt.
-<images/sgxshield.png, id=280, 1682.285pt x 719.68875pt>
+ [11.11 <./images/cloakcode.png>]
+<images/sgxshield.png, id=308, 1682.285pt x 719.68875pt>
 File: images/sgxshield.png Graphic file (type png)
 <use images/sgxshield.png>
-Package pdftex.def Info: images/sgxshield.png  used on input line 191.
+Package pdftex.def Info: images/sgxshield.png  used on input line 219.
 (pdftex.def)             Requested size: 336.45103pt x 143.9352pt.
- [10.10 <./images/cloakcode.png>] [11.11 <./images/sgxshield.png>]
+ [12.12 <./images/sgxshield.png>]
 Excluding 'comment' comment. Processing 'acks' comment.
 \openout4 = `comment.cut'.
 
@@ -961,6 +969,7 @@ LaTeX Info: Redefining \tempurl on input line 103.
 LaTeX Info: Redefining \tempurl on input line 116.
 LaTeX Info: Redefining \tempurl on input line 129.
 LaTeX Info: Redefining \tempurl on input line 142.
+ [13.13]
 LaTeX Info: Redefining \tempurl on input line 155.
 
 Underfull \hbox (badness 10000) in paragraph at lines 149--158
@@ -969,21 +978,21 @@ rs / core / desktop-[]6th-[]gen-[]core-[]family-[]spec-[]update .
  []
 
 LaTeX Info: Redefining \tempurl on input line 169.
-[12.12])) [13.13]
+)) [14.14]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 134.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 134.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 134.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 134.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 0AB3889C4E4F90B37B5D8E44EDA4CC4C;3477.
+(rerunfilecheck)             Checksum: 6751CF76E4A8CF9209AA673D56A665EF;3472.
  ) 
 Here is how much of TeX's memory you used:
- 16841 strings out of 494514
- 244709 string characters out of 6176215
- 399291 words of memory out of 5000000
- 19773 multiletter control sequences out of 15000+600000
- 19785 words of font info for 146 fonts, out of 8000000 for 9000
+ 16857 strings out of 494514
+ 244881 string characters out of 6176215
+ 399382 words of memory out of 5000000
+ 19778 multiletter control sequences out of 15000+600000
+ 19836 words of font info for 147 fonts, out of 8000000 for 9000
  220 hyphenation exceptions out of 8191
  60i,12n,94p,1960b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/amin/.texlive2018/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0800.600p
@@ -1000,10 +1009,10 @@ msfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on main.pdf (13 pages, 1100724 bytes).
+Output written on main.pdf (14 pages, 1182978 bytes).
 PDF statistics:
- 424 PDF objects out of 1000 (max. 8388607)
- 343 compressed objects within 4 object streams
- 81 named destinations out of 1000 (max. 500000)
- 28419 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 444 PDF objects out of 1000 (max. 8388607)
+ 359 compressed objects within 4 object streams
+ 89 named destinations out of 1000 (max. 500000)
+ 28424 words of extra memory for PDF output out of 29859 (max. 10000000)
 
