@@ -53,6 +53,12 @@ The creation and management of enclaves is done by the operating system which al
 
 Intel SGX API \cite{sgxapi} uses two main forms of specialized function calls to work with the enclave. ECALLs are functions which run inside the trusted enclave and can be called from outside untrusted environment while OCALLs are useful for using system functions and other operations which are possible to be done outside the enclave \cite{ecallocall}.
 
+\subsubsection{Trusted Platform Module}
+It can be useful to introduce TPM as a security module which is a microchip that is designed to enable some security measures and processes in the system. TPM is used to authenticate hardware devices using a unique secret key programmed in the chip. So, the security is pushed down to the hardware level. Basically, the TPM will identify if any firmware or boot process has been tampered with, while SGX protects sensitive and confidential processes executed by the operating system \cite{wptpm,sptpm}.
+
+\subsubsection{Trusted Execution Technology}
+Intel TXT is a hardware technology designed to validate that no unauthorized manipulation has been done against the code that provides the secure environment at the time of launch. TXT uses the TPM chip and other cryptographic techniques to enable attestation of the authenticity of a platform and its operating system. On the other hand, SGX is designed to increase the security of application code \cite{txt}.
+
 \subsection{Side-Channel Attacks on the Enclave}
 
 Multiple effective attacks and defenses on the enclave have been proposed by past research. Most of the attacks make use of the side-channel information that can be leaked and accessed by a modified malicious kernel. In these attacks, the malicious kernel retrieves useful information about the code and the data by changing the behavior of program execution or analyzing the page-faults and other possible points of data leakage.
@@ -75,8 +81,6 @@ Other attacks such as Stealthy Page Monitoring (SPM) attacks \cite{stealthy,leak
 	\label{fig:uos}
 \end{figure}
 
-\subsection{Trusted Platform Module}
-\subsection{Trusted Execution Technology}
 \subsection{Transactional Synchronization Extensions}
 One of the technologies that has attracted a great attention for making benefit in defense against SGX enclave side-channel attacks is Intel TSX \cite{tsx}. This technology has been introduced by Intel since Haswell micro-architecture \cite{haswell} for critical sections management and monitoring serialization. Intel TSX provides two frameworks to add transaction support to the processor. Both frameworks introduce new instructions for region specification, backward compatibility, and flexibility \cite{tsx}. One of them is RTM (Restricted Transactional Memory) \cite{rtm} which has been used by previous research like T-SGX \cite{tsgx} to isolate instructions and Cloak \cite{cloak} to pin sensitive code and data to the caches which are not supported by current hardware instructions. Both of these works make use of transactions to protect the enclave against side-channel attacks.
 

@@ -6,10 +6,36 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: bibliography.bib
 Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--no key, author in wptpm
+Warning--no author, editor, organization, or key in wptpm
+Warning--to sort, need author or key in wptpm
+Warning--no key, author in sptpm
+Warning--no author, editor, organization, or key in sptpm
+Warning--to sort, need author or key in sptpm
+Warning--no key, author in txt
+Warning--no author, editor, organization, or key in txt
+Warning--to sort, need author or key in txt
 Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
 Reallocated global_strs (elt_size=20001) to 20 items from 10.
 Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Warning--no key, author in sptpm
+Warning--no key, author in sptpm
+Warning--no key, author in txt
+Warning--no key, author in txt
+Warning--no key, author in wptpm
+Warning--no key, author in wptpm
 Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--no key, author in txt
+Warning--no author, editor, organization, or key in txt
+Warning--empty author in txt
+Warning--empty year in txt
+Warning--no key, author in sptpm
+Warning--no author, editor, organization, or key in sptpm
+Warning--empty author in sptpm
+Warning--empty year in sptpm
+Warning--no key, author in wptpm
+Warning--no author, editor, organization, or key in wptpm
+Warning--empty author in wptpm
 Warning--no number and no volume in drsgx
 Warning--page numbers missing in both pages and numpages fields in drsgx
 Warning--no number and no volume in brasser2017software
@@ -56,45 +82,45 @@ Warning--empty publisher in leakycauldron
 Warning--empty address in leakycauldron
 Warning--empty publisher in flushreload
 Warning--empty address in flushreload
-You've used 27 entries,
+You've used 30 entries,
             5732 wiz_defined-function locations,
-            1573 strings with 21205 characters,
-and the built_in function-call counts, 29621 in all, are:
-= -- 3212
+            1588 strings with 21676 characters,
+and the built_in function-call counts, 31590 in all, are:
+= -- 3379
 > -- 1231
 < -- 0
-+ -- 407
++ -- 410
 - -- 411
-* -- 2166
-:= -- 3184
-add.period$ -- 131
-call.type$ -- 27
-change.case$ -- 199
-chr.to.int$ -- 21
-cite$ -- 73
-duplicate$ -- 2645
-empty$ -- 1871
+* -- 2299
+:= -- 3304
+add.period$ -- 143
+call.type$ -- 30
+change.case$ -- 211
+chr.to.int$ -- 24
+cite$ -- 114
+duplicate$ -- 2873
+empty$ -- 2048
 format.name$ -- 482
-if$ -- 6921
+if$ -- 7410
 int.to.chr$ -- 8
 int.to.str$ -- 1
 missing$ -- 95
-newline$ -- 269
+newline$ -- 305
 num.names$ -- 210
-pop$ -- 1212
+pop$ -- 1377
 preamble$ -- 1
-purify$ -- 404
+purify$ -- 431
 quote$ -- 0
-skip$ -- 900
+skip$ -- 964
 stack$ -- 0
-substring$ -- 1870
-swap$ -- 232
+substring$ -- 1971
+swap$ -- 247
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 707
-warning$ -- 46
+type$ -- 797
+warning$ -- 72
 while$ -- 181
 width$ -- 0
-write$ -- 504
-(There were 46 warnings)
+write$ -- 561
+(There were 72 warnings)
