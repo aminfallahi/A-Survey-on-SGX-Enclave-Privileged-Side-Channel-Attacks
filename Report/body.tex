@@ -18,6 +18,12 @@ In summary, the main points of study in this work are:
 \section{Background}
 In this section, we provide detailed background on side-channel attacks targeting enclaved applications, tools, and terms we use in this report.
 
+\subsection{Storage Structure}
+
+In the common hardware architectures used in cloud computing environments today, data is transferred through several buses using multiple protocols to be used. The encrypted data is stored on the hard drive and will be transferred into enclaved memory. Then, it will be cached using multiple levels of cache for performance optimization. In current Intel processors, the cache hierarchy is made of three levels of fast storage. The last level cache (LLC) is shared among cores while each core has a separate pair of L1 and L2 caches. However, L1 and L2 are shared between the hyperthreads running on the same core. Furthermore, L1 caches data and instructions into different units while L2 and L3 share the space for both instruction and data \cite{brasser2017software}. Page mappings between virtual and physical addresses of data are also kept in the main memory and a transaction look-aside buffer (TLB) is used to cache the mappings in the page-table for better performance.
+
+Each data transfer can be a point of side-channel attack. While the data is encrypted, the patterns of reads and writes, cache-misses, page-faults, and other interrupts and exceptions can be used by the adversary for launching attacks and recovering useful information.
+
 \subsection{Intel SGX}
 
 Protecting the data inside a shield has been a major interest for improving security and privacy in distributed systems. For this purpose, several software and hardware based solutions have been proposed.
@@ -45,15 +51,7 @@ The creation and management of enclaves is done by the operating system which al
 	\label{fig:aex}
 \end{figure}
 
-Intel SGX API \cite{sgxapi} uses two main forms of specialized function calls to work with the enclave. ECALLs are functions which run inside the enclave and can be called from outside and OCALLs are useful for using system functions and other operations which are possible to be done outside enclave \cite{ecallocall}.
-
-
-
-\subsection{Storage Structure}
-
-In the common hardware architectures used in cloud computing environments today, data is transferred through several buses using multiple protocols to be used. The encrypted data is stored on the hard drive and will be transferred into enclaved memory. Then, it will be cached using multiple levels of cache for performance optimization. Page mappings between virtual and physical addresses of data are also kept in the main memory and a transaction look-aside buffer (TLB) is used to cache the mappings in the page-table for better performance.
-
-Each data transfer can be a point of side-channel attack. While the data is encrypted, the patterns of reads and writes, cache-misses, page-faults, and other interrupts and exceptions can be used by the adversary for launching attacks and recovering useful information.
+Intel SGX API \cite{sgxapi} uses two main forms of specialized function calls to work with the enclave. ECALLs are functions which run inside the trusted enclave and can be called from outside untrusted environment while OCALLs are useful for using system functions and other operations which are possible to be done outside the enclave \cite{ecallocall}.
 
 \subsection{Side-Channel Attacks on the Enclave}
 
@@ -77,12 +75,14 @@ Other attacks such as Stealthy Page Monitoring (SPM) attacks \cite{stealthy,leak
 	\label{fig:uos}
 \end{figure}
 
-\subsection{Intel TSX}
-One of the technologies that has attracted a great attention for making benefit in defense against side-channel attacks is Intel TSX \cite{tsx}. This technology has been introduced by Intel since Haswell micro-architecture \cite{haswell} for critical sections management and monitoring serialization. Intel TSX provides two frameworks to add transaction support to the processor. Both frameworks introduce new instructions for region specification, backward compatibility, and flexibility \cite{tsx}. One of them is RTM (Restricted Transactional Memory) \cite{rtm} which has been used by previous research like T-SGX \cite{tsgx} to isolate instructions and Cloak \cite{cloak} to pin sensitive code and data to the caches which are not supported by current hardware instructions.
+\subsection{Trusted Platform Module}
+\subsection{Trusted Execution Technology}
+\subsection{Transactional Synchronization Extensions}
+One of the technologies that has attracted a great attention for making benefit in defense against SGX enclave side-channel attacks is Intel TSX \cite{tsx}. This technology has been introduced by Intel since Haswell micro-architecture \cite{haswell} for critical sections management and monitoring serialization. Intel TSX provides two frameworks to add transaction support to the processor. Both frameworks introduce new instructions for region specification, backward compatibility, and flexibility \cite{tsx}. One of them is RTM (Restricted Transactional Memory) \cite{rtm} which has been used by previous research like T-SGX \cite{tsgx} to isolate instructions and Cloak \cite{cloak} to pin sensitive code and data to the caches which are not supported by current hardware instructions. Both of these works make use of transactions to protect the enclave against side-channel attacks.
 
 TSX introduces three main instructions XBEGIN, XEND, and XABORT. The instruction code will reside between XBEGIN and XEND while XABORT will cause the transaction to abort. Upon abortion, a fallback function will be called to handle reversing the transaction effects.
 
-These transaction can be used to protect and isolate code. While unexpected faults can cause a transaction to exit, the SGX enclave can make benefit of it to protect the code/data against faults.
+These transactions can be used to protect and isolate code. While unexpected faults can cause a transaction to exit, the SGX enclave can make benefit of it to protect the code/data against faults.
 \begin{figure}
 	\includegraphics[scale=0.2]{images/rtm}
 	\caption{HTM ensures that no concurrent modifications influence the transaction, either by preserving the old value or by aborting and reverting the transaction. \cite{cloak}.}
@@ -110,13 +110,13 @@ Other than TLBs, CPU caches are shared between the enclave and non-enclave code 
 \subsection{Cache-Based Attacks}
 Attacks which use cache for eavesdropping, usually work on causing intentional cache-misses. Since the cache is not visible to the OS, the attacker is interested to encourage the program to access the main memory.
 
-Attacker uses parameters like time, trace, and access patterns to infer sensitive data from the cache. When the attacker shares the same direct-mapped cache set with the victim, it is possible to launch a Prime+Probe attack against the victim. Considering an L1 cache of 64 sets, each containing 8 cache lines which are each 64 bytes, in the prime stage, the attacker executes conflicting cache lines to make page-fault possible for the victim who branches on a secret (Alg. \ref{alg:one}). By writing into cache lines, the attacker expects the victim to request access to a conflicting cache line and cause a page-fault. In the probe step, the attacker executes all the cache lines and measures the execution time of each, and based on it, the attacker can find out if that cache line has been touched by the user. Because the execution on the particular cache line will take more time due to page-fault. So, if the victim is continuously branching on a secret, it will be revealed which branch has been taken. Based on different inputs, the attacker can guess the behavior of the program \cite{primeprobe1,primeprobe2,cloak} (Fig. \ref{fig:ppone}, \ref{fig:pptwo}).
+Attacker uses parameters like time, trace, and access patterns to infer sensitive data from the cache. When the attacker shares the same direct-mapped cache set with the victim, it is possible to launch a Prime+Probe attack against the victim. Considering an L1 cache of 64 sets, each containing 8 cache lines which are each 64 bytes, in the prime stage, the attacker executes conflicting cache lines to make page-fault possible for the victim who branches on a secret (Alg. \ref{alg:one}). By executing virtual addresses that map to the same cache set using a sequential memory scan for an address pair, the attacker expects the victim to request access to a conflicting cache line and cause a cache miss \cite{mge}. In the probe step, the attacker executes all the cache lines and measures the execution time of each, and based on it, the attacker can find out if that cache line has been touched by the user. Because the execution on the particular cache line will take more time due to page-fault. So, if the victim is continuously branching on a secret, it will be revealed which branch has been taken. Based on different inputs, the attacker can guess the behavior of the program \cite{primeprobe1,primeprobe2,cloak} (Fig. \ref{fig:ppone}, \ref{fig:pptwo}).
 
 Most of the past researches work on extracting RSA and EdDSA keys as the most used cryptography systems \cite{mge,leakycauldron,brasser2017software, pigeonhole,cloak,stealthy}. However, both follow the same path and basically, RSA is expandable to EdDSA, and both are prune to prime+probe attack. As shown in Algorithm \ref{alg:rsa1}, while RSA is based on calculating an exponentiation modulo some number $n$, Using a square+multiply algorithm it is possible to calculate a result in a branch based algorithm. The calculated result inside the loop is dependent on the bits in $d$ which is a secret than can lead us to recover the private key. In each iteration, if the bit is one, the result will be calculated based on a square and a multiply, otherwise it will be calculated based on a single multiplication. Using this branch, it is possible to find out if the multiply is executed or not and then recover the bitstream of the key. Thus, this secret dependent memory access leads to time difference between the cached data and uncached data which is used by the prime+probe attack \cite{mge,cloak}.
 
 While the private key is kept inside an SGX enclave, it makes sense to also do the attack inside an SGX enclave to leave the minimum possible trace for the detection of the attack by the victim \cite{mge}.
 
-A common problem that comes into view in terms of making the attack more practical, is that Intel has disabled its high precision timer (rdtsc) instruction to be used inside the enclave. So, it is needed to implement a high precision timer inside an enclave which has been done by \cite{mge} as shown in Algorithm \ref{alg:timer}. They start a thread for continously incrementing a global variable and achieve even better performance than Intel's high precision timer. The number of cycles which are executed inside the loop are constant and are a parameter of time, enough for precise specification of a relative time scale \cite{mge}.
+A common problem that comes into view in terms of making the attack more practical, is that Intel has disabled its high precision timer (rdtsc) instruction to be used inside the enclave for security reasons. So, it is needed to implement a high precision timer inside an enclave which has been done by \cite{mge} as shown in Algorithm \ref{alg:timer}. They start a thread for continously incrementing a global variable and achieve even better performance than Intel's high precision timer. The number of cycles which are executed inside the loop are constant and are a parameter of time, enough for precise specification of a relative time scale \cite{mge}.
 
 A prime+probe attack based on this setting, can result in a pattern observation as shown in Fig. \ref{fig:ppres}. By running a moving average on the result, it is possible to extract the key more easily.
 
@@ -174,6 +174,7 @@ All has been done is experimented to be perfectly hidden, only some system noise
 	\caption{A high-level view of the Prime+Probe attack; victim and attacker’s Prime+Probe code run in parallel on a dedicated core. The malicious OS  ensures  that  no  other  code shares that core to minimize noise \cite{brasser2017software}.}
 	\label{fig:ppone}
 \end{figure}
+
 \begin{figure}
 	\includegraphics[scale=0.2]{images/pp2}
 	\caption{A detailed view of Prime+Probe side-channel attack; first the attacker primes the cache, next the victim executes and occupies some of the cache, then the attacker identifies which cache lines have been used by the victim. This information allows the attacker to recover secret data in use by the victim process \cite{brasser2017software}.}
