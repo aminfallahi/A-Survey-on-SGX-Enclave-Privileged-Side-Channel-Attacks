@@ -74,6 +74,8 @@ Warning--empty address in tsgx
 Warning--page numbers missing in both pages and numpages fields in tsgx
 Warning--no number and no volume in pigeonhole
 Warning--page numbers missing in both pages and numpages fields in pigeonhole
+Warning--no number and no volume in heisenberg
+Warning--page numbers missing in both pages and numpages fields in heisenberg
 Warning--empty publisher in stealthy
 Warning--empty address in stealthy
 Warning--page numbers missing in both pages and numpages fields in stealthy
@@ -82,45 +84,45 @@ Warning--empty publisher in leakycauldron
 Warning--empty address in leakycauldron
 Warning--empty publisher in flushreload
 Warning--empty address in flushreload
-You've used 30 entries,
+You've used 31 entries,
             5732 wiz_defined-function locations,
-            1588 strings with 21676 characters,
-and the built_in function-call counts, 31590 in all, are:
-= -- 3379
-> -- 1231
+            1592 strings with 21854 characters,
+and the built_in function-call counts, 32675 in all, are:
+= -- 3550
+> -- 1269
 < -- 0
-+ -- 410
-- -- 411
-* -- 2299
-:= -- 3304
-add.period$ -- 143
-call.type$ -- 30
-change.case$ -- 211
-chr.to.int$ -- 24
-cite$ -- 114
-duplicate$ -- 2873
-empty$ -- 2048
-format.name$ -- 482
-if$ -- 7410
++ -- 425
+- -- 427
+* -- 2368
+:= -- 3411
+add.period$ -- 148
+call.type$ -- 31
+change.case$ -- 217
+chr.to.int$ -- 25
+cite$ -- 117
+duplicate$ -- 2958
+empty$ -- 2110
+format.name$ -- 502
+if$ -- 7692
 int.to.chr$ -- 8
 int.to.str$ -- 1
-missing$ -- 95
-newline$ -- 305
-num.names$ -- 210
-pop$ -- 1377
+missing$ -- 99
+newline$ -- 313
+num.names$ -- 218
+pop$ -- 1413
 preamble$ -- 1
-purify$ -- 431
+purify$ -- 446
 quote$ -- 0
-skip$ -- 964
+skip$ -- 990
 stack$ -- 0
-substring$ -- 1971
-swap$ -- 247
+substring$ -- 2031
+swap$ -- 252
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 797
-warning$ -- 72
-while$ -- 181
+type$ -- 813
+warning$ -- 74
+while$ -- 189
 width$ -- 0
-write$ -- 561
-(There were 72 warnings)
+write$ -- 577
+(There were 74 warnings)

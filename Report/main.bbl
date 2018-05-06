@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{30}
+\begin{thebibliography}{31}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -163,7 +163,7 @@ Retrieved April 12, 2018 from \tempurl}
 \newblock
 \newblock
 \urldef\tempurl%
-\url{https://software.intel.com/en-us/sgx- sdk}
+\url{https://software.intel.com/en-us/sgx-sdk}
 \showURL{%
 Retrieved April 12, 2018 from \tempurl}
 
@@ -368,6 +368,18 @@ Retrieved April 12, 2018 from \tempurl}
   Defenses against pigeonhole attacks}.
 \newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1506.04832}}
   (\bibinfo{year}{2015}).
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Strackx and Piessens}{Strackx and
+  Piessens}{2017}]%
+        {heisenberg}
+\bibfield{author}{\bibinfo{person}{Raoul Strackx} {and} \bibinfo{person}{Frank
+  Piessens}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{The Heisenberg Defense: Proactively Defending SGX
+  Enclaves against Page-Table-Based Side-Channel Attacks}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:1712.08519}}
+  (\bibinfo{year}{2017}).
 \newblock
 
 
