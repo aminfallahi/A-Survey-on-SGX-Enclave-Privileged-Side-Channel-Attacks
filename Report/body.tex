@@ -211,7 +211,7 @@ The problem with the discussed attacks is that they induce a high overhead by ca
 
 Van Bulck et al. \cite{stealthy} have confirmed that accessed and dirty flags are set and unset for page table entries in both enclave mode and non-enclave mode. Monitoring these flags can lead to page-fault detection on protected memory region without the need to produce intended page-faults. Suppose a program is being executed in the enclave which branches based on a secret. If the branch is taken, one page will be retrieved and thus its accessed flag will be set, otherwise the same happens for another page. By observing the accessed bit for these two page tables, the secret is revealed. Doing this sequentially can reveal all the secrets \cite{stealthy}.
 
-%A problem with this attack is that after address translations are cached in the TLB, the flags are no longer updated in the page-table, but are updated in the TLB. Thus, it is needed to force the victim to walk its page-tables in order for the flags to be updated. In this attack, the attacker flushes the TLB by initiating an inter-processor interrupt which causes TLB shootdown. Thus, the flags will need to be updated in the page-table before being cached in the TLB \cite{leakycauldron,stealthy}.
+A problem with this attack is that after address translations are cached in the TLB, the flags are no longer updated in the page-table, but are updated in the TLB. Thus, it is needed to force the victim to walk its page-tables in order for the flags to be updated. In this attack, the attacker flushes the TLB by initiating an inter-processor interrupt which causes TLB shootdown. Thus, the flags will need to be updated in the page-table before being cached in the TLB \cite{leakycauldron,stealthy}.
 
 As a result, the high number of accesses to a page-table entry for a certain input, can result in lots of interrupt requests which can be detected by the victim. To prevent this, by finding out two pages which are accessed by the victim repetitively and measuring the time between these two page accesses, the input can be recovered. Thus, instead of multiple interrupts, one interrupt after each cycle is enough for clearing the TLB and successful attack \cite{leakycauldron,stealthy}.
 
@@ -247,23 +247,7 @@ Using two threads for launching the Prime+Probe attack \cite{primeprobe1, primep
 \section{Defenses}
 We discuss the research that has been done on protecting the enclave against the mentioned side-channel attacks and their effectiveness. Some research study on preventing the attack from being performed and some intend to defend the enclave against attacks and block them.
 
-\subsection{Attack Detection}%{Déjà Vu}
-One of the methods that lead to the prevention and defense against the attacks is to detect the attack and stop executing completely, or while the attack is in action.
-
-Chen et al. \cite{dejavu} embed a clock inside the enclave and use Intel TSX for detecting any interrupt to it. When the execution time of the program inside the enclave exceeds a fixed amount of time as the threshold, it is considered that the code has been interrupted by some external factor and an AEX (asynchronous enclave exit) will be detected. The implemented clock should be hidden from the OS in terms of reading and modification and it should not go backward in time under any condition. These can be assured by implementation inside SGX enclave. Also, the clock should not be stopped or interrupted by the OS which is solved by using TSX. For protecting the clock to be read by the OS, a random value will be generated in a transaction and will be added to the global timer variable. This will run in a thread parallel to the main program inside the enclave (Fig. \ref{fig:dejavu}). The threshold delay needs to be approximated by training the system with AEX-free execution time and minimum delay of an AEX execution.
-
-\begin{figure}
-	\includegraphics[scale=0.2]{images/dejavu}
-	\caption{System architecture of Déjà Vu. Blocks in gray are untrusted, which include the untrusted components of the processes and the entire OS kernel \cite{dejavu}.}
-	\label{fig:dejavu}
-\end{figure}
-
-Shinde et al. \cite{pigeonhole} conduct a statistical study on the percent of leakage, vulnerability, possibility and effectiveness of page-fault based attacks which they call pigeonhole attacks. Then, they consider the possible ways of eliminating page-fault side-channels. More precisely, they define pigeonhole attack as an attack that is performed when a page table walk is done. Moving data between the physical and virtual memory from different pages sequentially causes page-faults on every single page when the virtual memory is already full, holding all the other pages. When the first page is fetched, the next page will be removed from the page table and when the next page is to be fetched, a page-fault will occur. Based on the fact that the malicious OS cannot differentiate accesses which are occurred in a single page, they claim that by mapping all the input dependent data into a single page, the program will access the same pattern of the pages independent of the input and makes it page-fault oblivious. The page containing the input dependent data is called data staging page and the one containing the code is called code staging page. By creating a decision tree of the program instructions, it is understood that in each stage of the program which is being executed, there is a page-fault sequence dependent on the data, which can be mapped to a staging page. So, for each stage, one staging page is considered. This technique will create a high overhead, thus, the research extends to optimizing the implemented method by eliminating copy operations which is done by skipping read-only data save, merging small data blocks into single pages to reduce the number of fetches, merging levels of execution and reducing the number of stages, removing the mux based on the input to reduce the possibility of branch conditions, and removing the dependence of code on the data (Ex. CAS obliviousness).
-
-Shih et al. \cite{tsgx} make use of Intel transactional memory technology to isolate enclave code from interrupts caused by intentional page-fault based side-channel attacks performed by a privileged OS. They improve the design by dividing the code into micro blocks to prevent abortions, because transactions are not designed to run long programs.
-
-
-\subsection{Attack Prevention}%{Cache-based attacks}%cloak
+\subsection{Defense Against Cache Based Attacks}
 As discussed in 2.1, there are three levels of cache: L3 is shared between all physical cores, L2 is shared between each core's threads and L1 shares data and code separately between the hyperthreads. In a typical environment, it is not visible to the enclave program running in one thread, what is being run in the other thread on the same core. So, if the other hyperthread is trusted (assuming there are two hyperthreads running in each core) it is only needed to care about the L3 cache. In the SGX environment, the hyperthreads cannot trust each other, thus, L2 and L1 caches are also of importance when it comes to the case of cache side-channel attacks because attacks like Prime+Probe will be possible in this case \cite{cloak}.
 
 The basic approach to confront cache-based side-channel attacks including Prime+Probe and eliminate the leakage is to pin sensitive code and data into caches so no conflict and cache-miss be possible, but it is impossible to pin data into caches in the current hardware/software environment. So, there is a need to introduce a hack for indirectly doing this which has been implemented using Intel TSX by Gruss et al. \cite{cloak}.
@@ -280,6 +264,32 @@ After explaining the indirect effect of using TSX for pinning data to cache, it 
 
 For preloading, if the attacker targets L1, the code should be preloaded into L1-I by execution. Also, all the data should be loaded into the write set. For the attackers targeting L3, code and read-only data should be loaded into read set, while the data which will possibly be touched again should be loaded into the write set \cite{cloak}.
 
+\subsection{Defense Against Page Table Based Attacks}
+One of the late defenses proposed against page fault attacks is T-SGX \cite{tsgx} which has been developed by Shih et al. Based on the observation that race conditions cause Intel TSX transactions to abort, T-SGX puts the whole enclave inside a transaction. After abort, it will roll backk all the changes and control will be transfered to the fallback point. This way, any page fault can make the transaction abort and the enclave can self detect itself against it.
+
+However, TSX is not designed to contain and execute huge amounts of code. A frequent timer interrupt by the OS can cause the transaction to abort. So, if the transaction takes too long to execute, it keeps aborting and the program will never terminate. Another constraint is that TSX buffers all the memory changes inside the cache. So, if a single transaction does lots of memory accesses a cache conflict will occur and the transaction will abort. To solve this problem, this research breaks the program into several tiny execution blocks.
+
+A problem that comes with the introduction of tiny execution blocks is that setting up a transaction has a fixed cost in terms of number of processor cycles. This will have a bad effect on performance. So, any time it is possible and constraints are not violated, it is preferred to merge the continuous blocks like loops, if-else statements, and functions. For example, as shown in Fig. \ref{fig:tsgxloop} one possible loop optimization technique is to move the transaction outside the loop to prevent high number of transaction creations. By static analysis, it is indicated if it is safe to optimize based on the constraints.
+
+\begin{figure}
+	\includegraphics[scale=0.2]{images/tsgxloop}
+	\caption{An example of loop optimization \cite{heisenberg}.}
+	\label{fig:tsgxloop}
+\end{figure}
+
+Another problem is that TSX instructions are still outside transactions and transaction boundaries are still vulnerable to page fault attacks in this design. The attacker can unmap the pages where blocks start by writing to them. This can be solved by putting all transaction begin and end pairs in a dedicated springboard page. This way, only one page will be leaked \cite{tsgx}.
+
+\subsection{Other Attacks}
+Chen et al. \cite{dejavu} embed a clock inside the enclave and use Intel TSX for detecting any interrupt to it. When the execution time of the program inside the enclave exceeds a fixed amount of time as the threshold, it is considered that the code has been interrupted by some external factor and an AEX (asynchronous enclave exit) will be detected. The implemented clock should be hidden from the OS in terms of reading and modification and it should not go backward in time under any condition. These can be assured by implementation inside SGX enclave. Also, the clock should not be stopped or interrupted by the OS which is solved by using TSX. For protecting the clock to be read by the OS, a random value will be generated in a transaction and will be added to the global timer variable. This will run in a thread parallel to the main program inside the enclave (Fig. \ref{fig:dejavu}). The threshold delay needs to be approximated by training the system with AEX-free execution time and minimum delay of an AEX execution.
+
+\begin{figure}
+	\includegraphics[scale=0.2]{images/dejavu}
+	\caption{System architecture of Déjà Vu. Blocks in gray are untrusted, which include the untrusted components of the processes and the entire OS kernel \cite{dejavu}.}
+	\label{fig:dejavu}
+\end{figure}
+
+Shinde et al. \cite{pigeonhole} conduct a statistical study on the percent of leakage, vulnerability, possibility and effectiveness of page-fault based attacks which they call pigeonhole attacks. Then, they consider the possible ways of eliminating page-fault side-channels. More precisely, they define pigeonhole attack as an attack that is performed when a page table walk is done. Moving data between the physical and virtual memory from different pages sequentially causes page-faults on every single page when the virtual memory is already full, holding all the other pages. When the first page is fetched, the next page will be removed from the page table and when the next page is to be fetched, a page-fault will occur. Based on the fact that the malicious OS cannot differentiate accesses which are occurred in a single page, they claim that by mapping all the input dependent data into a single page, the program will access the same pattern of the pages independent of the input and makes it page-fault oblivious. The page containing the input dependent data is called data staging page and the one containing the code is called code staging page. By creating a decision tree of the program instructions, it is understood that in each stage of the program which is being executed, there is a page-fault sequence dependent on the data, which can be mapped to a staging page. So, for each stage, one staging page is considered. This technique will create a high overhead, thus, the research extends to optimizing the implemented method by eliminating copy operations which is done by skipping read-only data save, merging small data blocks into single pages to reduce the number of fetches, merging levels of execution and reducing the number of stages, removing the mux based on the input to reduce the possibility of branch conditions, and removing the dependence of code on the data (Ex. CAS obliviousness).
+
 Seo et al. \cite{sgxshield} study address space layout randomization (ASLR) which is used in traditional systems for defending the memory against corruption attacks, but SGX does not make benefit of it. They present a new ASLR scheme for SGX systems and study the new challenges which come with it. Including the problem of small randomization entropy which is a result of limited physical and enclave memory and makes brute force attacks possible. Also, the inability of runtime page permission change makes the enclave vulnerable to code injection attacks due to conflicts with ASLR which is addressed by implementing a software-based RWX permission set.
 
 \begin{figure}
@@ -295,7 +305,7 @@ Brasser et al. \cite{drsgx} propose data location randomization as a new approac
 \section{Analysis}
 Cloak \cite{cloak} has achieved significant protection against cache-based side-channel attacks. However, there will still be some leakage remaining which this research does not handle. Overall execution time can leak information. Also, aborts do not cause the concurrent memory accesses to be canceled. Branch predictor is influenced due to the cache pinning and other micro-architecture effects can be possible due to the modifications to the execution behavior. On the other hand, the introduction of a new software-based way for pinning data into cache lines and making use of transactions for this purpose is a novel idea that opens new ways for future research in several areas. There is also an opportunity for later research on optimization and performance improvement and architectural study for reducing faults.
 
-T-SGX \cite{tsgx} protects the enclave against page-fault based side-channel attacks, but at the same time, attacks which are based on monitoring accessed and dirty bits of the data are not detected by this method.
+T-SGX \cite{tsgx} protects the enclave against page-fault based side-channel attacks, but at the same time, attacks which are based on monitoring accessed and dirty bits of the data are not detected by this method. Also, this attack incurs 30\% memory overhead and 50\% runtime overhead which has a significant effect on the performance.
 
 The problem with Deja Vu \cite{dejavu} is that it only considers enclave exits as points of attacks and possible attacks that may have been occurred during the execution which do not cause AEX have been excluded. So, attacks like B-SPM and HT-SPM (sneaky page monitoring attacks in general) which do not rely on AEX can still be effective \cite{leakycauldron}.
 
@@ -305,8 +315,28 @@ Randomization, as studied in \cite{sgxshield} can be a leading point for researc
 
 The work done by Shinde et al. \cite{pigeonhole} does not take cache-based side-channel attacks into account. The idea of loading all the sensitive data into the same pages can still leak information using cache and TLB side channels \cite{leakycauldron}.
 
-The bottom line is that none of the proposed methods can completely defend the enclave against the possible side-channel attacks. Page-fault detection cannot protect the enclave since page accesses can be learned without causing page faults. It is not even needed to interrupt the enclave for reading the TLB. Thus, any solid defense method needs to either remove all the branches and conditional code/data from the program or find a way to reliably pin specific data/pages to the cache and therefore TLB.
+The bottom line is that none of the proposed methods can completely defend the enclave against the possible side-channel attacks. Page-fault detection cannot protect the enclave since page accesses can be learned without causing page faults. It is not even needed to interrupt the enclave for reading the TLB. Thus, a solid software based defense method needs to either remove all the branches and conditional code/data from the program or find a way to reliably pin specific data/pages to the cache and therefore TLB.
 
+A hardware based solution can be combining Cache Allocation Technology (CAT) with SGX. CAT provides a software control where data is allocated into the LLC \cite{cat}. This can make sure that some cache sets can only be used by one CPU core so there will be no shared cache set to launch cache based attacks. A better approach can be providing a non-shared secure memory element which is not cached \cite{mge}.
+
+Finally, we aggregate the effectiveness of the discussed defenses against the attacks we introduced in section 3 in Table \ref{tab:one}.
+
+\begin{table}
+	\centering
+	\caption{Effectiveness of proposed defenses against attacks}
+	\label{tab:one}
+	\begin{tabular}{@{}lllllll@{}}
+		\toprule
+		Attack/Defense & P+P & Basic PF & F+R & F+F & DRAMA & SPM \\ \midrule
+		Cloak          &\cmark   &\xmark          &\cmark     &\cmark     &\textbf{!}       &\xmark     \\
+		T-SGX          &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\xmark     \\
+		Deja Vu        &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\xmark     \\
+		Shinde et al.  &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\cmark     \\
+		SGX-Shield     &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\xmark     \\
+		ZeroTrace      &\xmark   &\cmark          &\cmark     &\cmark     &\cmark       &\cmark     \\
+		DR. SGX        &\cmark   &\cmark          &\cmark     &\cmark     &\cmark       &\cmark     \\
+	\end{tabular}
+\end{table}
 \begin{comment}
 
 \section{Future Research}
