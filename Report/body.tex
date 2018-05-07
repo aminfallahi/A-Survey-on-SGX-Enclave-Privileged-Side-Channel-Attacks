@@ -6,15 +6,16 @@ Several theoretical and practical attacks based on SGX side channels are discuss
 
 In response to the development of attacks, several defense mechanisms are designed which have been effective in some cases and conditions. These defense methods usually sacrifice performance or accuracy while improving the security against side-channel attacks. 
 
-In this report, we study the possible attacks which are possible using SGX side-channel information and their points of success. Then, we discuss possible defense mechanisms which have been proposed by the researchers, study their methods and compare the defenses and their effectiveness under different conditions and scenarios.
+In this report, we study the attacks which are possible using SGX side-channel information and their points of success. Then, we discuss possible defense mechanisms which have been proposed by the researchers, study their methods and compare the defenses and their effectiveness under different conditions and scenarios.
 
 In summary, the main points of study in this work are:
 \begin{itemize}
 	\item Examining SGX enclave points of attacks.
-	\item Discussing the past work which have been done on defending the SGX enclave against side-channel attacks.
+	\item Discussing major attacks which have proved to be successful against the enclave.
+	\item Introducing the past work which have been done on defending the SGX enclave against side-channel attacks.
 	\item Analyzing the defense methods and their effectiveness.
 \end{itemize} 
-\textbf{Outline} In the remainder of this report, we discuss basic background knowledge required for studying this work in section 2. Then, we review and analyze the attacks which are possible to be launched against SGX enclave using side-channel information in section 3. In section 4, we introduce several defenses proposed by past research works, and in section 5 we analyze and compare the effectiveness of these defense methods in terms of security and performance. At last, we conclude the research in section 6.
+\textbf{Outline} In the remainder of this report, we discuss basic background knowledge required for studying this work in section 2. Then, we review and analyze the attacks which are possible to be launched against SGX enclave using side-channel information in section 3. In section 4, we introduce several defenses proposed by past research works, and in section 5 we analyze and compare the effectiveness of these defense methods in terms of security and performance. Finally, we conclude the research in section 6.
 \section{Background}
 In this section, we provide detailed background on side-channel attacks targeting enclaved applications, tools, and terms we use in this report.
 
@@ -22,19 +23,17 @@ In this section, we provide detailed background on side-channel attacks targetin
 
 In the common hardware architectures used in cloud computing environments today, data is transferred through several buses using multiple protocols to be used. The encrypted data is stored on the hard drive and will be transferred into enclaved memory. Then, it will be cached using multiple levels of cache for performance optimization. In current Intel processors, the cache hierarchy is made of three levels of fast storage. The last level cache (LLC) is shared among cores while each core has a separate pair of L1 and L2 caches. However, L1 and L2 are shared between the hyperthreads running on the same core. Furthermore, L1 caches data and instructions into different units while L2 and L3 share the space for both instruction and data \cite{brasser2017software}. Page mappings between virtual and physical addresses of data are also kept in the main memory and a transaction look-aside buffer (TLB) is used to cache the mappings in the page-table for better performance.
 
-Each data transfer can be a point of side-channel attack. While the data is encrypted, the patterns of reads and writes, cache-misses, page-faults, and other interrupts and exceptions can be used by the adversary for launching attacks and recovering useful information.
+Each data transfer can be a point of side-channel attack. While the data is encrypted, the patterns of reads and writes, cache-misses, page-faults, and other interrupts and exceptions can be used by the adversary for launching attacks and recovering sensitive information.
 
 \subsection{Intel SGX}
 
 Protecting the data inside a shield has been a major interest for improving security and privacy in distributed systems. For this purpose, several software and hardware based solutions have been proposed.
 
-Intel introduced a new hardware-based technique in its new Skylake micro-architecture \cite{skylake} line of processors called Software Guard eXtensions (SGX) \cite{sgx}. It delivers 17 new instructions that can be used by applications to create enclaves, which are a portion of main memory assigned to a program and protected from being read and written by other processes. The effectiveness of this interface scales up to prevent the operating system kernel and hypervisor from accessing the shielded memory.
+Intel introduced a new hardware-based technique in its Skylake micro-architecture \cite{skylake} line of processors called Software Guard eXtensions (SGX) \cite{sgx}. It delivers 17 new instructions that can be used by applications to create enclaves, which are a portion of main memory assigned to a program and protected from being read and written by other processes. The effectiveness of this interface scales up to prevent the operating system kernel and hypervisor from accessing the shielded memory. The only trusted hardware component by SGX is the CPU itself and the plain text data can be stored in the caches and register while they are encrypted inside the main memory \cite{brasser2017software}.
 
-The enclave will be created by the processor as a contiguous physical memory area and is a part of the virtual address space of an operating system process. The base address will be generated randomly by address space layout randomization (ASLR) system. The security and confidentiality of the enclave is guaranteed by a hardware level memory encryption engine.
+The enclave will be created by the operating system as a contiguous physical memory area and is a part of the virtual address space of an operating system process. The base address of the enclave will be assigned randomly from a dedicated region of physical memory called Enclave Page Cache (EPC) \cite{brasser2017software}. The security and confidentiality of the enclave is guaranteed by a hardware level memory encryption engine.
 
-One of the major problems with running applications inside the cloud is the leakage of data and code instructions. Even with encryption, the CPU can only execute unencrypted instructions which can be eavesdropped and reverse engineered to useful code. Thus, the only trusted hardware component by SGX is the CPU itself and the plain text data can be stored in the caches and register while they are encrypted inside the main memory \cite{brasser2017software}.
-
-The creation and management of enclaves is done by the operating system which allocates the enclave memory from a dedicated region of physical memory named Enclave Page Cache (EPC). The virtual to physical address translation and transfering the data into enclave is also done by the OS. Meanwhile, SGX logs the behavior of the OS and records it for later observation by an external party for verification. Enclave binary is loaded by the operating system and since it is known by the OS, it cannot carry hard-coded sensitive data/code and all the secret information has to be loaded into the enclave during the runtime \cite{mge}. After the creation of the enclave and transferring the code/data into it, the OS will treat it as a normal process. Thus, it can be interrupted, migrated between cores, or halted. In the case of a context switch, SGX is responsible for cleaning the registers and saving the context. This process is called an asynchronous enclave exit (AEX). When the enclave program is to be executed again, the hardware will securely restore the context \cite{brasser2017software}. Detailed steps of an enclave exit can be described as below: \cite{tsgx} (Fig. \ref{fig:aex})
+The virtual to physical address translation and transfering the data into enclave is also done by the OS. Meanwhile, SGX logs the behavior of the OS and records it for later observation by an external party for verification. Enclave binary is loaded by the operating system and since it is known by the OS, it cannot carry hard-coded sensitive data/code and all the secret information has to be loaded into the enclave during the runtime \cite{mge}. After creating the enclave and transferring the code/data into it, the OS will treat it as a normal process. Thus, it can be interrupted, migrated between cores, or halted. In the case of a context switch, SGX is responsible for cleaning the registers and saving the context. This process is called an asynchronous enclave exit (AEX). When the enclave program is to be executed again, the hardware will securely restore the context \cite{brasser2017software}. Detailed steps of an enclave exit can be described as below: \cite{tsgx} (Fig. \ref{fig:aex})
 
 \begin{enumerate}
 	\item The processor stores register values and the exit reason into the state save area (SSA) inside the enclave.
@@ -51,23 +50,25 @@ The creation and management of enclaves is done by the operating system which al
 	\label{fig:aex}
 \end{figure}
 
-Intel SGX SDK \cite{sgxapi} which is used by developers to harden their applications using SGX technology, uses two main forms of specialized function calls to work with the enclave. ECALLs are functions which run inside the trusted enclave and can be called from outside untrusted environment while OCALLs are useful for using system functions and other operations which are possible to be done outside the enclave \cite{ecallocall}.
+Intel SGX SDK \cite{sgxapi} which is used by developers to harden their applications using SGX technology, uses two main forms of specialized function calls to work with the enclave. ECALLs are functions which run inside the trusted enclave and can be called from outside untrusted environment while OCALLs are useful for calling non-sensitive system functions and other operations which are possible to be done outside the enclave \cite{ecallocall}.
+
+It is also worth it to introduce two of the other Intel technologies which are dedicated to security systems in the following.
 
 \subsubsection{Trusted Platform Module}
-It can be useful to introduce TPM as a security module which is a microchip that is designed to enable some security measures and processes in the system. TPM is used to authenticate hardware devices using a unique secret key programmed in the chip. So, the security is pushed down to the hardware level. Basically, the TPM will identify if any firmware or boot process has been tampered with, while SGX protects sensitive and confidential processes executed by the operating system \cite{wptpm,sptpm}.
+TPM is a security module, a microchip that is designed to enable some security measures and processes in the system. It is used to authenticate hardware devices using a unique secret key programmed in the chip. So, the security is pushed down to the hardware level. Basically, the TPM will identify if any firmware or boot process has been tampered with, while SGX protects sensitive and confidential processes executed by the operating system \cite{wptpm,sptpm}.
 
 \subsubsection{Trusted Execution Technology}
 Intel TXT is a hardware technology designed to validate that no unauthorized manipulation has been done against the code that provides the secure environment at the time of launch. TXT uses the TPM chip and other cryptographic techniques to enable attestation of the authenticity of a platform and its operating system. On the other hand, SGX is designed to increase the security of application code \cite{txt}.
 
 \subsection{Side-Channel Attacks on the Enclave}
 
-Multiple effective attacks and defenses on the enclave have been proposed by past research. Most of the attacks make use of the side-channel information that can be leaked and accessed by a modified malicious kernel. In these attacks, the malicious kernel retrieves useful information about the code and the data by changing the behavior of program execution or analyzing the page-faults and other possible points of data leakage.
+Multiple effective attacks and defenses on the enclave have been proposed by past research. Most of the attacks make use of the side-channel information that can be leaked and accessed by a modified malicious kernel. In these attacks, the malicious kernel retrieves useful information about the code and the data by changing the behavior of system, program execution or analyzing the page-faults and other possible points of data leakage.
 
 One of the major points of attacks is targeting exceptions caused by the program. Since the exceptions are first acknowledged by the kernel before the program, a malicious OS can use them to infer activities and the behavior of the program according to the inputs which results in recovering the actual data and code of the program.
 
 Another kind of attack that can be triggered by a malicious OS is an interrupt-based attack. The kernel can trigger interrupts to control the execution of the program.
 
-Other attacks such as Stealthy Page Monitoring (SPM) attacks \cite{stealthy,leakycauldron} can also be effective. For a typical page-fault attack, the attacker can make all the page table entries invalid and restrict enclave program’s access to all the pages and by causing page-faults, view the pattern of memory reads and writes by the program. This action will cause a lot of page-faults which lead to a high overhead and attack detection by the victim, so the attacker is interested to retrieve this information and view the pattern without causing unwanted page-faults by the victim. In page monitoring attacks, the attacker monitors the bits representing the validity and whether a page is accessed or modified. The attacker is also able to clear these bits and view them again frequently. So, the pattern of accesses can be visible to the attacker without causing page-faults \cite{stealthy,leakycauldron}.
+Other attacks such as Stealthy Page Monitoring (SPM) attacks \cite{stealthy,leakycauldron} can also be effective. For a typical page-fault attack, the attacker can make all the page table entries invalid and restrict enclave program's access to all the pages and by causing page-faults, view the pattern of memory reads and writes by the program. This action will cause a lot of page-faults which lead to a high overhead and attack detection by the victim, so the attacker is interested to retrieve this information and view the pattern without causing unwanted page-faults. In page monitoring attacks, the attacker monitors the bits representing the validity and whether a page is accessed or modified. The attacker is also able to clear these bits and view them again frequently. So, the pattern of accesses can be visible to the attacker without causing page-faults \cite{stealthy,leakycauldron}.
 
 %\begin{figure}
 %	\includegraphics[scale=0.3]{images/uos}
@@ -84,21 +85,21 @@ Other attacks such as Stealthy Page Monitoring (SPM) attacks \cite{stealthy,leak
 \subsection{Transactional Synchronization Extensions}
 One of the technologies that has attracted a great attention for making benefit in defense against SGX enclave side-channel attacks is Intel TSX \cite{tsx}. This technology has been introduced by Intel since Haswell micro-architecture \cite{haswell} for critical sections management and monitoring serialization. Intel TSX provides two frameworks to add transaction support to the processor. Both frameworks introduce new instructions for region specification, backward compatibility, and flexibility \cite{tsx}. One of them is RTM (Restricted Transactional Memory) \cite{rtm} which has been used by previous research like T-SGX \cite{tsgx} to isolate instructions and Cloak \cite{cloak} to pin sensitive code and data to the caches which are not supported by current hardware instructions. Both of these works make use of transactions to protect the enclave against side-channel attacks.
 
-TSX introduces three main instructions XBEGIN, XEND, and XABORT. The instruction code will reside between XBEGIN and XEND while XABORT will cause the transaction to abort. Upon abortion, a fallback function will be called to handle reversing the transaction effects.
+TSX introduces three main instructions XBEGIN, XEND, and XABORT. The instruction code will reside between XBEGIN and XEND while XABORT will cause the transaction to abort. Upon abortion, a fallback function will be called to handle reversing the transaction effects (Fig. \ref{fig:rtm}).
 
 These transactions can be used to protect and isolate code. While unexpected faults can cause a transaction to exit, the SGX enclave can make benefit of it to protect the code/data against faults.
+
 \begin{figure}
 	\includegraphics[scale=0.2]{images/rtm}
-	\caption{HTM ensures that no concurrent modifications influence the transaction, either by preserving the old value or by aborting and reverting the transaction. \cite{cloak}.}
+	\caption{RTM ensures that no concurrent modifications influence the transaction, either by preserving the old value or by aborting and reverting the transaction. \cite{cloak}.}
 	\label{fig:rtm}
 \end{figure}
 
-
 \section{Attacks}
-In this section, we introduce and discuss the attacks which use side-channel information in a SGX environment. We will discuss major points of attack that have been worked on by the past research and then describe one attack related to each. At the end we discuss some other attacks in abstract.
+In this section, we introduce and discuss the attacks which use side-channel information in a SGX environment. We will discuss major points of attack that have been studied by the past research and then describe one attack related to each. At the end we discuss some other attacks in summary.
 
 \subsection{Attack Model}
-In our attack scenario, the enclave is protected by Intel SGX, so no one except the main program running inside enclave has the key to access it. The operating system kernel which runs on top of a hypervisor can view and manage tasks queue, exceptions and interrupts. The hypervisor kernel is also capable of viewing data transfer between memories and caches while Intel SGX prevents it from accessing the enclave data. It is considered that other tenants executing on the same hypervisor are not able to control the resources assigned to the main machine by the hypervisor.
+In our attack scenario, the enclave is protected by Intel SGX, so no one except the main program running inside the enclave has the key to access it. The operating system kernel which runs on top of a hypervisor can view and manage tasks queue, exceptions and interrupts. The hypervisor kernel is also capable of viewing data transfer between memories and caches while Intel SGX prevents it from accessing the enclave data. It is considered that other tenants executing on the same hypervisor are not able to control the resources assigned to the main machine by the hypervisor.
 
 \subsection{Points of Attack}
 Several caveats with SGX architecture have been studied to be points for launching attacks against the enclave.
@@ -107,73 +108,20 @@ TLB, as an address translation cache, can be one point of attack. While TLB is s
 
 Also, during AEX (Asynchronous EXit), TLB and paging-structure caches will be flushed and let the adversary know the flushed entries at context switch \cite{leakycauldron}.
 
+Other than TLBs, CPU caches which are shared between the enclave and non-enclave code can result cache side-channel attacks \cite{leakycauldron}.
+
 Another point of attack is the use of page table entry flags. The accessed and dirty bits which are set and unset for page table entries upon accesses and modifications are used for launching attacks. So, the code in non-enclave mode can observe page-table updates and the memory write pattern to recover useful data \cite{leakycauldron,stealthy}.
 
-Other than TLBs, CPU caches are shared between the enclave and non-enclave code resulting in the possibility of cache side-channel attacks \cite{leakycauldron}.
-
 \subsection{Cache-Based Attacks}
-Attacks which use cache for eavesdropping, usually work on causing intentional cache-misses. Since the cache is not visible to the OS, the attacker is interested to encourage the program to access the main memory.
+Attacks which use cache for eavesdropping, usually work on causing intentional cache misses. Since the cache is not visible to the OS, the attacker is interested to encourage the program to access the main memory.
 
-Attacker uses parameters like time, trace, and access patterns to infer sensitive data from the cache. When the attacker shares the same direct-mapped cache set with the victim, it is possible to launch a Prime+Probe attack against the victim. Considering an L1 cache of 64 sets, each containing 8 cache lines which are each 64 bytes, in the prime stage, the attacker executes conflicting cache lines to make page-fault possible for the victim who branches on a secret (Alg. \ref{alg:one}). By executing virtual addresses that map to the same cache set using a sequential memory scan for an address pair, the attacker expects the victim to request access to a conflicting cache line and cause a cache miss \cite{mge}. In the probe step, the attacker executes all the cache lines and measures the execution time of each, and based on it, the attacker can find out if that cache line has been touched by the user. Because the execution on the particular cache line will take more time due to page-fault. So, if the victim is continuously branching on a secret, it will be revealed which branch has been taken. Based on different inputs, the attacker can guess the behavior of the program \cite{primeprobe1,primeprobe2,cloak} (Fig. \ref{fig:ppone}, \ref{fig:pptwo}).
-
-Most of the past researches work on extracting RSA and EdDSA keys as the most used cryptography systems \cite{mge,leakycauldron,brasser2017software, pigeonhole,cloak,stealthy}. However, both follow the same path and basically, RSA is expandable to EdDSA, and both are prune to prime+probe attack. As shown in Algorithm \ref{alg:rsa1}, while RSA is based on calculating an exponentiation modulo some number $n$, Using a square+multiply algorithm it is possible to calculate a result in a branch based algorithm. The calculated result inside the loop is dependent on the bits in $d$ which is a secret than can lead us to recover the private key. In each iteration, if the bit is one, the result will be calculated based on a square and a multiply, otherwise it will be calculated based on a single multiplication. Using this branch, it is possible to find out if the multiply is executed or not and then recover the bitstream of the key. Thus, this secret dependent memory access leads to time difference between the cached data and uncached data which is used by the prime+probe attack \cite{mge,cloak}.
-
-While the private key is kept inside an SGX enclave, it makes sense to also do the attack inside an SGX enclave to leave the minimum possible trace for the detection of the attack by the victim \cite{mge}.
-
-A common problem that comes into view in terms of making the attack more practical, is that Intel has disabled its high precision timer (rdtsc) instruction to be used inside the enclave for security reasons. So, it is needed to implement a high precision timer inside an enclave which has been done by \cite{mge} as shown in Algorithm \ref{alg:timer}. They start a thread for continuously incrementing a global variable and achieve even better performance than Intel's high precision timer. The number of cycles which are executed inside the loop are constant and a parameter of time, enough for precise specification of a relative time scale \cite{mge}.
-
-Another problem is to find an eviction set to load into cache for causing row conflicts. For this purpose, since the enclave memory is allocated in a contiguous way, it is possible to sequentially scan the memory for conflicting pairs of addresses. 
-
-A prime+probe attack based on this setting, can result in a pattern observation as shown in Fig. \ref{fig:ppres}. By running a moving average on the result, it is possible to extract the key more easily.
-
-All has been done is experimented to be perfectly hidden, only some system noise can cause instability which is almost undetectable in comparison to an attack inside the enclave.
-
+Attacker uses parameters like time, trace, and access patterns to infer sensitive data from the cache. When the attacker shares the same direct-mapped cache set with the victim, it is possible to launch a Prime+Probe attack against the victim. Considering an L1 cache of 64 sets, each containing 8 cache lines which are each 64 bytes, in the prime stage, the attacker executes conflicting cache lines to make cache misses possible for the victim who branches on a secret (Alg. \ref{alg:one}). By executing virtual addresses that map to the same cache set using a sequential memory scan for an address pair, the attacker expects the victim to request access to a conflicting cache line and cause a cache miss \cite{mge}. In the probe step, the attacker executes all the cache lines and measures the execution time of each, and based on it, the attacker can find out if that cache line has been touched by the user, because the execution on the particular cache line will take more time due to cache miss. So, if the victim is continuously branching on a secret, it will be revealed which branch has been taken. Based on different inputs, the attacker can guess the behavior of the program \cite{primeprobe1,primeprobe2,cloak} (Fig. \ref{fig:ppone}, \ref{fig:pptwo}).
 
 \begin{algorithm}[t]
 	\includegraphics[scale=0.22]{images/alg}
-	%	\SetAlgoNoLine
-	%	if ($secret$)
-	%	\\\{\\
-	%	\tab ;\\
-	%	\}\\
-	%	else\\
-	%	\{\\
-	%	\tab;\\
-	%	\}
 	\caption{Prime+Probe branching side-channel sample code \cite{stealthy,cloak}}
 	\label{alg:one}
 \end{algorithm}
-
-\begin{algorithm}[t]
-	\textbf{input:} base $b$, exponent $e$, modulus $n$\\
-	\textbf{output:} $b^e mod \; n$\\
-	$X \leftarrow 1;$\\
-	\textbf{for} $i \leftarrow bitlen(e)$ \textbf{downto} $0$ \textbf{do}\\
-	\tab $X \leftarrow multiply(X, X);$\\
-	\tab \textbf{if} $e_i=1$ \textbf{then}
-	\tab \tab $X \leftarrow multiply(X, b);$\\
-	\tab \textbf{end}\\
-	\textbf{end}\\
-	\textbf{return} $X;$
-
-	\caption{Square and multiply exponentiation \cite{mge}}
-	\label{alg:rsa1}
-\end{algorithm}
-
-\begin{algorithm}[t]
-	\textbf{mov} \&counter, \%\textbf{rcx}\\
-	l: \textbf{inc} \%\textbf{rax}\\
-	\textbf{mov} \%\textbf{rax}, (\%\textbf{rcx})\\
-	\textbf{jmp} l
-	\caption{Timestamp counter \cite{mge}}
-	\label{alg:timer}
-\end{algorithm}
-
-\begin{figure}
-	\includegraphics[scale=0.2]{images/ppres}
-	\caption{Measurement's raw trace and over moving average. It is visible that the secret bits can be identified \cite{mge}.}
-	\label{fig:ppres}
-\end{figure}
 
 \begin{figure}
 	\includegraphics[scale=0.2]{images/pp1}
@@ -187,8 +135,51 @@ All has been done is experimented to be perfectly hidden, only some system noise
 	\label{fig:pptwo}
 \end{figure}
 
+Most of the past researches work on extracting RSA and EdDSA keys as the most used cryptography systems \cite{mge,leakycauldron,brasser2017software, pigeonhole,cloak,stealthy}. However, both follow the same path and basically RSA is expandable to EdDSA and both are vulnerable to prime+probe attack. As shown in Alg. \ref{alg:rsa1}, while RSA is based on calculating an exponentiation modulo some number $n$, using a square+multiply algorithm it is possible to calculate a result in a branch based algorithm. The calculated result inside the loop is dependent on the bits in $d$ which is a secret than can lead the attacker to recover the private key. In each iteration, if the bit is one, the result will be calculated based on a square and a multiply, otherwise it will be calculated based on a single multiplication. Using this branch, it is possible to find out if the multiply is executed or not and then recover the bitstream of the key. Thus, this secret dependent memory access leads to time difference between the cached data and uncached data which is used by the prime+probe attack \cite{mge,cloak}.
+
+\begin{algorithm}[t]
+	\textbf{input:} base $b$, exponent $e$, modulus $n$\\
+	\textbf{output:} $b^e mod \; n$\\
+	$X \leftarrow 1;$\\
+	\textbf{for} $i \leftarrow bitlen(e)$ \textbf{downto} $0$ \textbf{do}\\
+	\tab $X \leftarrow multiply(X, X);$\\
+	\tab \textbf{if} $e_i=1$ \textbf{then}
+	\tab \tab $X \leftarrow multiply(X, b);$\\
+	\tab \textbf{end}\\
+	\textbf{end}\\
+	\textbf{return} $X;$
+	
+	\caption{Square and multiply exponentiation \cite{mge}}
+	\label{alg:rsa1}
+\end{algorithm}
+
+While the private key is kept inside an SGX enclave, it makes sense to also do the attack inside an SGX enclave to leave the minimum possible trace for the detection of the attack by the victim \cite{mge}.
+
+A common problem that comes into view in terms of making the attack more practical, is that Intel has disabled its high precision timer (rdtsc) instruction to be used inside the enclave for security reasons. So, it is needed to implement a high precision timer inside an enclave which has been done by \cite{mge} as shown in Alg. \ref{alg:timer}. They start a thread for continuously incrementing a global variable and achieve even better performance than Intel's high precision timer. The number of cycles which are executed inside the loop are constant and a parameter of time, enough for precise specification of a relative time scale \cite{mge}.
+
+\begin{algorithm}[t]
+	\textbf{mov} \&counter, \%\textbf{rcx}\\
+	l: \textbf{inc} \%\textbf{rax}\\
+	\textbf{mov} \%\textbf{rax}, (\%\textbf{rcx})\\
+	\textbf{jmp} l
+	\caption{Timestamp counter \cite{mge}}
+	\label{alg:timer}
+\end{algorithm}
+
+Another problem is to find an eviction set to load into cache for causing row conflicts. For this purpose, since the enclave memory is allocated in a contiguous way, it is possible to sequentially scan the memory for conflicting pairs of addresses. 
+
+A prime+probe attack based on this setting, can result in a pattern observation as shown in Fig. \ref{fig:ppres}. By running a moving average on the result, it is possible to extract the key more easily \cite{mge}.
+
+All has been done is experimented to be perfectly hidden, only some system noise can cause instability which is almost undetectable in comparison to an attack outside the enclave \cite{mge}.
+
+\begin{figure}
+	\includegraphics[scale=0.2]{images/ppres}
+	\caption{Measurement's raw trace and over moving average. It is visible that the secret bits can be identified \cite{mge}.}
+	\label{fig:ppres}
+\end{figure}
+
 \subsection{Page Table Based Attacks}
-Several studies have been done on attacks which make use of page tables and page faults to extract sensitive data from the enclave. A basic attack is to make use of AEXs which have been caused when a page fault occurs and results in the base address of the faulting page to be revealed. A malicious operating system can use this fact to cause intentional page faults by clearing the present bits in page table or evicting the page table entries. Then, the OS can obtain the page level trace of the execution \cite{stealthy}. A similar attack is to monitor a specified page and measure the time between page faults that occured for that page. Every time a page fault handled, the OS invalidates the data for the next access and supposedly page fault.
+Several studies have been done on attacks which make use of page tables and page faults to extract sensitive data from the enclave. A basic attack is to make use of AEXs which have been caused when a page fault occurs and results in the base address of the faulting page to be revealed. A malicious operating system can use this fact to cause intentional page faults by clearing the present bits in page table or evicting the page table entries. Then, the OS can obtain the page level trace of the execution \cite{stealthy}. A similar attack is to monitor a specified page and measure the time between page faults that occurred for that page. Every time a page fault occurred, the OS invalidates the data for the next access and supposedly page fault.
 
 As an example, for analyzing genome data inside an enclave as shown in Fig. \ref{fig:pfdna} and reporting the presence of specific mutations, the page containing \emph{add\_description\_xyz} method is evicted from EPC memory. When the page fault is raised during the execution, the method is called and patient's specific disorder can be inferred by the attacker \cite{heisenberg}.
 
@@ -209,16 +200,16 @@ Similarly, the attack can be launched against both code and data. In Fig. \ref{f
 
 The problem with the discussed attacks is that they induce a high overhead by causing lots of page faults. This performance issue will lead to the attacks being exposed by the victim. So, it is important to come out with a method for retrieving information without causing page-faults.
 
-Van Bulck et al. \cite{stealthy} have confirmed that accessed and dirty flags are set and unset for page table entries in both enclave mode and non-enclave mode. Monitoring these flags can lead to page-fault detection on protected memory region without the need to produce intended page-faults. Suppose a program is being executed in the enclave which branches based on a secret. If the branch is taken, one page will be retrieved and thus its accessed flag will be set, otherwise the same happens for another page. By observing the accessed bit for these two page tables, the secret is revealed. Doing this sequentially can reveal all the secrets \cite{stealthy}.
+Van Bulck et al. \cite{stealthy} have confirmed that accessed and dirty flags are set and unset for page table entries in both enclave and non-enclave mode. Monitoring these flags can lead to page-fault detection on protected memory region without the need to produce intended page-faults. Suppose a program is being executed in the enclave which branches based on a secret. If the branch is taken, one page will be retrieved and thus its accessed flag will be set, otherwise the same happens for another page. By observing the accessed bit for these two page tables, the secret is revealed. Doing this sequentially can reveal all the secrets \cite{stealthy}.
 
-A problem with this attack is that after address translations are cached in the TLB, the flags are no longer updated in the page-table, but are updated in the TLB. Thus, it is needed to force the victim to walk its page-tables in order for the flags to be updated. In this attack, the attacker flushes the TLB by initiating an inter-processor interrupt which causes TLB shootdown. Thus, the flags will need to be updated in the page-table before being cached in the TLB \cite{leakycauldron,stealthy}.
+A problem with this attack is that after address translations are cached in the TLB, the flags are no longer updated in the page-table, but are updated in the TLB. Thus, it is needed to force the victim to walk its page-tables in order for the flags to be updated. In this attack, the attacker flushes the TLB by initiating an inter-processor interrupt which causes a TLB shootdown. Thus, the flags will need to be updated in the page-table before being cached in the TLB \cite{leakycauldron,stealthy}.
 
 As a result, the high number of accesses to a page-table entry for a certain input, can result in lots of interrupt requests which can be detected by the victim. To prevent this, by finding out two pages which are accessed by the victim repetitively and measuring the time between these two page accesses, the input can be recovered. Thus, instead of multiple interrupts, one interrupt after each cycle is enough for clearing the TLB and successful attack \cite{leakycauldron,stealthy}.
 
 To further remove the interrupts which are needed by the two aforementioned attacks, it is possible to make use of the fact that the TLB is shared between two threads which are being executed on the same core. Thus, by running the attacker program in the same core with the victim program, it is possible to invalidate TLB entries outside the enclave without interrupt requests \cite{leakycauldron,stealthy}.
 
 \subsection{Other Attacks}
-After discussing major cache and page table based attacks, we briefly introduce some other techniques which have been proposed by previous research and make use of these two side channels to launch attacks against the enclave.
+After discussing major cache and page table based attacks, we briefly introduce some other techniques which have been proposed by past research and make use of these two side channels to launch attacks against the enclave.
 
 \subsubsection{Flush+Reload}
 By making use of page sharing between enclave and non-enclave code, the attacker can find out if a certain page is removed from the cache. More precisely, the attacker flushes the target memory line from the cache and waits for the victim to access it. The wait time can be fixed to either a random value or a value that is experimented to be good for the attack success. Then, the attacker requests to access the page and measures the time it takes for the page to be fetched. Judging based on the time, the attacker can say if the page is already cached or fetched from the memory. In the case that it takes longer than a certain amount of time for the page to be retrieved, the attacker can conclude that it has not been fetched or touched by the victim \cite{flushreload}.
@@ -232,10 +223,10 @@ Using the \emph{clflush} instruction, it is possible to flush a cache line and i
 %	\label{fig:ppfr}
 %\end{figure}
 
-\subsubsection{DRAMA Attacks}
+\subsubsection{DRAMA}
 With caching disabled to prevent cache-based side-channel attacks, the attacker allocates two memory lines in the same memory segment which map to different virtual addresses but have common physical addresses. Then the attacker starts to regularly access one of the memory lines. In case the victim accesses the other memory line, a row conflict will cause the next fetch of the attacker to take more time. By measuring these times the attacker can recover the sensitive memory accesses by the victim \cite{leakycauldron,drama}.
 
-\subsubsection{Cache-DRAM Attacks}
+\subsubsection{Cache-DRAM}
 Using two threads for launching the Prime+Probe attack \cite{primeprobe1, primeprobe2} and DRAMA attacks \cite{drama} together, Prime+Probe can cause conflicts in the cache which leads to fetching the data from DRAM, making DRAMA attack possible in the case caching is disabled. Therefore, by launching this attack, the slowdown caused by disabling cache in DRAMA attacks is avoided \cite{leakycauldron}.
 
 %\begin{figure}
@@ -250,7 +241,7 @@ We discuss the research that has been done on protecting the enclave against the
 \subsection{Defense Against Cache Based Attacks}
 As discussed in 2.1, there are three levels of cache: L3 is shared between all physical cores, L2 is shared between each core's threads and L1 shares data and code separately between the hyperthreads. In a typical environment, it is not visible to the enclave program running in one thread, what is being run in the other thread on the same core. So, if the other hyperthread is trusted (assuming there are two hyperthreads running in each core) it is only needed to care about the L3 cache. In the SGX environment, the hyperthreads cannot trust each other, thus, L2 and L1 caches are also of importance when it comes to the case of cache side-channel attacks because attacks like Prime+Probe will be possible in this case \cite{cloak}.
 
-The basic approach to confront cache-based side-channel attacks including Prime+Probe and eliminate the leakage is to pin sensitive code and data into caches so no conflict and cache-miss be possible, but it is impossible to pin data into caches in the current hardware/software environment. So, there is a need to introduce a hack for indirectly doing this which has been implemented using Intel TSX by Gruss et al. \cite{cloak}.
+The basic approach to confront cache-based side-channel attacks including Prime+Probe and eliminate the leakage is to pin sensitive code and data into caches so no conflict and cache-miss be possible, but it is impossible to pin data into caches in the current hardware/software architecture. So, there is a need to introduce a hack for indirectly doing this which has been implemented using Intel TSX by Gruss et al. \cite{cloak}.
 
 By studying the in-depth architecture of TSX instructions, it is found that TSX uses a write set and a read set and interrupts to these sets cause the transaction to abort. The write set is always the 32kb L1 and the read set is the 8mb sized L3. So, if a cache line in L1 is modified and made dirty, the transaction aborts. The same happens when some cache line in L3 is removed due to a conflict. Also, it is observed that code, which is read-only, can only be a part of the read set L1. This has the benefit of detecting external code evictions by other cores which share the same L3 cache \cite{cloak}.
 
@@ -265,9 +256,9 @@ After explaining the indirect effect of using TSX for pinning data to cache, it 
 For preloading, if the attacker targets L1, the code should be preloaded into L1-I by execution. Also, all the data should be loaded into the write set. For the attackers targeting L3, code and read-only data should be loaded into read set, while the data which will possibly be touched again should be loaded into the write set \cite{cloak}.
 
 \subsection{Defense Against Page Table Based Attacks}
-One of the late defenses proposed against page fault attacks is T-SGX \cite{tsgx} which has been developed by Shih et al. Based on the observation that race conditions cause Intel TSX transactions to abort, T-SGX puts the whole enclave inside a transaction. After abort, it will roll backk all the changes and control will be transfered to the fallback point. This way, any page fault can make the transaction abort and the enclave can self detect itself against it.
+One of the late defenses proposed against page fault attacks is T-SGX \cite{tsgx} which has been developed by Shih et al. Based on the observation that race conditions cause Intel TSX transactions to abort, T-SGX puts the whole enclave inside a transaction. After abort, it will roll back all the changes and control will be transfered to the fallback point. This way, any page fault can make the transaction abort and the enclave can self detect itself against it.
 
-However, TSX is not designed to contain and execute huge amounts of code. A frequent timer interrupt by the OS can cause the transaction to abort. So, if the transaction takes too long to execute, it keeps aborting and the program will never terminate. Another constraint is that TSX buffers all the memory changes inside the cache. So, if a single transaction does lots of memory accesses a cache conflict will occur and the transaction will abort. To solve this problem, this research breaks the program into several tiny execution blocks.
+However, TSX is not designed to contain and execute huge amounts of code. A frequent timer interrupt by the OS can cause the transaction to abort. So, if the transaction takes too long to execute, it keeps aborting and the program will never terminate. Another constraint is that TSX buffers all the memory changes inside the cache. So, if a single transaction does lots of memory accesses a cache conflict will occur and the transaction will abort. To solve this problem, this research breaks the program into several tiny execution blocks. This method can eliminate the probability of unnecessary abortions.
 
 A problem that comes with the introduction of tiny execution blocks is that setting up a transaction has a fixed cost in terms of number of processor cycles. This will have a bad effect on performance. So, any time it is possible and constraints are not violated, it is preferred to merge the continuous blocks like loops, if-else statements, and functions. For example, as shown in Fig. \ref{fig:tsgxloop} one possible loop optimization technique is to move the transaction outside the loop to prevent high number of transaction creations. By static analysis, it is indicated if it is safe to optimize based on the constraints.
 
@@ -288,7 +279,7 @@ Chen et al. \cite{dejavu} embed a clock inside the enclave and use Intel TSX for
 	\label{fig:dejavu}
 \end{figure}
 
-Shinde et al. \cite{pigeonhole} conduct a statistical study on the percent of leakage, vulnerability, possibility and effectiveness of page-fault based attacks which they call pigeonhole attacks. Then, they consider the possible ways of eliminating page-fault side-channels. More precisely, they define pigeonhole attack as an attack that is performed when a page table walk is done. Moving data between the physical and virtual memory from different pages sequentially causes page-faults on every single page when the virtual memory is already full, holding all the other pages. When the first page is fetched, the next page will be removed from the page table and when the next page is to be fetched, a page-fault will occur. Based on the fact that the malicious OS cannot differentiate accesses which are occurred in a single page, they claim that by mapping all the input dependent data into a single page, the program will access the same pattern of the pages independent of the input and makes it page-fault oblivious. The page containing the input dependent data is called data staging page and the one containing the code is called code staging page. By creating a decision tree of the program instructions, it is understood that in each stage of the program which is being executed, there is a page-fault sequence dependent on the data, which can be mapped to a staging page. So, for each stage, one staging page is considered. This technique will create a high overhead, thus, the research extends to optimizing the implemented method by eliminating copy operations which is done by skipping read-only data save, merging small data blocks into single pages to reduce the number of fetches, merging levels of execution and reducing the number of stages, removing the mux based on the input to reduce the possibility of branch conditions, and removing the dependence of code on the data (Ex. CAS obliviousness).
+Shinde et al. \cite{pigeonhole} conduct a statistical study on the percent of leakage, vulnerability, possibility and effectiveness of page-fault based attacks which they call pigeonhole attacks. Then, they consider the possible ways of eliminating page-fault side-channels. More precisely, they define pigeonhole attack as an attack that is performed when a page table walk is done. Moving data between physical and virtual memory from different pages sequentially causes page-faults on every single page when the virtual memory is already full, holding all the other pages. When the first page is fetched, the next page will be removed from the page table and when the next page is to be fetched, a page-fault will occur. Based on the fact that the malicious OS cannot differentiate accesses which are occurred in a single page, they claim that by mapping all the input dependent data into a single page, the program will access the same pattern of the pages independent of the input and makes it page fault oblivious. They also create a deterministic page access and execution profile by introducing fake accesses so the program will access the same pattern of the pages independent of the input and make it page-fault oblivious. The page containing the input dependent data is called data staging page and the one containing the code is called code staging page. By creating a decision tree of the program instructions, it is understood that in each stage of the program which is being executed, there is a page-fault sequence dependent on the data, which can be mapped to a staging page. So, for each stage, one staging page is considered. This technique will create a high overhead, thus, the research extends to optimizing the implemented method by eliminating copy operations which is done by skipping read-only data save, merging small data blocks into single pages to reduce the number of fetches, merging levels of execution and reducing the number of stages, removing the mux based on the input to reduce the possibility of branch conditions, and removing the dependence of code on the data (Ex. CAS obliviousness).
 
 Seo et al. \cite{sgxshield} study address space layout randomization (ASLR) which is used in traditional systems for defending the memory against corruption attacks, but SGX does not make benefit of it. They present a new ASLR scheme for SGX systems and study the new challenges which come with it. Including the problem of small randomization entropy which is a result of limited physical and enclave memory and makes brute force attacks possible. Also, the inability of runtime page permission change makes the enclave vulnerable to code injection attacks due to conflicts with ASLR which is addressed by implementing a software-based RWX permission set.
 
@@ -303,23 +294,23 @@ Sasy et al. \cite{zerotrace} implement a block level memory controller as a new 
 Brasser et al. \cite{drsgx} propose data location randomization as a new approach for defending enclave side-channel attacks by designing and implementing a compiler based tool to shuffle the in-enclave data locations at the granularity of cache lines.
 
 \section{Analysis}
-Cloak \cite{cloak} has achieved significant protection against cache-based side-channel attacks. However, there will still be some leakage remaining which this research does not handle. Overall execution time can leak information. Also, aborts do not cause the concurrent memory accesses to be canceled. Branch predictor is influenced due to the cache pinning and other micro-architecture effects can be possible due to the modifications to the execution behavior. On the other hand, the introduction of a new software-based way for pinning data into cache lines and making use of transactions for this purpose is a novel idea that opens new ways for future research in several areas. There is also an opportunity for later research on optimization and performance improvement and architectural study for reducing faults.
+Cloak \cite{cloak} has achieved significant protection against cache-based side-channel attacks. However, there will still be some leakage remaining which this research does not handle. Aborts do not cause the concurrent memory accesses to be canceled. Branch predictor is influenced due to the cache pinning and other micro-architecture effects can be possible due to the modifications to the execution behavior. On the other hand, the introduction of a new software-based way for pinning data into cache lines and making use of transactions for this purpose is a novel idea that opens new ways for future research in several areas. There is also an opportunity for later research on optimization and performance improvement and architectural study for reducing faults.
 
 T-SGX \cite{tsgx} protects the enclave against page-fault based side-channel attacks, but at the same time, attacks which are based on monitoring accessed and dirty bits of the data are not detected by this method. Also, this attack incurs 30\% memory overhead and 50\% runtime overhead which has a significant effect on the performance.
 
-The problem with Deja Vu \cite{dejavu} is that it only considers enclave exits as points of attacks and possible attacks that may have been occurred during the execution which do not cause AEX have been excluded. So, attacks like B-SPM and HT-SPM (sneaky page monitoring attacks in general) which do not rely on AEX can still be effective \cite{leakycauldron}.
+The problem with Deja Vu \cite{dejavu} is that it only considers enclave exits as points of attacks and possible attacks that may have been occurred during the execution which do not cause AEX have been excluded. So, page monitoring attacks which do not rely on AEX can still be effective \cite{leakycauldron}.
 
 Overall, all the techniques based on using transactions to isolate the program from interrupts and immune them to page-faults, need an isolated executing environment which causes a single thread execution, low utilization, and high overhead.
 
 Randomization, as studied in \cite{sgxshield} can be a leading point for research on possible defenses. However, it is used to implement an ASLR for SGX which is not lively randomized. Thus, the attacker can observe the random patterns of memory accesses for multiple times and infer an approximate access pattern which is helpful for launching attacks \cite{leakycauldron}. Also, the implementation is not evaluated against brute force attacks, so, the amount of introduced entropy cannot be verified to be effective.
 
-The work done by Shinde et al. \cite{pigeonhole} does not take cache-based side-channel attacks into account. The idea of loading all the sensitive data into the same pages can still leak information using cache and TLB side channels \cite{leakycauldron}.
+The work done by Shinde et al. \cite{pigeonhole} does not take cache-based side-channel attacks into account. The idea of loading all the sensitive data into the same pages can still leak information using cache and TLB side channels \cite{leakycauldron}. Also, fake accesses can cause high overhead and instability. Only by suggesting new hardware changes they expect that they can achieve good performance.
 
 The bottom line is that none of the proposed methods can completely defend the enclave against the possible side-channel attacks. Page-fault detection cannot protect the enclave since page accesses can be learned without causing page faults. It is not even needed to interrupt the enclave for reading the TLB. Thus, a solid software based defense method needs to either remove all the branches and conditional code/data from the program or find a way to reliably pin specific data/pages to the cache and therefore TLB.
 
-A hardware based solution can be combining Cache Allocation Technology (CAT) with SGX. CAT provides a software control where data is allocated into the LLC \cite{cat}. This can make sure that some cache sets can only be used by one CPU core so there will be no shared cache set to launch cache based attacks. A better approach can be providing a non-shared secure memory element which is not cached \cite{mge}.
+A hardware based solution can be combining Cache Allocation Technology (CAT) with SGX. CAT provides a software to control where data is allocated into the LLC \cite{cat}. This can make sure that some cache sets can only be used by one CPU core so there will be no shared cache set to launch cache based attacks. A better approach can be providing a non-shared secure memory element which is not cached \cite{mge}.
 
-Finally, we aggregate the effectiveness of the discussed defenses against the attacks we introduced in section 3 in Table \ref{tab:one}. As we can see, most of the defenses either work on cache based attacks or page table based attacks or combine both. A reliable single solution to defend both kinds of attacks is still subject to research. The SPM attack can defeat most of the defense approaches and as a newly introduced attack is subject to more study. ORAM based defenses are also interesting for further research and can achieve good protection if there is a way to improve performance.
+Finally, we aggregate the effectiveness of the discussed defenses against the attacks we introduced in section 3 in Table \ref{tab:one}. As we can see, most of the defenses either work on cache based attacks or page table based attacks or combine both. A reliable single solution to defend both kinds of attacks is still subject to research. The Page Monitoring (PM) attack can defeat most of the defense approaches and as a newly introduced attack is subject to more study. ORAM based defenses are also interesting for further research and can achieve good protection if there is a way to improve performance.
 
 \begin{table}
 	\centering
@@ -327,11 +318,11 @@ Finally, we aggregate the effectiveness of the discussed defenses against the at
 	\label{tab:one}
 	\begin{tabular}{@{}lllllll@{}}
 		\toprule
-		Attack/Defense & P+P & Basic PF & F+R & F+F & DRAMA & SPM \\ \midrule
+		Attack/Defense & P+P & Basic PF & F+R & F+F & DRAMA & PM \\ \midrule
 		Cloak          &\cmark   &\xmark          &\cmark     &\cmark     &\xmark      &\xmark     \\
 		T-SGX          &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\xmark     \\
 		Deja Vu        &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\xmark     \\
-		Shinde et al.  &\xmark   &\cmark          &\xmark     &\xmark     &\xmark       &\cmark     \\
+		Shinde et al.  &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\cmark     \\
 		SGX-Shield     &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\xmark     \\
 		ZeroTrace      &\cmark   &\cmark          &\cmark     &\cmark     &\cmark       &\cmark     \\
 		DR. SGX        &\cmark   &\xmark          &\cmark     &\cmark     &\xmark       &\xmark     \\
