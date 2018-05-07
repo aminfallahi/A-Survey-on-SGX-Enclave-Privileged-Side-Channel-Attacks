@@ -279,7 +279,7 @@ A problem that comes with the introduction of tiny execution blocks is that sett
 
 Another problem is that TSX instructions are still outside transactions and transaction boundaries are still vulnerable to page fault attacks in this design. The attacker can unmap the pages where blocks start by writing to them. This can be solved by putting all transaction begin and end pairs in a dedicated springboard page. This way, only one page will be leaked \cite{tsgx}.
 
-\subsection{Other Attacks}
+\subsection{Other Defense Methods}
 Chen et al. \cite{dejavu} embed a clock inside the enclave and use Intel TSX for detecting any interrupt to it. When the execution time of the program inside the enclave exceeds a fixed amount of time as the threshold, it is considered that the code has been interrupted by some external factor and an AEX (asynchronous enclave exit) will be detected. The implemented clock should be hidden from the OS in terms of reading and modification and it should not go backward in time under any condition. These can be assured by implementation inside SGX enclave. Also, the clock should not be stopped or interrupted by the OS which is solved by using TSX. For protecting the clock to be read by the OS, a random value will be generated in a transaction and will be added to the global timer variable. This will run in a thread parallel to the main program inside the enclave (Fig. \ref{fig:dejavu}). The threshold delay needs to be approximated by training the system with AEX-free execution time and minimum delay of an AEX execution.
 
 \begin{figure}
@@ -319,7 +319,7 @@ The bottom line is that none of the proposed methods can completely defend the e
 
 A hardware based solution can be combining Cache Allocation Technology (CAT) with SGX. CAT provides a software control where data is allocated into the LLC \cite{cat}. This can make sure that some cache sets can only be used by one CPU core so there will be no shared cache set to launch cache based attacks. A better approach can be providing a non-shared secure memory element which is not cached \cite{mge}.
 
-Finally, we aggregate the effectiveness of the discussed defenses against the attacks we introduced in section 3 in Table \ref{tab:one}.
+Finally, we aggregate the effectiveness of the discussed defenses against the attacks we introduced in section 3 in Table \ref{tab:one}. As we can see, most of the defenses either work on cache based attacks or page table based attacks or combine both. A reliable single solution to defend both kinds of attacks is still subject to research. The SPM attack can defeat most of the defense approaches and as a newly introduced attack is subject to more study. ORAM based defenses are also interesting for further research and can achieve good protection if there is a way to improve performance.
 
 \begin{table}
 	\centering
@@ -328,13 +328,13 @@ Finally, we aggregate the effectiveness of the discussed defenses against the at
 	\begin{tabular}{@{}lllllll@{}}
 		\toprule
 		Attack/Defense & P+P & Basic PF & F+R & F+F & DRAMA & SPM \\ \midrule
-		Cloak          &\cmark   &\xmark          &\cmark     &\cmark     &\textbf{!}       &\xmark     \\
+		Cloak          &\cmark   &\xmark          &\cmark     &\cmark     &\xmark      &\xmark     \\
 		T-SGX          &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\xmark     \\
 		Deja Vu        &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\xmark     \\
-		Shinde et al.  &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\cmark     \\
+		Shinde et al.  &\xmark   &\cmark          &\xmark     &\xmark     &\xmark       &\cmark     \\
 		SGX-Shield     &\xmark   &\cmark          &\xmark     &\xmark     &\cmark       &\xmark     \\
-		ZeroTrace      &\xmark   &\cmark          &\cmark     &\cmark     &\cmark       &\cmark     \\
-		DR. SGX        &\cmark   &\cmark          &\cmark     &\cmark     &\cmark       &\cmark     \\
+		ZeroTrace      &\cmark   &\cmark          &\cmark     &\cmark     &\cmark       &\cmark     \\
+		DR. SGX        &\cmark   &\xmark          &\cmark     &\cmark     &\xmark       &\xmark     \\
 	\end{tabular}
 \end{table}
 \begin{comment}
