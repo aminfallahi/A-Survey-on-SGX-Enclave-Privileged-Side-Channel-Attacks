@@ -27,7 +27,7 @@
 \citation{brasser2017software}
 \citation{brasser2017software}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Background}{2}{section.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Storage Structure}{2}{subsection.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Memory Hierarchy}{2}{subsection.2.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Intel SGX}{2}{subsection.2.2}}
 \citation{mge}
 \citation{brasser2017software}
@@ -84,8 +84,8 @@
 \citation{mge}
 \citation{mge}
 \citation{mge}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A high-level view of the Prime+Probe attack; victim and attacker’s Prime+Probe code run in parallel on a dedicated core. The malicious OS ensures that no other code shares that core to minimize noise \citep  {brasser2017software}.\relax }}{7}{figure.caption.6}}
-\newlabel{fig:ppone}{{4}{7}{A high-level view of the Prime+Probe attack; victim and attacker’s Prime+Probe code run in parallel on a dedicated core. The malicious OS ensures that no other code shares that core to minimize noise \cite {brasser2017software}.\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A high-level view of the Prime+Probe attack; victim and attacker's Prime+Probe code run in parallel on a dedicated core. The malicious OS ensures that no other code shares that core to minimize noise \citep  {brasser2017software}.\relax }}{7}{figure.caption.6}}
+\newlabel{fig:ppone}{{4}{7}{A high-level view of the Prime+Probe attack; victim and attacker's Prime+Probe code run in parallel on a dedicated core. The malicious OS ensures that no other code shares that core to minimize noise \cite {brasser2017software}.\relax }{figure.caption.6}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces A detailed view of Prime+Probe side-channel attack; first the attacker primes the cache, next the victim executes and occupies some of the cache, then the attacker identifies which cache lines have been used by the victim. This information allows the attacker to recover secret data in use by the victim process \citep  {brasser2017software}.\relax }}{7}{figure.caption.7}}
 \newlabel{fig:pptwo}{{5}{7}{A detailed view of Prime+Probe side-channel attack; first the attacker primes the cache, next the victim executes and occupies some of the cache, then the attacker identifies which cache lines have been used by the victim. This information allows the attacker to recover secret data in use by the victim process \cite {brasser2017software}.\relax }{figure.caption.7}{}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Square and multiply exponentiation \citep  {mge}\relax }}{7}{algocf.2}}
@@ -99,18 +99,18 @@
 \citation{heisenberg}
 \citation{heisenberg}
 \citation{heisenberg}
-\citation{heisenberg}
-\citation{heisenberg}
-\citation{heisenberg}
 \@writefile{loa}{\contentsline {algocf}{\numberline {3}{\ignorespaces Timestamp counter \citep  {mge}\relax }}{8}{algocf.3}}
 \newlabel{alg:timer}{{3}{8}{Cache-Based Attacks}{algocf.3}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Measurement's raw trace and over moving average. It is visible that the secret bits can be identified \citep  {mge}.\relax }}{8}{figure.caption.10}}
 \newlabel{fig:ppres}{{6}{8}{Measurement's raw trace and over moving average. It is visible that the secret bits can be identified \cite {mge}.\relax }{figure.caption.10}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Page Table Based Attacks}{8}{subsection.3.4}}
+\citation{heisenberg}
+\citation{heisenberg}
+\citation{heisenberg}
 \citation{stealthy}
 \citation{stealthy}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Basic example of a page-table based side channel attack. The occurrence (or absence) of a page fault after an attacker evicted the \emph  {add\_description\_xyz} method reveals the result of the DNA analysis \citep  {heisenberg}.\relax }}{9}{figure.caption.11}}
-\newlabel{fig:pfdna}{{7}{9}{Basic example of a page-table based side channel attack. The occurrence (or absence) of a page fault after an attacker evicted the \emph {add\_description\_xyz} method reveals the result of the DNA analysis \cite {heisenberg}.\relax }{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Basic example of a page-table based side channel attack. The occurrence (or absence) of a page-fault after an attacker evicted the \emph  {add\_description\_xyz} method reveals the result of the DNA analysis \citep  {heisenberg}.\relax }}{9}{figure.caption.11}}
+\newlabel{fig:pfdna}{{7}{9}{Basic example of a page-table based side channel attack. The occurrence (or absence) of a page-fault after an attacker evicted the \emph {add\_description\_xyz} method reveals the result of the DNA analysis \cite {heisenberg}.\relax }{figure.caption.11}{}}
 \newlabel{fig:pfa}{{8(a)}{9}{Subfigure 8(a)}{subfigure.8.1}{}}
 \newlabel{sub@fig:pfa}{{(a)}{9}{Subfigure 8(a)\relax }{subfigure.8.1}{}}
 \newlabel{fig:pfb}{{8(b)}{9}{Subfigure 8(b)}{subfigure.8.2}{}}
@@ -131,7 +131,6 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Flush+Reload}{10}{subsubsection.3.5.1}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Flush+Flush}{10}{subsubsection.3.5.2}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}DRAMA}{10}{subsubsection.3.5.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4}Cache-DRAM}{10}{subsubsection.3.5.4}}
 \citation{cloak}
 \citation{cloak}
 \citation{cloak}
@@ -140,20 +139,27 @@
 \citation{cloak}
 \citation{tsgx}
 \@writefile{loa}{\contentsline {algocf}{\numberline {4}{\ignorespaces Cloak sample code \citep  {cloak}\relax }}{11}{algocf.4}}
-\newlabel{alg:cloak}{{4}{11}{Defense Against Cache Based Attacks}{algocf.4}{}}
+\newlabel{alg:cloak}{{4}{11}{Defense Against Cache-Based Attacks}{algocf.4}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4}Cache-DRAM}{11}{subsubsection.3.5.4}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Defenses}{11}{section.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Defense Against Cache Based Attacks}{11}{subsection.4.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Defense Against Page Table Based Attacks}{11}{subsection.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Defense Against Cache-Based Attacks}{11}{subsection.4.1}}
 \citation{heisenberg}
 \citation{heisenberg}
 \citation{tsgx}
+\citation{tsgx}
+\citation{tsgx}
 \citation{dejavu}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces An example of loop optimization \citep  {heisenberg}.\relax }}{12}{figure.caption.14}}
+\newlabel{fig:tsgxloop}{{9}{12}{An example of loop optimization \cite {heisenberg}.\relax }{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Defense Against Page Table Based Attacks}{12}{subsection.4.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Other Defense Methods}{12}{subsection.4.3}}
 \citation{dejavu}
 \citation{dejavu}
 \citation{pigeonhole}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces An example of loop optimization \citep  {heisenberg}.\relax }}{12}{figure.caption.14}}
-\newlabel{fig:tsgxloop}{{9}{12}{An example of loop optimization \cite {heisenberg}.\relax }{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Other Defense Methods}{12}{subsection.4.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Overall procedure of T-SGX \citep  {tsgx}.\relax }}{13}{figure.caption.15}}
+\newlabel{fig:tsgx2}{{10}{13}{Overall procedure of T-SGX \cite {tsgx}.\relax }{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces System architecture of Déjà Vu. Blocks in gray are untrusted, which include the untrusted components of the processes and the entire OS kernel \citep  {dejavu}.\relax }}{13}{figure.caption.16}}
+\newlabel{fig:dejavu}{{11}{13}{System architecture of Déjà Vu. Blocks in gray are untrusted, which include the untrusted components of the processes and the entire OS kernel \cite {dejavu}.\relax }{figure.caption.16}{}}
 \citation{sgxshield}
 \citation{sgxshield}
 \citation{sgxshield}
@@ -161,9 +167,9 @@
 \citation{oram1,oram2,oram3}
 \citation{drsgx}
 \citation{cloak}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces System architecture of Déjà Vu. Blocks in gray are untrusted, which include the untrusted components of the processes and the entire OS kernel \citep  {dejavu}.\relax }}{13}{figure.caption.15}}
-\newlabel{fig:dejavu}{{10}{13}{System architecture of Déjà Vu. Blocks in gray are untrusted, which include the untrusted components of the processes and the entire OS kernel \cite {dejavu}.\relax }{figure.caption.15}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Analysis}{13}{section.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Overall workflow of SGX-Shield: 1) the preparation phase builds a SGX binary from the target program's source code; 2) the bootstrapping phase loads the secure in-enclave loader into code pages and the target SGX program into data pages; and 3) the secure in-enclave loading phase finally loads the target SGX program \citep  {sgxshield}.\relax }}{14}{figure.caption.17}}
+\newlabel{fig:sgxshield}{{12}{14}{Overall workflow of SGX-Shield: 1) the preparation phase builds a SGX binary from the target program's source code; 2) the bootstrapping phase loads the secure in-enclave loader into code pages and the target SGX program into data pages; and 3) the secure in-enclave loading phase finally loads the target SGX program \cite {sgxshield}.\relax }{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Analysis}{14}{section.5}}
 \citation{tsgx}
 \citation{dejavu}
 \citation{leakycauldron}
@@ -173,8 +179,7 @@
 \citation{leakycauldron}
 \citation{cat}
 \citation{mge}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Overall workflow of SGX-Shield: 1) the preparation phase builds a SGX binary from the target program’s source code; 2) the bootstrapping phase loads the secure in-enclave loader into code pages and the target SGX program into data pages; and 3) the secure in-enclave loading phase finally loads the target SGX program \citep  {sgxshield}.\relax }}{14}{figure.caption.16}}
-\newlabel{fig:sgxshield}{{11}{14}{Overall workflow of SGX-Shield: 1) the preparation phase builds a SGX binary from the target program’s source code; 2) the bootstrapping phase loads the secure in-enclave loader into code pages and the target SGX program into data pages; and 3) the secure in-enclave loading phase finally loads the target SGX program \cite {sgxshield}.\relax }{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{15}{section.6}}
 \bibstyle{ACM-Reference-Format}
 \bibdata{bibliography}
 \bibcite{txt}{{1}{[n. d.]}{{txt}}{{??}}}
@@ -183,11 +188,6 @@
 \bibcite{drsgx}{{4}{2017a}{{Brasser et~al\unhbox \voidb@x \hbox {.}}}{{Brasser, Capkun, Dmitrienko, Frassetto, Kostiainen, M{\"u}ller, and Sadeghi}}}
 \bibcite{brasser2017software}{{5}{2017b}{{Brasser et~al\unhbox \voidb@x \hbox {.}}}{{Brasser, M{\"u}ller, Dmitrienko, Kostiainen, Capkun, and Sadeghi}}}
 \bibcite{dejavu}{{6}{2017}{{Chen et~al\unhbox \voidb@x \hbox {.}}}{{Chen, Zhang, Reiter, and Zhang}}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Effectiveness of proposed defenses against attacks\relax }}{15}{table.caption.17}}
-\newlabel{tab:one}{{1}{15}{Effectiveness of proposed defenses against attacks\relax }{table.caption.17}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{15}{section.6}}
-\@writefile{toc}{\contentsline {section}{Acknowledgments}{15}{section*.19}}
-\@writefile{toc}{\contentsline {section}{References}{15}{section*.21}}
 \bibcite{haswell}{{7}{[n. d.]a}{{Corporation}}{{Corporation}}}
 \bibcite{ecallocall}{{8}{[n. d.]b}{{Corporation}}{{Corporation}}}
 \bibcite{sgx}{{9}{[n. d.]c}{{Corporation}}{{Corporation}}}
@@ -198,8 +198,12 @@
 \bibcite{oram1}{{14}{1987}{{Goldreich}}{{Goldreich}}}
 \bibcite{oram3}{{15}{1996}{{Goldreich and Ostrovsky}}{{Goldreich and Ostrovsky}}}
 \bibcite{cloak}{{16}{2017}{{Gruss et~al\unhbox \voidb@x \hbox {.}}}{{Gruss, Lettner, Schuster, Ohrimenko, Haller, and Costa}}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Effectiveness of proposed defenses against attacks\relax }}{16}{table.caption.18}}
+\newlabel{tab:one}{{1}{16}{Effectiveness of proposed defenses against attacks\relax }{table.caption.18}{}}
+\@writefile{toc}{\contentsline {section}{Acknowledgments}{16}{section*.20}}
+\@writefile{toc}{\contentsline {section}{References}{16}{section*.22}}
 \bibcite{flushflush}{{17}{2016}{{Gruss et~al\unhbox \voidb@x \hbox {.}}}{{Gruss, Maurice, Wagner, and Mangard}}}
-\bibcite{kayaalp2016high}{{18}{2016}{{Kayaalp et~al\unhbox \voidb@x \hbox {.}}}{{Kayaalp, Abu-Ghazaleh, Ponomarev, and Jaleel}}}
+\bibcite{cat}{{18}{2017}{{Nguyen et~al\unhbox \voidb@x \hbox {.}}}{{Nguyen, T, and Intel}}}
 \bibcite{oram2}{{19}{1990}{{Ostrovsky}}{{Ostrovsky}}}
 \bibcite{primeprobe1}{{20}{2006}{{Osvik et~al\unhbox \voidb@x \hbox {.}}}{{Osvik, Shamir, and Tromer}}}
 \bibcite{drama}{{21}{2016}{{Pessl et~al\unhbox \voidb@x \hbox {.}}}{{Pessl, Gruss, Maurice, Schwarz, and Mangard}}}
@@ -218,4 +222,4 @@
 \newlabel{tocindent1}{10.00003pt}
 \newlabel{tocindent2}{14.86116pt}
 \newlabel{tocindent3}{23.88895pt}
-\newlabel{TotPages}{{16}{16}{}{page.16}{}}
+\newlabel{TotPages}{{17}{17}{}{page.17}{}}

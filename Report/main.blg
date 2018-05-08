@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2018/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: ACM-Reference-Format.bst
@@ -53,8 +53,6 @@ Warning--empty address in cloak
 Warning--page numbers missing in both pages and numpages fields in cloak
 Warning--empty publisher in flushflush
 Warning--empty address in flushflush
-Warning--empty publisher in kayaalp2016high
-Warning--empty address in kayaalp2016high
 Warning--empty publisher in oram2
 Warning--empty address in oram2
 Warning--empty publisher in primeprobe1
@@ -86,43 +84,43 @@ Warning--empty publisher in flushreload
 Warning--empty address in flushreload
 You've used 31 entries,
             5732 wiz_defined-function locations,
-            1592 strings with 21854 characters,
-and the built_in function-call counts, 32675 in all, are:
-= -- 3550
-> -- 1269
+            1594 strings with 21910 characters,
+and the built_in function-call counts, 32365 in all, are:
+= -- 3530
+> -- 1258
 < -- 0
-+ -- 425
-- -- 427
-* -- 2368
-:= -- 3411
++ -- 419
+- -- 423
+* -- 2345
+:= -- 3390
 add.period$ -- 148
 call.type$ -- 31
-change.case$ -- 217
+change.case$ -- 216
 chr.to.int$ -- 25
-cite$ -- 117
-duplicate$ -- 2958
-empty$ -- 2110
-format.name$ -- 502
-if$ -- 7692
+cite$ -- 115
+duplicate$ -- 2915
+empty$ -- 2083
+format.name$ -- 498
+if$ -- 7604
 int.to.chr$ -- 8
 int.to.str$ -- 1
-missing$ -- 99
-newline$ -- 313
+missing$ -- 94
+newline$ -- 318
 num.names$ -- 218
-pop$ -- 1413
+pop$ -- 1383
 preamble$ -- 1
-purify$ -- 446
+purify$ -- 445
 quote$ -- 0
-skip$ -- 990
+skip$ -- 979
 stack$ -- 0
-substring$ -- 2031
-swap$ -- 252
+substring$ -- 2018
+swap$ -- 247
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 813
-warning$ -- 74
-while$ -- 189
+warning$ -- 72
+while$ -- 188
 width$ -- 0
-write$ -- 577
-(There were 74 warnings)
+write$ -- 580
+(There were 72 warnings)

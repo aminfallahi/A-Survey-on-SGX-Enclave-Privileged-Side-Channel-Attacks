@@ -258,16 +258,19 @@ Retrieved April 12, 2018 from \tempurl}
 \newblock
 
 
-\bibitem[\protect\citeauthoryear{Kayaalp, Abu-Ghazaleh, Ponomarev, and
-  Jaleel}{Kayaalp et~al\mbox{.}}{2016}]%
-        {kayaalp2016high}
-\bibfield{author}{\bibinfo{person}{Mehmet Kayaalp}, \bibinfo{person}{Nael
-  Abu-Ghazaleh}, \bibinfo{person}{Dmitry Ponomarev}, {and}
-  \bibinfo{person}{Aamer Jaleel}.} \bibinfo{year}{2016}\natexlab{}.
-\newblock \showarticletitle{A high-resolution side-channel attack on last-level
-  cache}. In \bibinfo{booktitle}{\emph{Proceedings of the 53rd Annual Design
-  Automation Conference}}. ACM, \bibinfo{pages}{72}.
+\bibitem[\protect\citeauthoryear{Nguyen, T, and Intel}{Nguyen
+  et~al\mbox{.}}{2017}]%
+        {cat}
+\bibfield{author}{\bibinfo{person}{Nguyen}, \bibinfo{person}{Khang T}, {and}
+  \bibinfo{person}{Intel}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{title}{Introduction to Cache Allocation Technology in the
+  Intel® Xeon® Processor E5 v4 Family}.
 \newblock
+\newblock
+\urldef\tempurl%
+\url{https://software.intel.com/en-us/articles/introduction-to-cache-allocation-technology}
+\showURL{%
+\tempurl}
 
 
 \bibitem[\protect\citeauthoryear{Ostrovsky}{Ostrovsky}{1990}]%
